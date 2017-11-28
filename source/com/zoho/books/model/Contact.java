@@ -2,11 +2,11 @@
 
 package com.zoho.books.model;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class is used to make an object for contact.
@@ -720,6 +720,17 @@ public class Contact {
         return snailMail;
     }
 
+
+    /**
+     * set the custom fields.
+     *
+     * @param customFields Custom fields of the contact.
+     */
+
+    public void setCustomFields(List<CustomField> customFields) {
+        this.customFields = customFields;
+    }
+
     /**
      * get the custom fields.
      *
@@ -983,26 +994,26 @@ public class Contact {
 
 
     /**
-     * Get the contact is track1099.
-     *
-     * @return Returns true if the contact is track1099 else returns false.
-     */
-
+    * Get the contact is track1099.
+    *
+    * @return Returns true if the contact is track1099 else returns false.
+    */
+    
     public boolean isTrack1099() {
-        if(track1099 == null)
-            return false;
-        else
-            return track1099;
+      if(track1099 == null)
+        return false;
+      else
+        return track1099;
     }
 
-    /**
-     * Set the contact is track1099 or not.
-     *
-     * @param track1099 True or false to set the contact is track1099 or not.
-     */
+   /**
+    * Set the contact is track1099 or not.
+    *
+    * @param track1099 True or false to set the contact is track1099 or not.
+    */
 
     public void setTrack1099(Boolean track1099) {
-        this.track1099 = track1099;
+      this.track1099 = track1099;
     }
 
     /**
@@ -1051,11 +1062,8 @@ public class Contact {
      * @return Returns true of the contact is taxable else returns false.
      */
 
-    public boolean isTaxable() {
-        if(isTaxable == null)
-            return false;
-        else
-            return isTaxable;
+    public Boolean isTaxable() {
+        return isTaxable;
     }
 
     /**
