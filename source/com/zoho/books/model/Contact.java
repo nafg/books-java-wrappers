@@ -720,17 +720,6 @@ public class Contact {
         return snailMail;
     }
 
-
-    /**
-     * set the custom fields.
-     *
-     * @param customFields Custom fields of the contact.
-     */
-
-    public void setCustomFields(List<CustomField> customFields) {
-        this.customFields = customFields;
-    }
-
     /**
      * get the custom fields.
      *
@@ -747,7 +736,7 @@ public class Contact {
      * @param customFields Custom fields of the contact.
      */
 
-    public void setCustomFields(List<CustomField> customFields) throws Exception {
+    public void setCustomFields(List<CustomField> customFields) {
         this.customFields = customFields;
     }
 
