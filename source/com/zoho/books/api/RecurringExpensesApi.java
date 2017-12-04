@@ -37,7 +37,7 @@ import java.util.HashMap;
  */
 
 public class RecurringExpensesApi extends API {
-    private static String url = baseURL + "/recurringexpenses"; //No I18N
+    private String url = baseURL + "/recurringexpenses"; //No I18N
 
 
     /**

@@ -54,7 +54,7 @@ import java.util.List;
 
 public class BankTransactionsApi extends API {
 
-    private static String url = baseURL + "/banktransactions"; //No I18N
+    private String url = baseURL + "/banktransactions"; //No I18N
 
     /**
      * Construct a new BankTransactionsApi using user's authtoken and organization id.

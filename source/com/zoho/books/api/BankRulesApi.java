@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 public class BankRulesApi extends API {
 
-    private static String url = baseURL + "/bankaccounts/rules"; //No I18N
+    private String url = baseURL + "/bankaccounts/rules"; //No I18N
 
 
     /**

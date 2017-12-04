@@ -82,7 +82,7 @@ import java.util.List;
  */
 
 public class ProjectsApi extends API {
-    private static String url = baseURL + "/projects"; //No I18N
+    private String url = baseURL + "/projects"; //No I18N
 
 
     /**

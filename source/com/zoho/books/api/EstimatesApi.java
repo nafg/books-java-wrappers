@@ -60,7 +60,7 @@ import java.util.List;
 
 public class EstimatesApi extends API {
 
-    private static String url = baseURL + "/estimates"; //No I18N
+    private String url = baseURL + "/estimates"; //No I18N
 
     /**
      * Construct a new EstimatesApi using user's authtoken and organizationid.

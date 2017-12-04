@@ -90,7 +90,7 @@ import java.util.HashMap;
  */
 
 public class SettingsApi extends API {
-    private static String url = baseURL + "/settings"; //No I18N
+    private String url = baseURL + "/settings"; //No I18N
 
     /**
      * Construct a new SettingsApi using user's authtoken and organizationid.

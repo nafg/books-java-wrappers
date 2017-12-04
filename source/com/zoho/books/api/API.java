@@ -16,8 +16,8 @@ public class API {
      * This is the API base URL for Zoho Books service.
      */
 
-    public static String baseURL = "https://books.zoho.com/api/v3";    //No I18N
-
+    protected String baseURL = "https://books.zoho.com/api/v3";    //No I18N
+    private String basURLEu = "https://books.zoho.eu/api/v3";
     protected String authToken;
 
     protected String organizationId;
@@ -30,9 +30,15 @@ public class API {
      */
 
     public API(String authToken, String organizationId) {
-        this.authToken = authToken;
+        this(authToken, organizationId, false);
+    }
 
-        this.organizationId = organizationId;
+    public API(String authToken, String organizationId, boolean eu) {
+      this.authToken = authToken;
+      this.organizationId = organizationId;
+      if(eu) {
+        this.baseURL = basURLEu;
+      }
     }
 
 

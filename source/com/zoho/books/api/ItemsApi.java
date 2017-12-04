@@ -31,7 +31,7 @@ import java.util.HashMap;
  */
 
 public class ItemsApi extends API {
-    private static String url = baseURL + "/items"; //No I18N
+    private String url = baseURL + "/items"; //No I18N
 
 
     /**

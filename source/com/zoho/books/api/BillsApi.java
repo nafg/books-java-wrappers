@@ -61,7 +61,7 @@ import java.util.List;
 
 public class BillsApi extends API {
 
-    private static String url = baseURL + "/bills"; //No I18N
+    private String url = baseURL + "/bills"; //No I18N
 
     /**
      * Construct a new BillsApi using user's authtoken and organizationid.

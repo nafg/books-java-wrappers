@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 public class BaseCurrencyAdjustmentsApi extends API {
 
-    private static String url = baseURL + "/basecurrencyadjustment"; //No I18N
+    private String url = baseURL + "/basecurrencyadjustment"; //No I18N
 
     /**
      * Construct a new BaseCurrencyAdjustmentsApi using user's authtoken and organizationid.

@@ -25,7 +25,7 @@ import java.util.HashMap;
  */
 
 public class CustomerPaymentsApi extends API {
-    private static String url = baseURL + "/customerpayments"; //No I18N
+    private String url = baseURL + "/customerpayments"; //No I18N
 
     /**
      * Construct a new CustomerPaymentsApi using user's authtoken and organizationid.

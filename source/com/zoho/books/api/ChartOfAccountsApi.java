@@ -39,7 +39,7 @@ import java.util.HashMap;
 
 public class ChartOfAccountsApi extends API {
 
-    private static String url = baseURL + "/chartofaccounts"; //No I18N
+    private String url = baseURL + "/chartofaccounts"; //No I18N
 
 
     /**

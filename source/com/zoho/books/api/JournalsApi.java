@@ -25,7 +25,7 @@ import java.util.HashMap;
  */
 
 public class JournalsApi extends API {
-    private static String url = baseURL + "/journals"; //No I18N
+    private String url = baseURL + "/journals"; //No I18N
 
 
     /**

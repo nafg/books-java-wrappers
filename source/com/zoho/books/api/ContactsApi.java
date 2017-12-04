@@ -52,7 +52,7 @@ import java.util.HashMap;
 
 public class ContactsApi extends API {
 
-    private static String url = baseURL + "/contacts"; //No I18N
+    private String url = baseURL + "/contacts"; //No I18N
 
     /**
      * Construct a new ContactsApi using user's authtoken and organizationid.

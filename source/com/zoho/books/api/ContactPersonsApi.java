@@ -23,7 +23,7 @@ import java.util.HashMap;
  */
 
 public class ContactPersonsApi extends API {
-    private static String url = baseURL + "/contacts"; //No I18N
+    private String url = baseURL + "/contacts"; //No I18N
 
 
     /**

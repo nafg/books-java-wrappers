@@ -103,7 +103,7 @@ import java.util.List;
 
 public class InvoicesApi extends API {
 
-    private static String url = baseURL + "/invoices"; //No I18N
+    private String url = baseURL + "/invoices"; //No I18N
 
 
     /**

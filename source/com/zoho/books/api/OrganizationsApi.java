@@ -19,7 +19,7 @@ import java.util.HashMap;
  */
 
 public class OrganizationsApi extends API {
-    private static String url = baseURL + "/organizations"; //No I18N
+    private String url = baseURL + "/organizations"; //No I18N
 
 
     /**

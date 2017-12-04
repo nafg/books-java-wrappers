@@ -30,7 +30,7 @@ import java.util.HashMap;
 
 public class UsersApi extends API {
 
-    private static String url = baseURL + "/users"; //No I18N
+    private String url = baseURL + "/users"; //No I18N
 
 
     /**

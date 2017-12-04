@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 public class VendorPaymentsApi extends API {
 
-    private static String url = baseURL + "/vendorpayments"; //No I18N
+    private String url = baseURL + "/vendorpayments"; //No I18N
 
 
     /**

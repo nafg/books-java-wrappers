@@ -80,7 +80,7 @@ import java.util.List;
 public class CreditNotesApi extends API {
 
 
-    private static String url = baseURL + "/creditnotes"; //No I18N
+    private String url = baseURL + "/creditnotes"; //No I18N
 
 
     /**

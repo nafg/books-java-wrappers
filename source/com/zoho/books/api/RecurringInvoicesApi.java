@@ -37,7 +37,7 @@ import java.util.HashMap;
 
 public class RecurringInvoicesApi extends API {
 
-    private static String url = baseURL + "/recurringinvoices"; //No I18N
+    private String url = baseURL + "/recurringinvoices"; //No I18N
 
     /**
      * Construct a new RecurringInvoicesApi using user's authtoken and organizationid.
