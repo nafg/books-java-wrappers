@@ -12,15 +12,10 @@ import java.util.HashMap;
 
 /**
  * CustomerPaymentsApi is used to create a payment made by the customer.
- * <p>
  * It is used to get: <br><br>
- * <p>
  * The list of payments made by the customer.<br>
- * <p>
  * The details of a customer payment.<br><br>
- * <p>
  * It is used to update the details of a customer payment.<br>
- * <p>
  * It is used to delete an existing customer payment.
  */
 
@@ -35,9 +30,11 @@ public class CustomerPaymentsApi extends API {
      */
 
     public CustomerPaymentsApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public CustomerPaymentsApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -46,11 +43,8 @@ public class CustomerPaymentsApi extends API {
 
     /**
      * Create a payment made by your customer and you can also apply them to invoices either partially or fully.
-     * <p>
      * Pass the CustomerPayment object to create a payment made by your customer.
-     * <p>
      * The CustomerPayment object which contains date and amount are the mandatory parameters.
-     * <p>
      * It returns the CustomerPayment object.
      *
      * @param customerPayment CustomerPayment object.
@@ -70,9 +64,7 @@ public class CustomerPaymentsApi extends API {
 
     /**
      * Get the details of a customer payment.
-     * <p>
      * Pass the paymentId to get the details of a customer payment.
-     * <p>
      * It returns the CustomerPayment object.
      *
      * @param paymentId ID of the CustomerPayment.
@@ -92,11 +84,8 @@ public class CustomerPaymentsApi extends API {
 
     /**
      * Update an existing customer payment (You can also modify the amount applied to the invoices).
-     * <p>
      * Pass the CustomerPayment object to update the details of a customer payment.
-     * <p>
      * The CustomerPayment object which contains customerPaymentId is the mandatory parameter for which customer payment has to be updated.
-     * <p>
      * It returns the CustomerPayment object.
      *
      * @param customerPayment CustomerPayment object.
@@ -117,11 +106,8 @@ public class CustomerPaymentsApi extends API {
 
     /**
      * Delete an existing customer payment.
-     * <p>
      * Pass the paymentId to delete the customer payment.
-     * <p>
      * If the customer payment has been deleted it returns the success message.
-     * <p>
      * The success message is "The payment has been deleted."
      *
      * @param paymentId ID of the CustomerPayment.
@@ -143,49 +129,31 @@ public class CustomerPaymentsApi extends API {
 
     /**
      * List all the payments made by your customer.
-     * <p>
      * Pass the filters to get all the customer payments based on the filters.
-     * <p>
      * It returns the CustomerPaymentList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below: <br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
-     * <p>
      * <tr><td>customer_name</td><td>Search payments by customer name. <br>
      * Variants: <i>customer_name_startswith</i> and <i>customer_name_contains</i></td></tr>
-     * <p>
      * <tr><td>reference_number</td><td>Search payments by reference number.<br>
      * Variants: <i>reference_number_startswith</i> and <i>reference_number_contains</i></td></tr>
-     * <p>
      * <tr><td>date</td><td>Search payments by payment made date.<br>
      * Variants: <i>date_start, date_end, date_before</i> and <i>date_after</i></td></tr>
-     * <p>
      * <tr><td>amount</td><td>Search payments by payment amount.<br>
      * Variants: <i>amount_less_than, amount_less_equals, amount_greater_than</i> and <i>amount_greater_equals</i></td></tr>
-     * <p>
      * <tr><td>payment_mode</td><td>Search payments by payment mode.<br>
      * Variants: <i>payment_mode_startswith</i> and <i>payment_mode_contains</i></td></tr>
-     * <p>
      * <tr><td>notes</td><td>Search payments by customer notes.<br>
      * Variants: <i>notes_startswith</i> and <i>notes_contains</i></td></tr>
-     * <p>
      * <tr><td>customer_id</td><td>Search payments by customer id.</td></tr>
-     * <p>
      * <tr><td>invoice_id</td><td>Search payments by invoice id.</td></tr>
-     * <p>
      * <tr><td>search_text</td><td>Search payments by reference number or customer name or payment description.</td></tr>
-     * <p>
      * <tr><td>filter_by</td><td>Filter payments by mode.<br>
      * Allowed Values: <i>PaymentMode.All, PaymentMode.Check, PaymentMode.Cash, PaymentMode.BankTransfer, PaymentMode.Paypal, PaymentMode.CreditCard, PaymentMode.GoogleCheckout, PaymentMode.Credit, PaymentMode.Authorizenet, PaymentMode.BankRemittance, PaymentMode.Payflowpro, PaymentMode.Stripe, PaymentMode.TwoCheckout, PaymentMode.Braintree</i> and <i>PaymentMode.Others</i></td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort the payment list. <br>
      * Allowed Values: <i>customer_name, unused_amount, amount, bcy_amount, date, reference_number, account_name</i> and <i>payment_mode</i></td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.

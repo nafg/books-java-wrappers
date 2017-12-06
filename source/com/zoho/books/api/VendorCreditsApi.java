@@ -13,44 +13,23 @@ import java.util.List;
 
 /**
  * VendorCreditsApi is used to:
- * <p>
  * Get the list of vendor credits.
- * <p>
  * Get the details of a vendor credit.
- * <p>
  * Get the list of vendor credit refunds.
- * <p>
  * Get the refunds of vendor credit.
- * <p>
  * Get the details of a vendor credit.
- * <p>
  * Get the list of comments.
- * <p>
- * <p>
  * Create a new vendor credit.
- * <p>
  * Convert the vendor credit into open.
- * <p>
  * Convert the vendor credit into void.
- * <p>
  * Apply bills to a vendor credit.
- * <p>
  * Refund a vendor credit.
- * <p>
  * Add a comment.
- * <p>
- * <p>
  * Update the details of a vendor credit.
- * <p>
  * Update the details of a vendor credit refund.
- * <p>
- * <p>
  * Delete an existing vendor credit.
- * <p>
  * Delete an existing bills credited.
- * <p>
  * Delete an existing vendor credit refund.
- * <p>
  * Delete an existing comment.
  *
  * @author ramesh-2099
@@ -69,6 +48,10 @@ public class VendorCreditsApi extends API {
 
     public VendorCreditsApi(String authToken, String organizationId) {
         super(authToken, organizationId);
+    }
+
+    public VendorCreditsApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
     //VendorCreditsParser is used to parse the JSON response into respective objects.

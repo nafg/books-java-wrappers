@@ -14,50 +14,26 @@ import java.util.HashMap;
 
 /**
  * PurchaseorderApi is used to:
- * <p>
  * Get the list of purchase orders.
- * <p>
  * Get the details of a purchase order.
- * <p>
  * Get the email content.
- * <p>
  * Get the list of templates.
- * <p>
  * Get the attachment.
- * <p>
  * Get the list of comments.
- * <p>
- * <p>
  * Create a new purchase order.
- * <p>
  * Change the status of the purchase order into open.
- * <p>
  * Change the status of the purchase order into billed.
- * <p>
  * Change the status of the purchase order into cancelled.
- * <p>
  * Send email to the vendor.
- * <p>
  * Add a new attachment.
- * <p>
  * Add a new comment.
- * <p>
- * <p>
  * Update the details of a purchase order.
- * <p>
  * Update the billing address.
- * <p>
  * Update the template.
- * <p>
  * Update the details of an attachment.
- * <p>
  * Update the details of a comment.
- * <p>
- * <p>
  * Delete an existing purchase order.
- * <p>
  * Delete an existing attachment.
- * <p>
  * Delete an existing comment.
  *
  * @author ramesh-2099
@@ -77,6 +53,10 @@ public class PurchaseOrderApi extends API {
 
     public PurchaseOrderApi(String authToken, String organizationId) {
         super(authToken, organizationId);
+    }
+
+    public PurchaseOrderApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
     // PurchaseOrderParser is used to parse the JSON response and make it into the respective objects.

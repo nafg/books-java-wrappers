@@ -12,9 +12,7 @@ import java.util.HashMap;
 
 /**
  * OrganizationsApi is used to create an Organization.
- * <p>
  * It is used to get and update the details of an organization.
- * <p>
  * Get the list of organizations for the user.
  */
 
@@ -29,9 +27,11 @@ public class OrganizationsApi extends API {
      */
 
     public OrganizationsApi(String authToken) {
-
         super(authToken, "");
+    }
 
+    public OrganizationsApi(String authToken, boolean eu) {
+        super(authToken, "", eu);
     }
 
 
@@ -40,7 +40,6 @@ public class OrganizationsApi extends API {
 
     /**
      * Get the list of organizations.
-     * <p>
      * It returns the OrganizationList object.
      *
      * @return Returns the OrganizationList object.
@@ -57,9 +56,7 @@ public class OrganizationsApi extends API {
 
     /**
      * Get the details of an organization.
-     * <p>
      * Pass the organizationId to get the detatils of a particular organization.
-     * <p>
      * It returns the Organization object.
      *
      * @param organizationid ID of an organization.
@@ -79,11 +76,8 @@ public class OrganizationsApi extends API {
 
     /**
      * Create an organization.
-     * <p>
      * Pass the Organization object to create a new organization for the user.
-     * <p>
      * The Organization object which contains name, currencyId, and timeZone are the mandatory parameters.
-     * <p>
      * It returns the Organization object.
      *
      * @param organization Organization object.
@@ -103,11 +97,8 @@ public class OrganizationsApi extends API {
 
     /**
      * Update the details of an organization.
-     * <p>
      * Pass the Organization object to update the details of an organization.
-     * <p>
      * The Organization object must contain the organizationId for which organization details has to be updated.
-     * <p>
      * It returns the Organization object.
      *
      * @param organization Organization object.

@@ -14,47 +14,26 @@ import java.util.List;
 
 /**
  * EstimatesApi is used to create a new estimate for the customer.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The details of an estimate.<br>
- * <p>
  * The list of all estimates.<br>
- * <p>
  * The estimate email content.<br>
- * <p>
  * The estimate in a single pdf.<br>
- * <p>
  * The estimate in a single pdf and print it.<br>
- * <p>
  * The list estimate templates.<br>
- * <p>
  * The list of estimate comments.<br><br>
- * <p>
  * It is used to update:<br><br>
- * <p>
  * The details of an estimate.<br>
- * <p>
  * The billing address of an estimate.<br>
- * <p>
  * The shipping address of an estimate.<br>
- * <p>
  * The templates of an estimate.<br>
- * <p>
  * The comment of an estimate.<br><br>
- * <p>
  * It is used to change the status:<br><br>
- * <p>
  * Mark an estimate as sent.<br>
- * <p>
  * Mark an estimate as accepted.<br>
- * <p>
  * Mark an estimate as declined.<br><br>
- * <p>
  * It is used to delete an estimate.<br>
- * <p>
  * It is used to add the comment for an estimate.<br>
- * <p>
  * It is used to delete the comment for an estimate.
  */
 
@@ -70,9 +49,11 @@ public class EstimatesApi extends API {
      */
 
     public EstimatesApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public EstimatesApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -81,9 +62,7 @@ public class EstimatesApi extends API {
 
     /**
      * Create an estimate for your customer.
-     * <p>
      * Pass customerId and itemName to create a new estimate for the customer.
-     * <p>
      * It returns the Estimate object.
      *
      * @param customerId ID of the customer the estimate has to be created.
@@ -122,19 +101,12 @@ public class EstimatesApi extends API {
 
     /**
      * Create an estimate for your customer.
-     * <p>
      * Pass the Estimate object to create a new estimate for the customer.
-     * <p>
      * The Estimate object which contains customerId and itemName are the mandatory parameters.
-     * <p>
      * The paramMap contains the query string paramters in the form of key-value pair.<br>
-     * <p>
      * The possible keys and values are as mentioned below: <br><br>
-     * <p>
      * send = 'true' or 'false' <br>
-     * <p>
      * ignore_auto_number_generation = 'true' or 'false' <br><br>
-     * <p>
      * It returns the Estimate object.
      *
      * @param estimate Estimate object.
@@ -155,9 +127,7 @@ public class EstimatesApi extends API {
 
     /**
      * Get the details of an estimate.
-     * <p>
      * Pass the estimateId to get the details of a particular estimate.
-     * <p>
      * It returns the Estimate object.
      *
      * @param estimateId ID of an estimate.
@@ -177,17 +147,11 @@ public class EstimatesApi extends API {
 
     /**
      * Update an existing estimate. (To delete a line item remove it from the line_items list.)
-     * <p>
      * Pass the Estimate object to update the details of a particular estimate.
-     * <p>
      * The estimate object must contain the estimateId for which estimate details has to be updated.
-     * <p>
      * The paramMap contains the query string paramters in the form of key-value pair.
-     * <p>
      * The paramMap contains the key and value as mentioned below: <br><br>
-     * <p>
      * ignore_auto_number_generation = 'true' or 'false'<br><br>
-     * <p>
      * It returns the Estimate object.
      *
      * @param paramMap Ignore auto estimate number generation for this estimate. This mandates the estimate number.
@@ -210,11 +174,8 @@ public class EstimatesApi extends API {
 
     /**
      * Delete an existing estimate.
-     * <p>
      * Pass the estimateId to delete an estimate.
-     * <p>
      * It returns the success message.
-     * <p>
      * The success message is "The estimate has been deleted."
      *
      * @param estimateId ID of an estimate.
@@ -234,61 +195,39 @@ public class EstimatesApi extends API {
 
     /**
      * List all estimates with pagination.
-     * <p>
      * Pass the filters in the form of key-value pair to get all the estimates based on the filter.
-     * <p>
      * It returns EstimateList object.<br>
-     * <p>
      * The queryMap contains the  possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
-     * <p>
      * <tr><td>estimate_number</td><td>Search estimates by estimate number.<br>
      * Variants: <i>estimate_number_startswith</i> and <i>estimate_number_contains</i></td></tr>
-     * <p>
      * <tr><td>reference_number</td><td>Search estimates by estimates reference number.<br>
      * Variants: <i>reference_number_startswith</i> and <i>reference_number_contains</i></td></tr>
-     * <p>
      * <tr><td>customer_name</td><td>Search estimates by customer name.<br>
      * Variants: <i>customer_name_startswith</i> and <i>customer_name_contains</i></td></tr>
-     * <p>
      * <tr><td>total</td><td>Search estimates by estimate total.<br>
      * Variants: <i>total_less_than, total_less_equals, total_greater_than</i> and <i>total_greater_equals</i></td></tr>
-     * <p>
      * <tr><td>customer_id</td><td>Search estimates by customer id.</td></tr>
-     * <p>
      * <tr><td>item_name</td><td>Search estimates by item name.<br>
      * Variants: <i>item_name_startswith</i> and <i>item_name_contains</i></td></tr>
-     * <p>
      * <tr><td>item_id</td><td>Search estimates by item id.</td></tr>
-     * <p>
      * <tr><td>item_description</td><td>Search estimates by item description.<br>
      * Variants: <i>item_description_startswith</i> and <i>item_description_contains</i></td></tr>
-     * <p>
      * <tr><td>custom_field</td><td>Search estimates by custom field.
      * Variants: <i>custom_field_startswith</i> and <i>custom_field_contains</i></td></tr>
-     * <p>
      * <tr><td>expiry_date</td><td>Search estimates by expiry date.
      * Variants: <i>expiry_date_start, expiry_date_end, expiry_date_before</i> and <i>expiry_date_after</td></tr>
-     * <p>
      * <tr><td>date</td><td>Search estimates by invoice date.<br>
      * Variants: <i>date_start, date_end, date_before</i> and <i>date_after</i></td></tr>
-     * <p>
      * <tr><td>status</td><td>Search estimates by status.<br>
      * Allowed Values: <i>draft, sent, invoiced, accepted, declined</i> and <i>expired</i></td></tr>
-     * <p>
      * <tr><td>search_text</td><td>Search estimates by estimate number or reference or customer name.</td></tr>
-     * <p>
      * <tr><td>filter_by</td><td>Filter estimates by status.<br>
      * Allowed Values: <i>Status.All, Status.Sent, Status.Draft, Status.Invoiced, Status.Accepted, Status.Declined</i> and <i>Status.Expired</i> </td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort estimates. <br>
      * Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>created_time</i></td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.
@@ -308,11 +247,8 @@ public class EstimatesApi extends API {
 
     /**
      * Email an estimate to the customer (If the Email object is empty, email will be sent with default email content).
-     * <p>
      * Pass the estimateId and Email object to send the email to the customer.
-     * <p>
      * If the email has been sent to the customer it returns the success message.
-     * <p>
      * The success message is "Your estimate has been sent."
      *
      * @param estimateId ID of an estimate.
@@ -348,11 +284,8 @@ public class EstimatesApi extends API {
 
     /**
      * Send estimates to your customers by email. (Maximum of 10 estimates can be sent at once.)
-     * <p>
      * Pass the estimate ids to send an email to the customers.
-     * <p>
      * If the email has been sent to the customer it returns the success message.
-     * <p>
      * The success message is "Mission accomplished! We've sent all the estimates."
      *
      * @param paramMap Comma separated estimate ids which are to be emailed.
@@ -372,13 +305,9 @@ public class EstimatesApi extends API {
 
     /**
      * Get the email content of an estimate.
-     * <p>
      * Pass the estimateId and filters to get the email content.
-     * <p>
      * The queryMap contains the possible key as mentioned below:<br><br>
-     * <p>
      * email_template_id - Get the email content based on a specific email template.<br><br>
-     * <p>
      * It returns the Email object.
      *
      * @param estimateId ID of an estimate.
@@ -399,11 +328,8 @@ public class EstimatesApi extends API {
 
     /**
      * Mark a draft estimate as sent.
-     * <p>
      * Pass the estimateId to change the status of an estimate to 'sent'.
-     * <p>
      * If the estimate status has been changed it returns the success message.
-     * <p>
      * The success message is "Estimate status has been changed to Sent."
      *
      * @param estimateId ID of an estimate.
@@ -423,11 +349,8 @@ public class EstimatesApi extends API {
 
     /**
      * Mark a sent estimate as accepted if the customer has accepted it.
-     * <p>
      * Pass the estimateId to change the status of an estimate to 'accepted'.
-     * <p>
      * If the estimate status has been changed it returns the success message.
-     * <p>
      * The success message is "Estimate status has been changed to Accepted."
      *
      * @param estimateId ID of an estimate.
@@ -447,11 +370,8 @@ public class EstimatesApi extends API {
 
     /**
      * Mark a sent estimate as declined if the customer has rejected it.
-     * <p>
      * Pass the estimateId to change the status of an estimate to 'declined'.
-     * <p>
      * If the estimate status has been changed it returns the success message.
-     * <p>
      * The success message is "Estimate status has been changed to Declined."
      *
      * @param estimateId ID of an estimate.
@@ -471,9 +391,7 @@ public class EstimatesApi extends API {
 
     /**
      * Maximum of 25 estimates can be exported in a single pdf.
-     * <p>
      * Pass the estimateIds to get the estimates in a single pdf.
-     * <p>
      * It returns the File object.
      *
      * @param queryMap Comma separated estimate ids which are to be exported as pdf.
@@ -491,9 +409,7 @@ public class EstimatesApi extends API {
 
     /**
      * Export estimates as pdf and print them (Maximum of 25 estimates can be printed).
-     * <p>
      * Pass the estimateIds to get the estimates as pdf.
-     * <p>
      * It returns the File object.
      *
      * @param queryMap Comma separated estimate ids which are to be printed.
@@ -511,11 +427,8 @@ public class EstimatesApi extends API {
 
     /**
      * Update the billing address for this estimate alone (You can set this address as default billing address for your customer by specifying 'is_update_customer' param as true).
-     * <p>
      * Pass the estimateId and Address object to update the billing address for the estimate.
-     * <p>
      * If the billing address has been updated it returns the success message.
-     * <p>
      * The success message is "Billing address updated."
      *
      * @param estimateId     ID of an estimate.
@@ -540,11 +453,8 @@ public class EstimatesApi extends API {
 
     /**
      * Update the shipping address for an existing estimate alone (You can set this address as default shipping address for your customer by specifying 'is_update_customer' param as true).
-     * <p>
      * Pass the estimateId and Address object to update the shipping address for the estimate.
-     * <p>
      * If the billing address has been updated it returns the success message.
-     * <p>
      * The success message is "Shipping address updated"
      *
      * @param estimateId      ID of an estimate.
@@ -569,7 +479,6 @@ public class EstimatesApi extends API {
 
     /**
      * Get all estimate pdf templates.
-     * <p>
      * It returns the TemplateList object.
      *
      * @return Returns the TemplateList object.
@@ -588,11 +497,8 @@ public class EstimatesApi extends API {
 
     /**
      * Update the pdf template associated with the estimate.
-     * <p>
      * Pass the estimateId and templateId to update the respective template for the estimate.
-     * <p>
      * It returns the success message.
-     * <p>
      * The success message is "Estimate information has been updated."
      *
      * @param estimateId ID of an estimate.
@@ -618,9 +524,7 @@ public class EstimatesApi extends API {
 
     /**
      * Get the complete history and comments of an estimate.
-     * <p>
      * Pass the estimateId to get all the comments for the estimate.
-     * <p>
      * It returns the CommentList object.
      *
      * @param estimateId ID of an estimate.
@@ -640,9 +544,7 @@ public class EstimatesApi extends API {
 
     /**
      * Add a comment for an estimate.
-     * <p>
      * Pass the estimateId, description, and showCommentToClients to add a comment for the estimate.
-     * <p>
      * If the comment has been added it returns the Comment object.
      *
      * @param estimateId           ID of an estimate.
@@ -672,9 +574,7 @@ public class EstimatesApi extends API {
 
     /**
      * Update an existing comment of an estimate.
-     * <p>
      * Pass the estimateId, commentId, description, and showCommentToClients to update the comment for the estimate.
-     * <p>
      * If the comment has been updated it returns the Comment object.
      *
      * @param estimateId           ID of an estimate.
@@ -705,11 +605,8 @@ public class EstimatesApi extends API {
 
     /**
      * Delete an estimate comment.
-     * <p>
      * Pass the estimateId and commentId to delete the comment for the estimate.
-     * <p>
      * If the comment has been deleted it returns the success message.
-     * <p>
      * The success message is "The comment has been deleted."
      *
      * @param estimateId ID of an estimate.

@@ -12,15 +12,10 @@ import java.util.HashMap;
 
 /**
  * BaseCurrencyAdjustmentsApi is used to create the basecurrency adjustments.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The list of all  base currency adjustments.<br>
- * <p>
  * The details of a base currency adjsutment.<br>
- * <p>
  * The list of all account details for the base currency adjustment.<br><br>
- * <p>
  * It is used to delete the base currency adjustment.
  */
 
@@ -36,9 +31,11 @@ public class BaseCurrencyAdjustmentsApi extends API {
      */
 
     public BaseCurrencyAdjustmentsApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public BaseCurrencyAdjustmentsApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -47,21 +44,14 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
     /**
      * List of accounts having transaction with effect to the given exchange rate.
-     * <p>
      * Pass the filters to get all the base currency adjustment accounts based on the filters.
-     * <p>
      * It returns the BaseCurrencyAdjustment object.<br>
-     * <p>
      * The queryMap contains the possible keys as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
      * <tbody>
      * <tr><td>currency_id*</td><td>ID of currency for which we need to post adjustment.</td></tr>
-     * <p>
      * <tr><td>adjustment_date*</td><td>Date of adjustment.</td></tr>
-     * <p>
      * <tr><td>exchange_rate*</td><td>Exchange rate of the currency.</td></tr>
-     * <p>
      * <tr><td>notes*</td><td>Notes for the base currency adjustment.</td></tr>
      * </tbody>
      * </table>
@@ -83,21 +73,14 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
     /**
      * Creates a base currency adjustment for the given information.
-     * <p>
      * Pass the querystring parameter and BaseCurrencyAdjustment object to create a base currency adjustment.
-     * <p>
      * The BasCurrencyAdjustment object which contains currencyId, adjustmentDate, exchangeRate, and notes are the mandatory parameters.
-     * <p>
      * It returns the BaseCurrencyAdjustment object.<br>
-     * <p>
      * The paramMap contains the possible key as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>account_ids*</td><td>ID of the accounts for which base currency adjustments need to be posted.</td></tr>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param paramMap               It contains query string values in the form of key-value pair.
@@ -118,9 +101,7 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
     /**
      * Get the base currency adjustment details.
-     * <p>
      * Pass the baseCurrencyAdjustmentId to get the details of a base currency adjustment.
-     * <p>
      * It returns the BaseCurrencyAdjsutment object.
      *
      * @param baseCurrencyAdjustmentId ID of the BaseCurrencyAdjustment.
@@ -140,11 +121,8 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
     /**
      * Delete the base currency adjustment.
-     * <p>
      * Pass the baseCurrencyAdjsutmentId to delete the base currency adjsutment.
-     * <p>
      * If the base currency adjustment has been deleted it returns the success message.
-     * <p>
      * The success message is "The selected base currency adjustment has been deleted."
      *
      * @param baseCurrencyAdjustmentId ID of the BaseCurrencyAdjustment.
@@ -164,23 +142,16 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
     /**
      * List base currency adjustment.
-     * <p>
      * Pass the filters to get all the base currency adjustments based on the filters.
-     * <p>
      * It returns the BaseCurrencyAdjsutmentList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>filter_by<td><td>Filter base currency adjustment list. <br>
      * Allowed Values: <i>Date.All, Date.Today, Date.ThisWeek, Date.ThisMonth, Date.ThisQuarter</i> and <i>Date.ThisYear</i></td></tr>
-     * <p>
      * <tr><td>sort_column<td><td>Sort base currency adjustment list. <br>
      * Allowed Values: <i>adjustment_date, exchange_rate, currency_code, debit_or_credit</i> and <i>gain_or_loss</i></td></tr>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.

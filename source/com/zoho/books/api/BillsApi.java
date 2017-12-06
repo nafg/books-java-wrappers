@@ -15,47 +15,26 @@ import java.util.List;
 
 /**
  * BillsApi is used to create a Bill for the vendor.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The list of all the bills.<br>
- * <p>
  * The details of a bill.<br>
- * <p>
  * The list of bill payments.<br>
- * <p>
  * The bill attchment.<br>
- * <p>
  * The list of comments for the bill.<br><br>
- * <p>
  * It is used to:<br><br>
- * <p>
  * Apply credits to a bill.<br>
- * <p>
  * Add an attachment to a bill.<br>
- * <p>
  * Add a comment to a bill.<br><br>
- * <p>
  * It is used to update:<br><br>
- * <p>
  * The details of a bill.<br>
- * <p>
  * The billing address of a bill.<br><br>
- * <p>
  * It is used to change the status:<br><br>
- * <p>
  * Mark a bill status as void.<br>
- * <p>
  * Mark a void bill as open.<br><br>
- * <p>
  * It is used to delete:<br><br>
- * <p>
  * The particular bill.<br>
- * <p>
  * The payment made to a bill.<br>
- * <p>
  * The file attached to a bill.<br>
- * <p>
  * The bill comment.<br>
  */
 
@@ -71,9 +50,11 @@ public class BillsApi extends API {
      */
 
     public BillsApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public BillsApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -82,9 +63,7 @@ public class BillsApi extends API {
 
     /**
      * Create a bill received from your vendor.
-     * <p>
      * Pass the vendorId, billNumber, and accountId to create a new bill for the vendor.
-     * <p>
      * It returns the Bill object.
      *
      * @param vendorId   ID of the vendor for whom the bill has to be created.
@@ -125,11 +104,8 @@ public class BillsApi extends API {
 
     /**
      * Create a bill received from your vendor.
-     * <p>
      * Pass the Bill object to create a new bill for the vendor.
-     * <p>
      * The Bill object which contains vendorId, billNumber, and accountId are the mandatory parameters.
-     * <p>
      * It returns the Bill object.
      *
      * @param bill Bill object.
@@ -150,11 +126,8 @@ public class BillsApi extends API {
 
     /**
      * Create a bill received from your vendor.
-     * <p>
      * Pass the Bill object and File object to create a new bill with the attachment for the vendor.
-     * <p>
      * The Bill object which contains vendorId, billNumber, and accountId are the mandatory parameters.
-     * <p>
      * It returns the Bill object.
      *
      * @param bill Bill object.
@@ -179,9 +152,7 @@ public class BillsApi extends API {
 
     /**
      * Get the details of a bill.
-     * <p>
      * Pass the billId to get the details of a bill.
-     * <p>
      * It returns the Bill object.
      *
      * @param billId ID of the bill.
@@ -201,11 +172,8 @@ public class BillsApi extends API {
 
     /**
      * Update a bill, and delete a line item by removing it from the line_items list.
-     * <p>
      * Pass the Bill object to update the details of a bill.
-     * <p>
      * The Bill object which contains billId is the mandatory parameter for which bill details has to be updated.
-     * <p>
      * It returns the Bill object.
      *
      * @param bill Bill object.
@@ -227,11 +195,8 @@ public class BillsApi extends API {
 
     /**
      * Update a bill, and delete a line item by removing it from the line_items list.
-     * <p>
      * Pass the Bill object and File object to update the details and attachement of a bill.
-     * <p>
      * The Bill object which contains billId is the mandatory parameter for which bill details has to be updated.
-     * <p>
      * It returns the Bill object.
      *
      * @param bill Bill object.
@@ -258,11 +223,8 @@ public class BillsApi extends API {
 
     /**
      * Delete an existing bill. (Bills which have payments applied cannot be deleted.)
-     * <p>
      * Pass the billId to delete the bill.
-     * <p>
      * If the bill has been deleted it returns the success message.
-     * <p>
      * The success message is "The bill has been deleted."
      *
      * @param billId ID of the bill.
@@ -282,52 +244,33 @@ public class BillsApi extends API {
 
     /**
      * List all bills with pagination.
-     * <p>
      * Pass the filters to get all the bills based on the filters.
-     * <p>
      * It returns the BillList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
-     * <p>
      * <tr><td>bill_number</td><td>Search bills by bill number.<br>
      * Variants: <i>bill_number_startswith</i> and <i>bill_number_contains</i></td></tr>
-     * <p>
      * <tr><td>reference_number</td><td>Search bills by reference number.<br>
      * Variants: <i>reference_number_startswith</i> and <i>reference_number_contains</i></td></tr>
-     * <p>
      * <tr><td>date</td><td>Search bills by bill date.<br>
      * Variants: <i>date_start, date_end, date_before</i> and <i>date.after</i></td></tr>
-     * <p>
      * <tr><td>description</td><td>Search bills by description.<br>
      * Variants: <i>description_startswith</i> and <i>description_contains</i></td></tr>
-     * <p>
      * <tr><td>vendor_name</td><td>Search bills by vendor name.<br>
      * Variants: <i>vendor_name_startswith</i> and <i>vendor_name_contains</i></td></tr>
-     * <p>
      * <tr><td>total</td><td>Search bills by bill total.<br>
      * Variants: <i>total_less_than, total_less_equals, total_greater_than</i> and <i>total_greater_equals</i></td></tr>
-     * <p>
      * <tr><td>vendor_id</td><td>Search bills by vendor id.</td></tr>
-     * <p>
      * <tr><td>item_id</td><td>Search bills by bill item id.</td></tr>
-     * <p>
      * <tr><td>search_text</td><td>Search bills by bill number or reference number or vendor name.</td></tr>
-     * <p>
      * <tr><td>status</td><td>Search bills by bill status.<br>
      * Allowed Values: <i>paid, open, overdue, void</i> and <i>partially_paid</i></td></tr>
-     * <p>
      * <tr><td>filter_by</td><td>Filter bills by any status.<br>
      * Allowed Values: <i>Status.All, Status.PartiallyPaid, Status.Paid, Status.Overdue, Status.Void</i> and <i>Status.Open</i></td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort bills.<br>
      * Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> and <i>created_time</i></td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.
@@ -346,11 +289,8 @@ public class BillsApi extends API {
 
     /**
      * Mark a bill status as void.
-     * <p>
      * Pass the billId to change the status of a bill to 'void'.
-     * <p>
      * If the status of the bill has been changed it returns the success message.
-     * <p>
      * The success message is "The bill has been marked as void."
      *
      * @param billId ID of the bill.
@@ -370,11 +310,8 @@ public class BillsApi extends API {
 
     /**
      * Mark a void bill as open.
-     * <p>
      * Pass the billId to change the status of a bill to 'open'.
-     * <p>
      * If the status of the bill has been changed it returns the success message.
-     * <p>
      * The success message is "The status of the bill has been changed from void to open."
      *
      * @param billId ID of the bill.
@@ -394,11 +331,8 @@ public class BillsApi extends API {
 
     /**
      * Update the billing address for this bill.
-     * <p>
      * Pass the billId and Address object to update the billing address of a bill.
-     * <p>
      * If the billing address has been updated it returns the success message.
-     * <p>
      * The success message is "Billing address updated."
      *
      * @param billId         ID of the bill.
@@ -427,9 +361,7 @@ public class BillsApi extends API {
 
     /**
      * Get the list of payments made for a bill.
-     * <p>
      * Pass the billId to get all the payments for the bill.
-     * <p>
      * It returns the PaymentList object.
      *
      * @param billId ID of the bill.
@@ -449,13 +381,9 @@ public class BillsApi extends API {
 
     /**
      * Apply vendor credits from excess vendor payments to a bill. (Multiple credits can be applied at once.)
-     * <p>
      * Pass the billId and list of Payment object to apply the credits for the bill.
-     * <p>
      * The Payment object which contains amountApplied is the mandatory parameter.
-     * <p>
      * If the credits has been applied to the bill it returns the success message.
-     * <p>
      * The success message is "Credits have been applied to the bill(s)."
      *
      * @param billId  ID of the bill.
@@ -495,11 +423,8 @@ public class BillsApi extends API {
 
     /**
      * Delete a payment made to a bill.
-     * <p>
      * Pass the billId and billPaymentId to delete the bill payment.
-     * <p>
      * If the bill payment has been deleted it returns the success message.
-     * <p>
      * The success message is "The payment has been deleted."
      *
      * @param billId        ID of the bill.
@@ -524,9 +449,7 @@ public class BillsApi extends API {
 
     /**
      * Return the file attached to the bill.
-     * <p>
      * Pass the billId to get the attachment of the bill.
-     * <p>
      * It returns the File object.
      *
      * @param billId ID of the bill.
@@ -544,11 +467,8 @@ public class BillsApi extends API {
 
     /**
      * Attach a file to a bill.
-     * <p>
      * Pass the billId and File object to add the attachment of the bill.
-     * <p>
      * If the file has been attached to the bill it returns the success message.
-     * <p>
      * The success message is "The document has been attached."
      *
      * @param billId ID of the bill.
@@ -574,11 +494,8 @@ public class BillsApi extends API {
 
     /**
      * Delete the file attached to a bill.
-     * <p>
      * Pass the billId to delete the attachment of the bill.
-     * <p>
      * If the attachment has been deleted it returns the success message.
-     * <p>
      * The success message is "The attachment has been deleted."
      *
      * @param billId ID of the bill.
@@ -603,9 +520,7 @@ public class BillsApi extends API {
 
     /**
      * Get the complete history and comments of a bill.
-     * <p>
      * Pass the billId to get all the comments for the bill.
-     * <p>
      * It returns the BillList object.
      *
      * @param billId ID of the bill.
@@ -625,9 +540,7 @@ public class BillsApi extends API {
 
     /**
      * Add a comment for a bill.
-     * <p>
      * Pass the billId and description to add the comment for the bill.
-     * <p>
      * It returns the Comment object.
      *
      * @param billId      ID of the bill.
@@ -656,11 +569,8 @@ public class BillsApi extends API {
 
     /**
      * Delete a bill comment.
-     * <p>
      * Pass the billId and commentId to delete the comment for the bill.
-     * <p>
      * If the comment has been deleted it retuens the success message.
-     * <p>
      * The success message is "The comment has been deleted."
      *
      * @param billId    ID of the bill.

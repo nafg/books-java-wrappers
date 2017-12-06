@@ -15,65 +15,35 @@ import java.util.List;
 
 /**
  * CreditNotesApi is used to create a new credit note for a customer.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The list of credit notes.<br>
- * <p>
  * The details of a credit note.<br>
- * <p>
  * The email history of a credit note.<br>
- * <p>
  * The email content of a credit note.<br>
- * <p>
  * The list of credit note templates.<br>
- * <p>
  * The list of invoice credits.<br>
- * <p>
  * The list of credit note refunds.<br>
- * <p>
  * The list of refunds of a credit note.<br>
- * <p>
  * The details of a credit note refund.<br>
- * <p>
  * The list of credit note comments.<br><br>
- * <p>
  * It is used to:<br><br>
- * <p>
  * Send an email to a customer.<br>
- * <p>
  * Apply credit note to an invoice.<br>
- * <p>
  * Add a credit note refund.<br>
- * <p>
  * Add a comment for the credit note.<br><br>
- * <p>
  * It is used to update:<br><br>
- * <p>
  * The details of a credit note.<br>
- * <p>
  * The billing address of a credit note.<br>
- * <p>
  * The shipping address of a credit note.<br>
- * <p>
  * The pdf template of a credit note.<br>
- * <p>
  * The details of a credit note refund. <br><br>
- * <p>
  * It is used to change the status:<br><br>
- * <p>
  * Mark a credit note status to open.<br>
- * <p>
  * Mark a credit note as void.<br><br>
- * <p>
  * It is used to delete:<br><br>
- * <p>
  * The existing credit note.<br>
- * <p>
  * The credits applied to an invoice.<br>
- * <p>
  * The credit note refund.<br>
- * <p>
  * The credit note comment.<br>
  */
 
@@ -91,9 +61,11 @@ public class CreditNotesApi extends API {
      */
 
     public CreditNotesApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public CreditNotesApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -102,9 +74,7 @@ public class CreditNotesApi extends API {
 
     /**
      * Create a credit note for a customer.
-     * <p>
      * Pass the customerId, accountId, and itemName to create a new Credit note for a customer.
-     * <p>
      * It returns the CreditNote object.
      *
      * @param customerId ID of the customer the credit note has to be created.
@@ -143,15 +113,10 @@ public class CreditNotesApi extends API {
 
     /**
      * Create a credit note for a customer.
-     * <p>
      * Pass the CreditNote object and query string to create a new credit note for a customer.<br>
-     * <p>
      * The paramMap contains the possible keys as mentioned below:<br><br>
-     * <p>
      * invoice_id - Create a credit note and apply it to an invoice.<br>
-     * <p>
      * ignore_auto_number_generation - Ignore auto number generation for this credit note only. To enable this option credit note number is mandatory.<br><br>
-     * <p>
      * It returns the CreditNote object.
      *
      * @param creditNote CreditNote object.
@@ -173,9 +138,7 @@ public class CreditNotesApi extends API {
 
     /**
      * Get details of a credit note.
-     * <p>
      * Pass the creditNoteId to get the details of a credit note.
-     * <p>
      * It returns the CreditNote object.
      *
      * @param creditNoteId ID of the CreditNote.
@@ -196,15 +159,10 @@ public class CreditNotesApi extends API {
 
     /**
      * Update an existing credit note.
-     * <p>
      * Pass the CreditNote object and query string parameters to update the details of a credit note.
-     * <p>
      * The paramMap contains the possible key as mentioned below: <br><br>
-     * <p>
      * ignore_auto_number_generation - Allow editing of credit note number.<br><br>
-     * <p>
      * The CreditNote object which contains creditNoteId is the mandatory parameter for which credit note details has to be updated.
-     * <p>
      * It returns the CreditNote object.
      *
      * @param creditNote CreditNote object.
@@ -228,11 +186,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Delete a credit note.
-     * <p>
      * Pass the creditNoteId to delete a credit note.
-     * <p>
      * If the credit note has been deleted it returns the success message.
-     * <p>
      * The success message is "The credit note has been deleted."
      *
      * @param creditNoteId ID of the CreditNote.
@@ -252,59 +207,37 @@ public class CreditNotesApi extends API {
 
     /**
      * List credit notes with pagination.
-     * <p>
      * Pass the filters in the form of key-value pair to get all the credit notes based on the filter.
-     * <p>
      * It returns the CreditNoteList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
-     * <p>
      * <tr><td>creditnote_number</td><td>Search credit notes by credit note number.<br>
      * Variants: <i>creditnote_number_startswith</i> and <i>creditnote_number_contains</i></td></tr>
-     * <p>
      * <tr><td>date</td><td>Search credit notes by credit note date.<br>
      * Variants: <i>date_start, date_end, date_before</i> and <i>date_after</i></td></tr>
-     * <p>
      * <tr><td>total</td><td>Search credit notes by credit note total amount.<br>
      * Variants: <i>total_less_than, total_less_equals, total_greater_than</i> and <i>total_greater_equals</i></td></tr>
-     * <p>
      * <tr><td>reference_number</td><td>Search credit notes by credit note reference number.<br>
      * Variants: <i>reference_number_startswith</i> and <i>reference_number_contains</i></td></tr>
-     * <p>
      * <tr><td>customer_name</td><td>Search credit notes by customer name.<br>
      * Variants: <i>customer_name_startswith</i> and <i>customer_name_contains</i></td></tr>
-     * <p>
      * <tr><td>item_name</td><td>Search credit notes by item name.<br>
      * Variants: <i>item_name_startswith</i> and <i>item_name_contains</i></td></tr>
-     * <p>
      * <tr><td>item_description</td><td>Search credit notes by credit note item description.<br>
      * Variants: <i>item_description_startswith</i> and <i>item_description_contains</i></td></tr>
-     * <p>
      * <tr><td>customer_id</td><td>Search credit notes by customer id.</td></tr>
-     * <p>
      * <tr><td>line_item_id</td><td>Search credit notes by credit note line item id.</td></tr>
-     * <p>
      * <tr><td>item_id</td><td>Search credit notes by item id.</td></tr>
-     * <p>
      * <tr><td>tax_id</td><td>Search credit notes by tax id.</td></tr>
-     * <p>
      * <tr><td>search_text</td><td>Search credit notes by credit note number or customer name or credit note reference number.</td></tr>
-     * <p>
      * <tr><td>status</td><td>Search credit notes by credit note status. Allowed statuses are draft,open,closed and void.<br>
      * Allowed Values: <i>open, closed</i> and <i>void</i></td></tr>
-     * <p>
      * <tr><td>filter_by</td><td>Filter credit notes by statuses.<br>
      * Allowed Values: <i>Status.All, Status.Open, Status.Draft, Status.Closed</i> and <i>Status.Void</td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort credit notes by following columns customer_name, creditnote_number, balance, total, date and created_time.<br>
      * Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> and <i>created_time</i></td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.
@@ -323,15 +256,10 @@ public class CreditNotesApi extends API {
 
     /**
      * Email a credit note to the customer.
-     * <p>
      * Pass the creditNoteId, Email object and query string parameters to send an email credit note to a customer.
-     * <p>
      * The paramMap contains the possible key as mentioned below: <br><br>
-     * <p>
      * customer_id - ID of the customer.<br><br>
-     * <p>
      * If the email has been sent to the customer it returns the success message.
-     * <p>
      * The success message is "Your credit note has been sent."
      *
      * @param creditNoteId ID of the CreditNote.
@@ -371,9 +299,7 @@ public class CreditNotesApi extends API {
 
     /**
      * Get email history of a credit note.
-     * <p>
      * Pass the creditNoteId to get all the email history for the credit note.
-     * <p>
      * It returns the EmailHistoryList object.
      *
      * @param creditNoteId ID of the CreditNote.
@@ -393,13 +319,9 @@ public class CreditNotesApi extends API {
 
     /**
      * Get email content of a credit note.
-     * <p>
      * Pass the creditNoteId and query string parameters to get the email content for the credit note.
-     * <p>
      * The queryMap contains the possible key as mentioned below:<br><br>
-     * <p>
      * email_template_id - Get the email content based on a specific email template. <br><br>
-     * <p>
      * It returns the Email object.
      *
      * @param creditNoteId ID of the CreditNote.
@@ -420,11 +342,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Change an existing credit note status to open (A void credit note can't be changed to open).
-     * <p>
      * Pass the creditNoteId to change the status of a credit note to 'open'.
-     * <p>
      * If the credit note status has been changed it returns the success message.
-     * <p>
      * The success message is "The status of the credit note has been changed to open."
      *
      * @param creditNoteId ID of the CreditNote.
@@ -444,11 +363,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Mark an existing credit note as void.
-     * <p>
      * Pass the creditNoteId to change the status of a credit note to 'void'.
-     * <p>
      * If the credit note status has been changed it returns the success message.
-     * <p>
      * The success message is "The credit note has been marked as void."
      *
      * @param creditNoteId ID of the CreditNote.
@@ -468,11 +384,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Update the billing address for an existing credit note alone (You can set this address as default billing address for your customer by specifying 'is_update_customer' node as true).
-     * <p>
      * Pass the creditNoteId and Address object to update the billing address of a credit note.
-     * <p>
      * If the billing address has been updated it returns the success message.
-     * <p>
      * The success message is "Billing address updated".
      *
      * @param creditNoteId   ID of the CreditNote.
@@ -497,11 +410,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Update the shipping address for an existing credit note alone (You can set this address as default shipping address for your customer by specifying 'is_update_customer' node as true).
-     * <p>
      * Pass the creditNoteId and Address object to update the shipping address of a credit note.
-     * <p>
      * If the shipping address has been updated it returns the success message.
-     * <p>
      * The success message is "Shipping address updated".
      *
      * @param creditNoteId    ID of the CreditNote.
@@ -526,7 +436,6 @@ public class CreditNotesApi extends API {
 
     /**
      * Get all credit note pdf templates.
-     * <p>
      * It returns the TemplateList object.
      *
      * @return Returns the TemplateList object.
@@ -545,11 +454,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Update the pdf template associated with the credit note.
-     * <p>
      * Pass the creditNoteId and templateId to update the respective template for the credit note.
-     * <p>
      * If the template has been updated it returns the success message.
-     * <p>
      * The success message is "The credit note has been updated."
      *
      * @param creditNoteId ID of the CreditNote.
@@ -575,9 +481,7 @@ public class CreditNotesApi extends API {
 
     /**
      * Apply credit note to existing invoices.
-     * <p>
      * Pass the creditNoteId and list of Invoice objects to apply the credit to invoice.
-     * <p>
      * It returns the InvoiceList object.
      *
      * @param creditNoteId ID of the CreditNote.
@@ -616,9 +520,7 @@ public class CreditNotesApi extends API {
 
     /**
      * List invoices to which the credit note is applied.
-     * <p>
      * Pass the creditNoteId to get the invoices credited list.
-     * <p>
      * It returns the InvoicesCreditedList object.
      *
      * @param creditNoteId ID of the CreditNote.
@@ -639,11 +541,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Delete the credits applied to an invoice.
-     * <p>
      * Pass the creditNoteId and creditNoteInvoiceId to delete the invoices credited for the credit note.
-     * <p>
      * If the credited invoices has been deleted it returns the success message.
-     * <p>
      * The success message is "Credits applied to an invoice have been deleted."
      *
      * @param creditNoteId        ID of the CreditNote.
@@ -668,11 +567,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Refund credit note amount.
-     * <p>
      * Pass the creditNoteId, CreditnoteRefund object to add the refund amount for the credit note.
-     * <p>
      * The CreditnoteRefund object which contains date and amount are the mandatory parameters.
-     * <p>
      * It returns the CreditnoteRefund object.
      *
      * @param creditNoteId     ID of the creditnote.
@@ -695,9 +591,7 @@ public class CreditNotesApi extends API {
 
     /**
      * Get refund of a particular credit note.
-     * <p>
      * Pass creditNoteId and creditnoteRefundId to get all the refunds for the credit note.
-     * <p>
      * It returns the CreditnoteRefund object.
      *
      * @param creditNoteId       ID of the creditnote.
@@ -719,11 +613,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Update the refunded transaction.
-     * <p>
      * Pass the creditNoteId and CreditnoteRefund object to update the details of a creditnote refund.
-     * <p>
      * The CreditnoteRefund object which contains creditnoteRefundId is the mandatory parameter.
-     * <p>
      * It returns the CreditnoteRefund object.
      *
      * @param creditNoteId     ID of the creditnote.
@@ -746,11 +637,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Delete a credit note refund.
-     * <p>
      * Pass the creditNoteId and creditnoteRefundId to delete the creditnote refund.
-     * <p>
      * If the creditnote refund has been deleted it returns the success message.
-     * <p>
      * The success message is "The refund has been successfully deleted."
      *
      * @param creditNoteId       ID of the creditnote.
@@ -771,9 +659,7 @@ public class CreditNotesApi extends API {
 
     /**
      * List all refunds of an existing credit note.
-     * <p>
      * Pass the creditNoteId to get all the creditnote refunds for the credit note.
-     * <p>
      * It returns the CreditnoteRefundList object.
      *
      * @param creditNoteId ID of the creditnote.
@@ -793,24 +679,15 @@ public class CreditNotesApi extends API {
 
     /**
      * List all refunds with pagination.
-     * <p>
      * Pass the filters to get all the refunds based on the filter.
-     * <p>
      * It returns the CreditnoteRefundList object. <br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
-     * <p>
      * <tr><td>customer_id</td><td>List credit note refunds made for a particular customer.</td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort refunds list. <br>
      * Allowed Values: <i>refund_mode, reference_number, date, creditnote_number, customer_name, amount_bcy</i> and <i>amount_fcy</i></td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.
@@ -834,9 +711,7 @@ public class CreditNotesApi extends API {
 
     /**
      * Add a comment to an existing credit note.
-     * <p>
      * Pass the creditNoteId and description to add a comment for the credit note.
-     * <p>
      * It returns the Comment object.
      *
      * @param creditNoteId ID of the creditnote.
@@ -864,9 +739,7 @@ public class CreditNotesApi extends API {
 
     /**
      * Get history and comments of a credit note.
-     * <p>
      * Pass the creditNoteId to get all the comments for the credit note.
-     * <p>
      * It returns the CommentList object.
      *
      * @param creditNoteId ID of the creditnote.
@@ -887,11 +760,8 @@ public class CreditNotesApi extends API {
 
     /**
      * Delete a credit note comment.
-     * <p>
      * Pass the creditNoteId and commentId to delete the comment for the credit note.
-     * <p>
      * If the comment has been deleted it returns the success message.
-     * <p>
      * The success message is "The comment has been deleted."
      *
      * @param creditNoteId ID of the creditnote.

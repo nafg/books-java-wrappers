@@ -15,89 +15,47 @@ import java.util.List;
 
 /**
  * InvoicesApi is used to create a new invoice for the customer.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The list of all invoices.<br>
- * <p>
  * The details of an invoice.<br>
- * <p>
  * The invoice email content.<br>
- * <p>
  * The payment reminder email content.<br>
- * <p>
  * The invoices as pdf.<br>
- * <p>
  * The invoice templates.<br>
- * <p>
  * The list of invoice payments.<br>
- * <p>
  * The list of credits applied for an invoice.<br>
- * <p>
  * The invoice attachment.<br>
- * <p>
  * The list of comments for an invoice.<br><br>
- * <p>
  * It is used to update:<br><br>
- * <p>
  * The details of an invoice.<br>
- * <p>
  * The billing address of an invoice.<br>
- * <p>
  * The shipping address of an invoice.<br>
- * <p>
  * The templates of an invoice.<br>
- * <p>
  * The attachment preference of an invoice.<br>
- * <p>
  * The comment of an invoice.<br><br>
- * <p>
  * It is used to change the status:<br><br>
- * <p>
  * Mark an invoice as sent.<br>
- * <p>
  * Mark an invoice as void.<br>
- * <p>
  * Mark an invoice as draft.<br>
- * <p>
  * Enable payment reminder for an invoice.<br>
- * <p>
  * Disable payment reminder for an invoice.<br>
- * <p>
  * Write off the invoice balance amount of an invoice.<br>
- * <p>
  * Cancel write off amount of an invoice.<br><br>
- * <p>
  * It is used to send:<br><br>
- * <p>
  * Invoice to your customer by email.<br>
- * <p>
  * Invoices to your customers by email.<br>
- * <p>
  * Reminder to your customer by email.<br>
- * <p>
  * Reminder to your multiple customers by email.<br><br>
- * <p>
  * It is used to:<br><br>
- * <p>
  * Apply creditnotes to an invoice.<br>
- * <p>
  * Attach a file to an invoice.<br>
- * <p>
  * Add a comment for an invoice.<br><br>
- * <p>
  * It is used to delete:<br><br>
- * <p>
  * The existing invoice.<br>
- * <p>
  * The payment made to an invoice.<br>
- * <p>
  * The credit particularly applied to an invoice.<br>
- * <p>
  * The file attached to an invoice.<br>
- * <p>
  * The expense receipts attached to an invoice.<br>
- * <p>
  * The comment to an invoice.<br>
  */
 
@@ -114,9 +72,11 @@ public class InvoicesApi extends API {
      */
 
     public InvoicesApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public InvoicesApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -125,68 +85,43 @@ public class InvoicesApi extends API {
 
     /**
      * Get list of invoices.
-     * <p>
      * Pass the filters in the form of key-value pair to get all the invoices based on the filters.
-     * <p>
      * It returns the InvoiceList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
-     * <p>
      * <tr><td>invoice_number</td><td>Search invoices by invoice number.<br>
      * Variants: <i>invoice_number_startswith</i> and <i>invoice_number_contains</i></td></tr>
-     * <p>
      * <tr><td>item_name</td><td>Search invoices by item name.<br>
      * Variants: <i>item_name_startswith</i> and <i>item_name_contains</i></td></tr>
-     * <p>
      * <tr><td>item_id</td><td>Search invoices by item id.</td></tr>
-     * <p>
      * <tr><td>item_description</td><td>Search invoices by item description.<br>
      * Variants: <i>item_description_startswith</i> and <i>item_description_contains</i></td></tr>
-     * <p>
      * <tr><td>reference_number</td><td>Search invoices by invoice reference number (i.e., P.O.#).<br>
      * Variants: <i>reference_number_startswith</i> and <i>reference_number_contains</i></td></tr>
-     * <p>
      * <tr><td>customer_name</td><td>Search invoices by customer name.<br>
      * Variants: <i>customer_name_startswith</i> and <i>customer_name_contains</i></td></tr>
-     * <p>
      * <tr><td>recurring_invoice_id</td><td>Search invoices by recurring profile id.</td></tr>
-     * <p>
      * <tr><td>email</td><td>Search invoices by customer contact persons email.</td></tr>
-     * <p>
      * <tr><td>total</td><td>Search invoices by invoice total.<br>
      * Variants: <i>total_less_than, total_less_equals, total_greater_than</i> and <i>total_greater_equals</i></td></tr>
-     * <p>
      * <tr><td>balance</td><td>Search invoices by invoice total.<br>
      * Variants: <i>balance_less_than, balance_less_equals, balance_greater_than</i> and <i>balance_greater_equals</i></td></tr>
-     * <p>
      * <tr><td>date</td><td>Search invoices by invoice date.<br>
      * Variants: <i>date_start, date_end, date_before</i> and <i>date_after</i></td></tr>
-     * <p>
      * <tr><td>due_date</td><td>Search invoices by due date.<br>
      * Variants: <i>due_date_start, due_date_end, due_date_before</i> and <i>due_date_after</i></td></tr>
-     * <p>
      * <tr><td>status</td><td>Search invoices by invoice status.<br>
      * Allowed Values: <i>sent, draft, overdue, paid, void, unpaid, partiallypaid</i> and <i>viewed</i></td></tr>
-     * <p>
      * <tr><td>customer_id</td><td>Search invoices by customer id.</td></tr>
-     * <p>
      * <tr><td>custom_field</td><td>Search invoices by custom fields.<br>
      * Variants: <i>custom_field_startswith</i> and <i>custom_field_contains</i></td></tr>
-     * <p>
      * <tr><td>search_text</td><td>Search invoices by invoice number or purchase order or customer name.</td></tr>
-     * <p>
      * <tr><td>filter_by</td><td>Filter invoices by any status or payment expected date.<br>
      * Allowed Values: <i>Status.All, Status.Sent, Status.Draft, Status.OverDue, Status.Paid, Status.Void, Status.Unpaid, Status.PartiallyPaid, Status.Viewed</i> and <i>Date.PaymentExpectedDate</i> </td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort invoices.<br>
      * Allowed Values: <i>customer_name, invoice_number, date, due_date, total, balance</i> and <i>created_time</i></td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.
@@ -204,9 +139,7 @@ public class InvoicesApi extends API {
 
     /**
      * Create an invoice for your customer.
-     * <p>
      * Pass the customerId, contactPersonId, and description to create a new invoice.
-     * <p>
      * It returns the Invoice object.
      *
      * @param customerId      ID of the customer for whom the invoice has to be created.
@@ -249,21 +182,14 @@ public class InvoicesApi extends API {
 
     /**
      * Create an invoice for your customer.
-     * <p>
      * Pass the Invoice object to create a new invoice for your customer.
-     * <p>
      * Pass Invoice object and query string parameters to create a new invoice.<br>
-     * <p>
      * The possible keys and values are mentioned below:<br><br>
-     * <p>
      * send - Send the invoice to the contact person(s) associated with the invoice.
      * Allowed Values: true and false <br>
-     * <p>
      * ignore_auto_number_generation - Ignore auto invoice number generation for this invoice. This mandates the invoice number.
      * Allowed Values: true and false <br><br>
-     * <p>
      * The Invoice object which contains customerId, contactPersonId, and description are the mandatory parameters.
-     * <p>
      * It returns the Invoice object.
      *
      * @param newInvoice Invoice object.
@@ -287,9 +213,7 @@ public class InvoicesApi extends API {
 
     /**
      * Get the details of an invoice.
-     * <p>
      * Pass the invoiceId to get the details of a particular invoice.
-     * <p>
      * It returns the Invoice object.
      *
      * @param invoiceId ID of an invoice.
@@ -309,15 +233,10 @@ public class InvoicesApi extends API {
 
     /**
      * Update an existing invoice (To delete a line item just remove it from the line_items list).
-     * <p>
      * Pass the Invoice object and query string parameters to update the details of a particular invoice.
-     * <p>
      * The possible key and value are mentioned below: <br><br>
-     * <p>
      * ignore_auto_number_generation - Ignore auto estimate number generation for this estimate. This mandates the estimate number.<br>
-     * <p>
      * The Invoice object which contains invoiceId is the mandatory paramter for which invoice has to be updated.
-     * <p>
      * It returns the Invoice object.
      *
      * @param newInvoice Invoice object.
@@ -342,11 +261,8 @@ public class InvoicesApi extends API {
 
     /**
      * Delete an existing invoice (Invoices which have payment or credit notes applied cannot be deleted).
-     * <p>
      * Pass the invoiceId to delete a particular invoice.
-     * <p>
      * If the invoice has been deleted it returns the success message.
-     * <p>
      * The success message is "The invoice has been deleted."
      *
      * @param invoiceId ID of an Invoice.
@@ -367,17 +283,11 @@ public class InvoicesApi extends API {
 
     /**
      * Email an invoice to the customer (If the Email object is not inputted, mail will be send with default mail content).
-     * <p>
      * Pass the invoiceId, Email object, and query string paramters to send the email to the customer.
-     * <p>
      * The possible keys and values are mentioned below: <br><br>
-     * <p>
      * send_customer_statement - Send customer statement pdf a with email.<br>
-     * <p>
      * send_attachment - Send the invoice attachment a with the email.<br><br>
-     * <p>
      * If the email has been sent to the customer it returns the success message.
-     * <p>
      * The success message is "Your invoice has been sent."
      *
      * @param invoiceId ID of an Invoice.
@@ -420,15 +330,10 @@ public class InvoicesApi extends API {
 
     /**
      * Send invoices to your customers by email (Maximum of 10 invoices can be sent at once).
-     * <p>
      * Pass the list of Contact object and query string paramters to send the email to the customers.
-     * <p>
      * The paramMap contains the possible key as mentioned below: <br><br>
-     * <p>
      * invoice_ids* - Comma separated invoice ids which are to be emailed. <br><br>
-     * <p>
      * If the email has been sent to the customers it returns the success message.
-     * <p>
      * The success message is "Mission accomplished! We've sent all the invoices."
      *
      * @param contacts Contacts for whom email or snail mail has to be sent.
@@ -470,13 +375,9 @@ public class InvoicesApi extends API {
 
     /**
      * Get the email content of an invoice.
-     * <p>
      * Pass the invoiceId and query string parameters to get the email content of an invoice.
-     * <p>
      * The queryMap contains the possible key as mentioned below: <br><br>
-     * <p>
      * email_template_id - Get the email content based on a specific email template. <br><br>
-     * <p>
      * It returns the Email object.
      *
      * @param invoiceId Id of an Invoice.
@@ -498,15 +399,10 @@ public class InvoicesApi extends API {
 
     /**
      * Remind your customer about an unpaid invoice by email (Reminder will be sent, only for the invoices which are in open or overdue status).
-     * <p>
      * Pass the invoiceId, Email object, and query string parameters to send the reminder to the customer.
-     * <p>
      * The paramMap contains the possible key and value as mentioned below: <br><br>
-     * <p>
      * send_customer_statement - Send customer statement pdf a with payment reminder. <br><br>
-     * <p>
      * If the reminder has been sent to the customer it returns the success message.
-     * <p>
      * The success message is "Your payment reminder has been sent."
      *
      * @param invoiceId ID of an Invoice.
@@ -549,15 +445,10 @@ public class InvoicesApi extends API {
 
     /**
      * Remind your customer about an unpaid invoices by email (Reminder mail will be sent, only for the invoices which are in open or overdue status. The customer can be reminded for maximum 10 invoices at once.)
-     * <p>
      * Pass the query string parameters to send the reminder to the customer.
-     * <p>
      * The paramMap contains the possible key as mentioned below: <br><br>
-     * <p>
      * invoice_ids* - Comma separated invoice ids which the reminder has to be sent.<br><br>
-     * <p>
      * If the reminder has been sent to the customer it returns the success message.
-     * <p>
      * The success message is "Success! All reminders have been sent."
      *
      * @param paramMap Comma separated invoice ids for which the reminder has to be sent.
@@ -577,9 +468,7 @@ public class InvoicesApi extends API {
 
     /**
      * Get the email content of the payment reminder.
-     * <p>
      * Pass the invoiceId to get the email content of the payment reminder.
-     * <p>
      * It returns the Email object.
      *
      * @param invoiceId ID of an Invoice.
@@ -599,11 +488,8 @@ public class InvoicesApi extends API {
 
     /**
      * Mark a draft invoice as sent.
-     * <p>
      * Pass the invoiceId to change the status of an invoice to 'sent'.
-     * <p>
      * If the invoice status has been changed it returns the success message.
-     * <p>
      * The success message is "Invoice status has been changed to Sent."
      *
      * @param invoiceId Id of an Invoice.
@@ -623,11 +509,8 @@ public class InvoicesApi extends API {
 
     /**
      * Mark a void invoice as draft.
-     * <p>
      * Pass the invoiceId to change the status of an invoice to 'draft'.
-     * <p>
      * If the invoice status has been changed it returns the success message.
-     * <p>
      * The success message is "Status of invoice changed from void to draft."
      *
      * @param invoiceId ID of an Invoice.
@@ -647,11 +530,8 @@ public class InvoicesApi extends API {
 
     /**
      * Mark an invoice status as void (Upon void, the payments and credits associated with the invoices will be unassociated and will be under customer credits).
-     * <p>
      * Pass the invoiceId to change the status of an invoice to 'void'.
-     * <p>
      * If the invoice status has been changed it returns the success message.
-     * <p>
      * The success message is "Invoice status has been changed to void."
      *
      * @param invoiceId ID of an Invoice.
@@ -671,13 +551,9 @@ public class InvoicesApi extends API {
 
     /**
      * Maximum of 25 invoices can be exported in a single pdf.
-     * <p>
      * Pass the query string parameters to get multiple invoices in a single pdf.
-     * <p>
      * The queryMap contains the possible key as mentioned below: <br><br>
-     * <p>
      * invoice_ids* - Comma separated invoice ids which are to be export as pdf.<br><br>
-     * <p>
      * It returns a File object.
      *
      * @param queryMap Comma separated invoice ids which are to be exported as pdf.
@@ -695,13 +571,9 @@ public class InvoicesApi extends API {
 
     /**
      * Export invoices as pdf, and print them (Maximum of 25 invoices can be printed).
-     * <p>
      * Pass the query string parameters to get multiple invoices in a single pdf.
-     * <p>
      * The queryMap contains the possible key as mentioned below: <br><br>
-     * <p>
      * invoice_ids* - Comma separated invoice ids which are to be printed.<br><br>
-     * <p>
      * It returns a File object.
      *
      * @param queryMap Comma separated invoice ids which are to be printed.
@@ -718,11 +590,8 @@ public class InvoicesApi extends API {
 
     /**
      * Enable automated payment reminders for an invoice.
-     * <p>
      * Pass the invoiceId to enable payment reminder for an invoice.
-     * <p>
      * If the payment reminder has been enabled it returns the success message.
-     * <p>
      * The success message is "Reminders enabled."
      *
      * @param invoiceId ID of an Invoice.
@@ -742,11 +611,8 @@ public class InvoicesApi extends API {
 
     /**
      * Disable automated payment reminders for an invoice.
-     * <p>
      * Pass the invoiceId to disable payment reminder for an invoice.
-     * <p>
      * If the payment reminder has been disabled it returns the success message.
-     * <p>
      * The success message is "Reminders stopped."
      *
      * @param invoiceId ID of an Invoice.
@@ -766,11 +632,8 @@ public class InvoicesApi extends API {
 
     /**
      * Write off the invoice balance amount of an invoice.
-     * <p>
      * Pass the invoiceId to change the status of an invoice to 'writeoff'.
-     * <p>
      * If the invoice status has been changed it returns the success message.
-     * <p>
      * The success message is "Invoice has been written off."
      *
      * @param invoiceId ID of an Invoice.
@@ -790,11 +653,8 @@ public class InvoicesApi extends API {
 
     /**
      * Cancel the write-off amount of an invoice.
-     * <p>
      * Pass the invoiceId to cancel the write-off amount of an invoice.
-     * <p>
      * If the invoice status has been changed it returns the success message.
-     * <p>
      * The success message is "Invoice has been written off."
      *
      * @param invoiceId ID of an Invoice.
@@ -814,11 +674,8 @@ public class InvoicesApi extends API {
 
     /**
      * Updates the billing address for this invoice alone (You can set this address as default billing address for your customer by specifying 'is_update_customer' param as true)
-     * <p>
      * Pass the invoiceId and Address object to update the billing address of an invoice.
-     * <p>
      * If the billing address has been updated it returns the success message.
-     * <p>
      * The success message is "Billing address updated."
      *
      * @param invoiceId      Id of an Invoice.
@@ -843,11 +700,8 @@ public class InvoicesApi extends API {
 
     /**
      * Updates the shipping address for this invoice (You can set this address as default shipping address for your customer by specifying 'is_update_customer' param as true).
-     * <p>
      * Pass the invoiceId and Address object to update the shipping address of an invoice.
-     * <p>
      * If the shipping address has been updated it returns the success message.
-     * <p>
      * The success message is "Shipping address updated."
      *
      * @param invoiceId       ID of an Invoice.
@@ -872,7 +726,6 @@ public class InvoicesApi extends API {
 
     /**
      * Get all invoice pdf templates.
-     * <p>
      * It returns the TemplateList object.
      *
      * @return Returns the TemplateList object.
@@ -891,11 +744,8 @@ public class InvoicesApi extends API {
 
     /**
      * Update the pdf template associated with the invoice.
-     * <p>
      * Pass the invoiceId and templateId to update the respective template for an invoice.
-     * <p>
      * If the template has been updated it returns the success message.
-     * <p>
      * The success message is "Invoice information has been updated."
      *
      * @param invoiceId  ID of an Invoice.
@@ -921,9 +771,7 @@ public class InvoicesApi extends API {
 
     /**
      * Get the list of payments made for an invoice.
-     * <p>
      * Pass the invoiceId to get all the payments for an invoice.
-     * <p>
      * It returns the PaymentList object.
      *
      * @param invoiceId ID of an Invoice.
@@ -943,9 +791,7 @@ public class InvoicesApi extends API {
 
     /**
      * Get the list of credits applied for an invoice.
-     * <p>
      * Pass the invoiceId to get all the credits for an invoice.
-     * <p>
      * It returns the CreditList object.
      *
      * @param invoiceId ID of an Invoice.
@@ -965,9 +811,7 @@ public class InvoicesApi extends API {
 
     /**
      * Apply the customer credits either from credit notes or excess customer payments to an invoice (Multiple credits can be applied at once).
-     * <p>
      * Pass the invoiceId, list of InvoicePayment objects, and list of ApplyCreditnote objects to add the credits for an invoice.
-     * <p>
      * It returns the Credit object.
      *
      * @param invoiceId        ID of an Invoice.
@@ -1017,11 +861,8 @@ public class InvoicesApi extends API {
 
     /**
      * Delete a payment made to an invoice.
-     * <p>
      * Pass the invoiceId and invoicePaymentId to delete a payment made for an invoice.
-     * <p>
      * If the payment has been deleted it returns the success message.
-     * <p>
      * The success message is "The payment has been deleted."
      *
      * @param invoiceId        ID of an Invoice.
@@ -1043,11 +884,8 @@ public class InvoicesApi extends API {
 
     /**
      * Delete a particular credit applied to an invoice.
-     * <p>
      * Pass the invoiceId and creditnotesInvoiceId to delete the credit applied for an invoice.
-     * <p>
      * If the credit applied has been deleted it returns the success message.
-     * <p>
      * The success message is "Credits applied to an invoice have been deleted."
      *
      * @param invoiceId            ID of an Invoice.
@@ -1073,15 +911,10 @@ public class InvoicesApi extends API {
 
     /**
      * Attach a file to an invoice.
-     * <p>
      * Pass the invoiceId, File, and query string parameters to add an attachment to an invoice.
-     * <p>
      * The paramMap contains the possible key and value as mentioned below: <br><br>
-     * <p>
      * can_send_in_mail - True to send the attachment with the invoice when emailed.<br><br>
-     * <p>
      * If the file has been attached it returns the success message.
-     * <p>
      * The success message is "Your file has been successfully attached to the invoice."
      *
      * @param invoiceId ID of an Invoice.
@@ -1109,13 +942,9 @@ public class InvoicesApi extends API {
 
     /**
      * Returns the file attached to the invoice.
-     * <p>
      * Pass the invoiceId and queryMap to get the attached file to the invoice.
-     * <p>
      * The queryMap contains the possible key and value as mentioned below: <br><br>
-     * <p>
      * preview - Get the thumbnail of the attachment.<br><br>
-     * <p>
      * It returns the File object.
      *
      * @param invoiceId ID of an Invoice.
@@ -1134,15 +963,10 @@ public class InvoicesApi extends API {
 
     /**
      * Set whether you want to send the attached file while emailing the invoice.
-     * <p>
      * Pass the invoiceId and query string parameters to update the attachment for an invoice.
-     * <p>
      * The paramMap contains the possible key and value as mentioned below: <br><br>
-     * <p>
      * can_send_in_mail* - Boolean to send the attachment with the invoice when emailed.<br><br>
-     * <p>
      * If the attachment details has been updated it returns the success message.
-     * <p>
      * The success message is "Invoice information has been updated."
      *
      * @param invoiceId ID of an Invoice.
@@ -1163,11 +987,8 @@ public class InvoicesApi extends API {
 
     /**
      * Delete the file attached to the invoice.
-     * <p>
      * Pass the invoiceId to delete an attachment for an invoice.
-     * <p>
      * If the attachment has been deleted it returns the success message.
-     * <p>
      * The success message is "Your file is no longer attached to the invoice."
      *
      * @param invoiceId ID of an Invoice.
@@ -1187,11 +1008,8 @@ public class InvoicesApi extends API {
 
     /**
      * Delete the expense receipts attached to an invoice which is raised from an expense.
-     * <p>
      * Pass the invoiceId to delete the expense receipt for an invoice.
-     * <p>
      * If the expense receipt has been deleted it returns the success message.
-     * <p>
      * The success message is "The attached expense receipt has been deleted."
      *
      * @param invoiceId ID of an Invoice.
@@ -1215,9 +1033,7 @@ public class InvoicesApi extends API {
 
     /**
      * Get the complete history and comments of an invoice.
-     * <p>
      * Pass the invoiceId to get all the comments for an invoice.
-     * <p>
      * It returns the CommentList object.
      *
      * @param invoiceId ID of an Invoice.
@@ -1237,9 +1053,7 @@ public class InvoicesApi extends API {
 
     /**
      * Add a comment for an invoice.
-     * <p>
      * Pass the invoiceId, description, paymentExpectedDate, and showCommentToClients to add the comment for an invoice.
-     * <p>
      * It returns the Comment object.
      *
      * @param invoiceId            ID of an Invoice.
@@ -1271,9 +1085,7 @@ public class InvoicesApi extends API {
 
     /**
      * Update an existing comment of an invoice.
-     * <p>
      * Pass the invoiceId, commentId, description, and showCommentToClients to update a comment for an invoice.
-     * <p>
      * It returns the Comment object.
      *
      * @param invoiceId            ID of an Invoice.
@@ -1304,11 +1116,8 @@ public class InvoicesApi extends API {
 
     /**
      * Delete an invoice comment.
-     * <p>
      * Pass the invoiceId and commentId to delete the comment for an invoice.
-     * <p>
      * If the comment has been deleted it returns the success message.
-     * <p>
      * The success message is "The comment has been deleted."
      *
      * @param invoiceId ID of an Invoice.

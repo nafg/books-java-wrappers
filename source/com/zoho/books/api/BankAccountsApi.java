@@ -13,21 +13,13 @@ import java.util.HashMap;
 
 /**
  * BankAccountsApi is used to create a bank account or credit card account for the organization.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The list of bank accounts.<br>
- * <p>
  * The details of a bank account.<br><br>
- * <p>
  * It is used to change the status of an account:<br><br>
- * <p>
  * Make an account active.<br>
- * <p>
  * Make an account inactive.<br><br>
- * <p>
  * It is used to update the details of an account.<br>
- * <p>
  * It is used to delete an account.
  */
 
@@ -44,9 +36,11 @@ public class BankAccountsApi extends API {
      */
 
     public BankAccountsApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public BankAccountsApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -55,18 +49,13 @@ public class BankAccountsApi extends API {
 
     /**
      * List all bank and credit card accounts for your organization.
-     * <p>
      * Pass the filters to get all the bank accounts based on the filters.
-     * <p>
      * It returns the BankAccountList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
-     * <table border = "1">
+     * <table border="1">
      * <tbody>
      * <tr><td>filter_by</td><td>Filter the account by their status.<br>
      * Allowed Values: <i>Status.All, Status.Active</i> and <i>Status.Inactive</i></td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort the values based on the allowed values.<br>
      * Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
      * </tbody>
@@ -87,11 +76,8 @@ public class BankAccountsApi extends API {
 
     /**
      * Create a bank account or a credit card account for your organization.
-     * <p>
      * Pass the BankAccount object to create a new bank account for the organization.
-     * <p>
      * The BankAccount object which contains accountName, accountType are the mandatory parameters.
-     * <p>
      * It returns the BankAccount object.
      *
      * @param bankAccount BankAccount object.
@@ -111,9 +97,7 @@ public class BankAccountsApi extends API {
 
     /**
      * Get the details of the account specified.
-     * <p>
      * Pass the accountId to get the details of a bank account.
-     * <p>
      * It returns the BankAccount object.
      *
      * @param accountId ID of the bank account.
@@ -133,11 +117,8 @@ public class BankAccountsApi extends API {
 
     /**
      * Modify the account that was created.
-     * <p>
      * Pass the BankAccount object to update the details of a bank account.
-     * <p>
      * The BankAccount object which contains accountId is the mandatory parameter for which bank account details have to be updated.
-     * <p>
      * It returns the BankAccount object.
      *
      * @param bankAccount BankAccount object.
@@ -158,11 +139,8 @@ public class BankAccountsApi extends API {
 
     /**
      * Delete a bank account from your organization.
-     * <p>
      * Pass the accountId to delete a bank account from the organization.
-     * <p>
      * If the account has been deleted it returns the success message.
-     * <p>
      * The success message is "The account has been deleted."
      *
      * @param accountId ID of the bank account.
@@ -182,11 +160,8 @@ public class BankAccountsApi extends API {
 
     /**
      * Make an account inactive.
-     * <p>
      * Pass the accountId to change the status of a bank account to 'inactive'.
-     * <p>
      * If the bank account status has been changed it returns the success message.
-     * <p>
      * The success message is "The account has been marked as inactive."
      *
      * @param accountId ID of the bank account.
@@ -206,11 +181,8 @@ public class BankAccountsApi extends API {
 
     /**
      * Make an account active.
-     * <p>
      * Pass the accountId to change the status of a bank account to 'active'.
-     * <p>
      * If the bank account status has been changed it returns the success message.
-     * <p>
      * The success message is "The account has been marked as active."
      *
      * @param accountId ID of the bank account.
@@ -230,9 +202,7 @@ public class BankAccountsApi extends API {
 
     /**
      * Get the details of previously imported statement for the account.
-     * <p>
      * Pass the accountId to get the last imported statements of the bank account.
-     * <p>
      * It returns the Statement object.
      *
      * @param accountId ID of the bank account.
@@ -252,11 +222,8 @@ public class BankAccountsApi extends API {
 
     /**
      * Delete the statement that was previously imported.
-     * <p>
      * Pass the accountId and statementId to delete the last imported statement of the bank account.
-     * <p>
      * If the last imported statement has been deleted it returns the success message.
-     * <p>
      * The success message is "You have successfully deleted the last imported statement."
      *
      * @param accountId   ID of the bank account.

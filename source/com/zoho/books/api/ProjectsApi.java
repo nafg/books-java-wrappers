@@ -13,71 +13,38 @@ import java.util.List;
 
 /**
  * ProjectsApi is used to create projects for the customer.
- * <p>
  * It is used to get: <br><br>
- * <p>
  * The list of all projects.<br>
- * <p>
  * The details of a project.<br>
- * <p>
  * The list of all tasks.<br>
- * <p>
  * The details of a task.<br>
- * <p>
  * The list of all users.<br>
- * <p>
  * The details of an user.<br>
- * <p>
  * The list of all time entries.<br>
- * <p>
  * The details of a time entry.<br>
- * <p>
  * The list of all comments.<br>
- * <p>
  * The list of all invoices created for this project.<br><br>
- * <p>
  * It is used to:<br><br>
- * <p>
  * Mark a project as active.<br>
- * <p>
  * Mark a project as inactive.<br>
- * <p>
  * Clone a project.<br>
- * <p>
  * Add a task to a project.<br>
- * <p>
  * Assign users to a project.<br>
- * <p>
  * Invite and add user to  a project.<br>
- * <p>
  * Log time entries.<br>
- * <p>
  * Start tracking time spent.<br>
- * <p>
  * Stop tracking time.<br>
- * <p>
  * Add a comment to a project.<br><br>
- * <p>
  * It is used to update:<br><br>
- * <p>
  * The details of a project.<br>
- * <p>
  * The details of a task.<br>
- * <p>
  * The details of a user.<br>
- * <p>
  * The details of a time entry.<br><br>
- * <p>
  * It is used to delete:<br><br>
- * <p>
  * The existing project.<br>
- * <p>
  * The task to a project.<br>
- * <p>
  * The user from the project.<br>
- * <p>
  * The time entry for the project.<br>
- * <p>
  * The comment for the project.<br>
  */
 
@@ -93,9 +60,11 @@ public class ProjectsApi extends API {
      */
 
     public ProjectsApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public ProjectsApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -104,27 +73,17 @@ public class ProjectsApi extends API {
 
     /**
      * List all projects with pagination.
-     * <p>
      * Pass the filters to get all the projects based on the filters.
-     * <p>
      * It returns the ProjectList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
-     * <p>
      * <tr><td>filter_by</td><td>Filter projects by any status.<br>
      * Allowed Values: <i>Status.All, Status.Active</i> and <i>Status.Inactive</i></td></tr>
-     * <p>
      * <tr><td>customer_id</td><td>Search projects by customer id.</td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort projects. <br>
      * Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i></td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.
@@ -143,9 +102,7 @@ public class ProjectsApi extends API {
 
     /**
      * Get the details of a project.
-     * <p>
      * Pass the projectId to get the details of a project.
-     * <p>
      * It returns the Project object.
      *
      * @param projectId ID of the project.
@@ -165,11 +122,8 @@ public class ProjectsApi extends API {
 
     /**
      * Create a project for your customer.
-     * <p>
      * Pass the Project object to create a project for the customer.
-     * <p>
      * The project object which contains projectName, customerId, billingType, userId, and taskName are the mandatory parameters.
-     * <p>
      * It returns the Project object.
      *
      * @param project Project object.
@@ -190,11 +144,8 @@ public class ProjectsApi extends API {
 
     /**
      * Update details of a project.
-     * <p>
      * Pass the Project object to update the details of a project.
-     * <p>
      * The Project object which contains projectId is the mandatory parameter for which project details has to be updated.
-     * <p>
      * It returns the Project object.
      *
      * @param project Project object.
@@ -217,11 +168,8 @@ public class ProjectsApi extends API {
 
     /**
      * Deleting a existing project.
-     * <p>
      * Pass the projectId to delete the project.
-     * <p>
      * If the project has been deleted it returns the success message.
-     * <p>
      * The success message is "The project has been deleted."
      *
      * @param projectId ID of the project.
@@ -242,11 +190,8 @@ public class ProjectsApi extends API {
 
     /**
      * Mark project as active.
-     * <p>
      * Pass the projectId to change the status of a project to 'active'.
-     * <p>
      * If the project status has been changed it returns the success message.
-     * <p>
      * The success message is "The selected Projects have been marked as active."
      *
      * @param projectId ID of the project.
@@ -267,11 +212,8 @@ public class ProjectsApi extends API {
 
     /**
      * Marking a project as inactive.
-     * <p>
      * Pass the projectId to change the status of a project to 'inactive'.
-     * <p>
      * If the project status has been changed it returns the success message.
-     * <p>
      * The success message is "The selected projects have been marked as inactive."
      *
      * @param projectId ID of the project.
@@ -292,9 +234,7 @@ public class ProjectsApi extends API {
 
     /**
      * Cloning a project.
-     * <p>
      * Pass the projectId, projectName, and description to clone the project.
-     * <p>
      * It returns the Project object.
      *
      * @param projectId   ID of the project.
@@ -329,20 +269,14 @@ public class ProjectsApi extends API {
 
     /**
      * Get list of tasks added to a project.
-     * <p>
      * Pass the projectId and filters to get all the tasks for the project based on the filter.
-     * <p>
      * It returns the TaskList object.<br>
-     * <p>
      * The queryMap contains the possible key and value as mentioned below: <br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>sort_column</td><td>Sort tasks. <br>
      * Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours</i></td></tr>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param projectId ID of the project.
@@ -364,11 +298,8 @@ public class ProjectsApi extends API {
 
     /**
      * Add task to a project.
-     * <p>
      * Pass the projectId and Task object to add a task for the project.
-     * <p>
      * The Task object which contains taskName is the mandatory parameter.
-     * <p>
      * It returns the Task object.
      *
      * @param projectId ID of the project.
@@ -392,9 +323,7 @@ public class ProjectsApi extends API {
 
     /**
      * Get details of a task.
-     * <p>
      * Pass the projectId and taskId to get the details of a task for the project.
-     * <p>
      * It returns the Task object.
      *
      * @param projectId ID of the project.
@@ -416,11 +345,8 @@ public class ProjectsApi extends API {
 
     /**
      * Update details of a task.
-     * <p>
      * Pass the projectId and Task object to update the details of a task for the project.
-     * <p>
      * The Task object which contains taskId is the mandatory prameter for which task has to be updated.
-     * <p>
      * It returns the Task object.
      *
      * @param projectId ID of the project.
@@ -444,11 +370,8 @@ public class ProjectsApi extends API {
 
     /**
      * Deleting task added to a project.
-     * <p>
      * Pass the projectId and taskId to delete the task from the project.
-     * <p>
      * If the task has been deleted it returns the success message.
-     * <p>
      * The success message is "The task has been deleted."
      *
      * @param projectId ID of the project.
@@ -473,9 +396,7 @@ public class ProjectsApi extends API {
 
     /**
      * Get list of user associated with a project.
-     * <p>
      * Pass the projectId to get all the users for the project.
-     * <p>
      * It returns the UserList object.
      *
      * @param projectId ID of the project.
@@ -496,9 +417,7 @@ public class ProjectsApi extends API {
 
     /**
      * Get details of a user in a project.
-     * <p>
      * Pass the projectId and userId to get the details of a user for the project.
-     * <p>
      * It returns the User object.
      *
      * @param projectId ID of the project.
@@ -520,11 +439,8 @@ public class ProjectsApi extends API {
 
     /**
      * Assign users to a project.
-     * <p>
      * Pass the projectId and list of User object to assign the users for the project.
-     * <p>
      * The User object which contains userId is the mandatory parameter.
-     * <p>
      * It returns the UserList object.
      *
      * @param projectId ID of the project.
@@ -563,11 +479,8 @@ public class ProjectsApi extends API {
 
     /**
      * Invite and add user to the project.
-     * <p>
      * Pass the projectId and User object to invite the user for the project.
-     * <p>
      * The User object which contains userName and email are the mandatory parameters.
-     * <p>
      * It returns the User object.
      *
      * @param projectId ID of the project.
@@ -591,11 +504,8 @@ public class ProjectsApi extends API {
 
     /**
      * Update details of a user.
-     * <p>
      * Pass the projectId and User object to update the details of a user for the project.
-     * <p>
      * The User object which contains userId is the mandatory parameter for which user details has to be updated.
-     * <p>
      * It returns the User object.
      *
      * @param projectId ID of the project.
@@ -619,11 +529,8 @@ public class ProjectsApi extends API {
 
     /**
      * Remove user from the project.
-     * <p>
      * Pass the projectId and userId to delete the user from the project.
-     * <p>
      * If the user has been deleted it returns the success message.
-     * <p>
      * The success message is "The staff has been removed."
      *
      * @param projectId ID of the project.
@@ -648,31 +555,20 @@ public class ProjectsApi extends API {
 
     /**
      * List all time entries with pagination.
-     * <p>
      * Pass the filters to get all the time entries based on the filters.
-     * <p>
      * It retuens the TimeEntryList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>from_date</td><td>Date from which the time entries logged to be fetched</td></tr>
-     * <p>
      * <tr><td>to_date</td><td>Date up to which the time entries logged to be fetched</td></tr>
-     * <p>
      * <tr><td>filter_by</td><td>Filter time entries by date and status.<br>
      * Allowed Values: <i>Date.All, Date.Today, Date.ThisWeek, Date.ThisMonth, Date.ThisQuarter, Date.ThisYear, Date.PreviousDay, Date.PreviousWeek, Date.PreviousMonth, Date.PreviousQuarter, Date.PreviousYear, Date.CustomDate, Status.Unbilled</i> and <i>Status.Invoiced</i></td></tr>
-     * <p>
      * <tr><td>project_id</td><td>Search time entries by project_id.</td></tr>
-     * <p>
      * <tr><td>user_id</td><td>Search time entries by user_id.</td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort time entries.<br>
      * Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_at</i> and <i>customer_name</i></td></tr>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.
@@ -693,11 +589,8 @@ public class ProjectsApi extends API {
 
     /**
      * Logging time entries.
-     * <p>
      * Pass the TimeEntry object to log the time entry.
-     * <p>
      * The TimeEntry object which contains projectId, taskId, userId, and logDate are the mandatory parameters.
-     * <p>
      * It returns the TimeEntry object.
      *
      * @param timeEntry TimeEntry object.
@@ -721,9 +614,7 @@ public class ProjectsApi extends API {
 
     /**
      * Get details of a time entry.
-     * <p>
      * Pass the timeEntryId to get the details of a time entry.
-     * <p>
      * It returns the TimeEntry object.
      *
      * @param timeEntryId ID of the TimeEntry.
@@ -744,11 +635,8 @@ public class ProjectsApi extends API {
 
     /**
      * Update logged time entry
-     * <p>
      * Pass the TimeEntry object to update the details of a time entry.
-     * <p>
      * The TimeEntry object which contains timeEntryId is the mandatory parameter for which time entry details has to be updated.
-     * <p>
      * It returns the TimeEntry object.
      *
      * @param timeEntry TimeEntry object.
@@ -772,11 +660,8 @@ public class ProjectsApi extends API {
 
     /**
      * Deleting a logged time entry.
-     * <p>
      * Pass the timeEntryId to delete the time entry.
-     * <p>
      * If the time entry has been deleted it returns the success message.
-     * <p>
      * The success message is "The time entry has been deleted."
      *
      * @param timeEntryId ID of the TimeEntry.
@@ -797,15 +682,10 @@ public class ProjectsApi extends API {
 
     /**
      * Deleting time entries.
-     * <p>
      * Pass the timeEntryIds in the query param to delete the list of time entries.
-     * <p>
      * The queryMap contains the key as mentioned below: <br><br>
-     * <p>
      * time_entry_ids* - ID of the time entries to be deleted.<br><br>
-     * <p>
      * If the time entries has been deleted it returns the success message.
-     * <p>
      * The success message is "The selected timesheet entries have been deleted."
      *
      * @param queryMap ID of the time entries to be deleted.
@@ -826,9 +706,7 @@ public class ProjectsApi extends API {
 
     /**
      * Start tracking time spent.
-     * <p>
      * Pass the timeEntryId to start the timer.
-     * <p>
      * It returns the TimeEntry object.
      *
      * @param timeEntryId ID of the time entry.
@@ -849,9 +727,7 @@ public class ProjectsApi extends API {
 
     /**
      * Stop tracking time, say taking a break or leaving.
-     * <p>
      * This method is used to stop the timer.
-     * <p>
      * It returns the TimeEntry object.
      *
      * @return Returns the TimeEntry object.
@@ -874,9 +750,7 @@ public class ProjectsApi extends API {
 
     /**
      * get list of comments for the project.
-     * <p>
      * Pass the projectId to get all the comments for the project.
-     * <p>
      * It returns the CommentList object.
      *
      * @param projectId Id of the project.
@@ -897,9 +771,7 @@ public class ProjectsApi extends API {
 
     /**
      * add comment for the project.
-     * <p>
      * Pass the projectId and description to add the comment for the project.
-     * <p>
      * It returns the Comment object.
      *
      * @param projectId   Id of the project.
@@ -928,11 +800,8 @@ public class ProjectsApi extends API {
 
     /**
      * delete comment for the project.
-     * <p>
      * Pass the projectId and commentId to delete the comment from the project.
-     * <p>
      * If the comment has been deleted it returns the success message.
-     * <p>
      * The success message is "The comment has been deleted."
      *
      * @param projectId Id of the project.
@@ -957,20 +826,14 @@ public class ProjectsApi extends API {
 
     /**
      * get list of invoices for the project.
-     * <p>
      * Pass the projectId and filters to get all the invoices created for this project.
-     * <p>
      * It returns the InvoiceList object.<br>
-     * <p>
      * The queryMap contains the possible key and value as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>sort_column</td><td>Sort invoices raised. <br>
      * Allowed Values: <i>invoice_number, date, total, balance</i> and <i>created_time</i></td></tr>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param projectId Id of the project.

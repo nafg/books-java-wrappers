@@ -14,41 +14,23 @@ import java.util.List;
 
 /**
  * BankTransactionsApi is used to create a transaction for an account.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The list of all transactions.<br>
- * <p>
  * The details of a transaction.<br>
- * <p>
  * The matching transactions.<br>
- * <p>
  * The list of all associated transactions.<br><br>
- * <p>
  * It is used to update the details of a transaction.<br><br>
- * <p>
  * It is used to:<br><br>
- * <p>
  * Match a transaction.<br>
- * <p>
  * Unmatch a matched transaction.<br>
- * <p>
  * Exclude a transaction.<br>
- * <p>
  * Restore an excluded transaction.<br>
- * <p>
  * Categorize an uncategorized transaction.<br>
- * <p>
  * Categorize as credit note refunds.<br>
- * <p>
  * Categorize as vendor payment.<br>
- * <p>
  * Categorize as customer payment.<br>
- * <p>
  * Categorize as expense.<br>
- * <p>
  * Uncategorize a categorized transaction.<br><br>
- * <p>
  * It is used to delete a transaction.
  */
 
@@ -64,9 +46,11 @@ public class BankTransactionsApi extends API {
      */
 
     public BankTransactionsApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public BankTransactionsApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
     private BankTransactionParser bankTransactionParser = new BankTransactionParser();
@@ -74,30 +58,20 @@ public class BankTransactionsApi extends API {
 
     /**
      * Get all the transaction details involved in an account.
-     * <p>
      * Pass the filters to get all the transactions based on the filters.
-     * <p>
      * It returns the TransactionList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
      * <tbody>
      * <tr><td>account_id*</td><td>Mandatory Account id for which transactions are to be listed.</td></tr>
-     * <p>
      * <tr><td>filter_by</td><td>Filters the transactions based on the allowed types.<br>
      * Allowed Values: <i>Status.All, Status.Uncategorized, Status.Categorized, Status.ManuallyAdded, Status.Excluded</i> and <i>Status.Matched</i></td></tr>
-     * <p>
      * <tr><td>date</td><td>Start and end date, to provide a range within which the transaction date exist.<br>
      * Variants: <i>date_start</i> and <i>date_end</i></td></tr>
-     * <p>
      * <tr><td>amount</td><td>Start and end amount, to provide a range within which the transaction amount exist.<br>
      * Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
-     * <p>
      * <tr><td>status</td><td>Transaction status wise list view - All, uncategorized, manually_added, matched, excluded, categorized</td></tr>
-     * <p>
      * <tr><td>reference_number</td><td>Reference Number of the transaction</td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sorts the transactions based on the allowed sort types. <br>
      * Allowed Values: <i>date</i></td></tr>
      * </tbody>
@@ -118,9 +92,7 @@ public class BankTransactionsApi extends API {
 
     /**
      * Fetch the details of a transaction by specifying the transaction_id.
-     * <p>
      * Pass the transactionId to get the details of a transaction.
-     * <p>
      * It returns the Transaction object.
      *
      * @param transactionId ID of the transaction.
@@ -139,11 +111,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Create a bank transaction based on the allowed transaction types.
-     * <p>
      * Pass the Transaction object to create a new bank transaction.
-     * <p>
      * The Transaction object which contains transactionType is the mandatory parameter.
-     * <p>
      * It returns the Transaction object.
      *
      * @param transaction Transaction object.
@@ -162,11 +131,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Make changes in the applicable fields of a transaction and update it.
-     * <p>
      * Pass the Transaction object to update the details of a bank transaction.
-     * <p>
      * The Transaction object which contains transactionId is the mandatory parameter for which bank transaction has to be updated.
-     * <p>
      * It returns the Transaction object.
      *
      * @param transaction Transaction object.
@@ -188,11 +154,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Delete a transaction from an account by specifying the transactionId.
-     * <p>
      * Pass the transactionId to delete the bank transaction.
-     * <p>
      * If the transaction has been deleted it returns the success message.
-     * <p>
      * The success message is "The transaction has been deleted."
      *
      * @param transactionId ID of the transaction.
@@ -211,26 +174,18 @@ public class BankTransactionsApi extends API {
 
     /**
      * Provide criteria to search for matching uncategorised transactions.
-     * <p>
      * Pass the transactionId and filters to get all the matching transactions based on the filters.
-     * <p>
      * It returns the TransactionList object.<br>
-     * <p>
      * The queryMap contains the below listed possible keys and values as mentioned below:<br>
-     * <p>
      * <table border = "1">
      * <tbody>
      * <tr><td>transaction_type</td><td>The type of transaction. <br>
      * Allowed Values: <i>expense, deposit, refund, transfer_fund, card_payment, sales_without_invoices, expense_refund, owner_contribution, interest_income, other_income, owner_drawings, invoice, bill, credit_notes, creditnote_refund, customer_payment</i> and <i>vendor_payment</i></td></tr>
-     * <p>
      * <tr><td>date</td><td>Start and end date, to provide a range within which the transaction date exist.<br>
      * Variants: <i>date_start</i> and <i>date_end</i></td></tr>
-     * <p>
      * <tr><td>amount</td><td>Initial and final amount range within which the search amount exists.<br>
      * Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
-     * <p>
      * <tr><td>contact</td><td>Contact person name, involved in the transaction.</td></tr>
-     * <p>
      * <tr><td>reference_number</td><td>Reference Number of the transaction.</td></tr>
      * </tbody>
      * </table>
@@ -252,13 +207,9 @@ public class BankTransactionsApi extends API {
 
     /**
      * Match an uncategorized transaction with an existing transaction in the account.
-     * <p>
      * Pass the transactionId and list of Transaction objects to match an uncategorized transaction.
-     * <p>
      * The Transaction objects which contains transactionId and transactionType are the mandatory parameters.
-     * <p>
      * If the transaction is uncategorized it returns the success message.
-     * <p>
      * The success message is "The Uncategorized transaction is linked to the selected transaction(s) in Zoho Books."
      *
      * @param transactionId ID of the transaction.
@@ -297,11 +248,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Unmatch a transaction that was previously matched and make it uncategorized.
-     * <p>
      * Pass the transactionId to unmatch a matched transaction.
-     * <p>
      * If the transaction has been unmatched it returns the success message.
-     * <p>
      * The success message is "The transaction has been unmatched."
      *
      * @param transactionId ID of the transaction.
@@ -320,9 +268,7 @@ public class BankTransactionsApi extends API {
 
     /**
      * Get a list of all the associated transactions that were matched or categorized to the given imported transaction.
-     * <p>
      * Pass the transactionId and sortColumn to get the associated transaction based on the sort column.
-     * <p>
      * It returns the Transaction object.
      *
      * @param transactionId ID of the transaction.
@@ -348,11 +294,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Exclude a transaction from your bank or credit card account.
-     * <p>
      * Pass the transactionId to exclude a transaction from your bank account.
-     * <p>
      * If the transaction has been excluded it returns the success message.
-     * <p>
      * The success message is "The transaction has been excluded."
      *
      * @param transactionId ID of the transaction.
@@ -371,11 +314,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Restore an excluded transaction in your account.
-     * <p>
      * Pass the transactionId to restore the excluded transaction.
-     * <p>
      * If the transaction has been restored it returns the success message.
-     * <p>
      * The success message is "The excluded transaction has been restored."
      *
      * @param transactionId ID of the transaction.
@@ -398,11 +338,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Categorize an uncategorized transaction by creating a new transaction.
-     * <p>
      * Pass the Transaction object to categorize the transaction by creating a new transaction.
-     * <p>
      * The Transaction object which contains transactionType is the mandatory parameter.
-     * <p>
      * It returns the Transaction object.
      *
      * @param transaction Transaction object.
@@ -425,11 +362,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Categorize an Uncategorized transaction as a refund from a credit note.
-     * <p>
      * Pass the transactionId and CreditnoteRefund object to categorize the transaction as a refund from the credit note.
-     * <p>
      * The CreditnoteRefund object which contains creditNoteId and date are the mandatory parameters.
-     * <p>
      * It returns the CreditnoteRefund object.
      *
      * @param transactionId    ID of the transaction.
@@ -453,11 +387,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Categorize an uncategorized transaction as Vendor Payment.
-     * <p>
      * Pass the transactionId and VendorPayment object to categorize the transaction as vendor payment.
-     * <p>
      * The VendorPayment object which contains vendorId and amount are the mandatory parameters.
-     * <p>
      * It returns the VendorPayment object.
      *
      * @param transactionId ID of the transaction.
@@ -479,11 +410,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Categorize an uncategorized transaction as Customer Payment.
-     * <p>
      * Pass the transactionId and CustomerPayment object to categorize the transaction as customer payment.
-     * <p>
      * The CustomerPayment object which contains date and amount are the mandatory parameters.
-     * <p>
      * It returns the CustomerPayment object.
      *
      * @param transactionId   ID of the transaction.
@@ -505,11 +433,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Categorize an uncategorized transaction as Expense.
-     * <p>
      * Pass the transactionId, Expense object, and File object to categorize the transaction as expense.
-     * <p>
      * The Expense object which contains accountId, paidThroughAccountId, and amount are the mandatory parameters.
-     * <p>
      * It returns the Expense object.
      *
      * @param transactionId ID of the transaction.
@@ -536,11 +461,8 @@ public class BankTransactionsApi extends API {
 
     /**
      * Revert a categorized transaction as uncategorized.
-     * <p>
      * Pass the transactionId to categorize the transaction as uncategorized.
-     * <p>
      * If the transaction has been uncategorized it returns the success message.
-     * <p>
      * The success message is "The transaction has been uncategorized."
      *
      * @param transactionId ID of the transaction.

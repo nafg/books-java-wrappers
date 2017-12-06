@@ -14,25 +14,15 @@ import java.util.HashMap;
 
 /**
  * RecurringExpensesApi is used to create a new recurring expense.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The list of all recurring expenses.<br>
- * <p>
  * The details of a recurring expense.<br>
- * <p>
  * The child expenses created from recurring expense.<br>
- * <p>
  * The list of all comments for the recurring expense.<br><br>
- * <p>
  * It is used to change the status:<br><br>
- * <p>
  * Stop an active recurring expense.<br>
- * <p>
  * Resume a stopped recurring expense.<br><br>
- * <p>
  * It is used to update the details of a recurring expense.<br>
- * <p>
  * It is used to delete an existing recurring expense.
  */
 
@@ -48,9 +38,11 @@ public class RecurringExpensesApi extends API {
      */
 
     public RecurringExpensesApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public RecurringExpensesApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -59,11 +51,8 @@ public class RecurringExpensesApi extends API {
 
     /**
      * Create a recurring expense.
-     * <p>
      * Pass the RecurringExpense object to create a new recurring expense.
-     * <p>
      * The RecurringExpense object which contains accountId, paidThroughAccountId, recurrenceName, startDate, recurrenceFrequency, repeatEvery, and amount are the mandatory parameters.
-     * <p>
      * It returns the RecurringExpense object.
      *
      * @param recurringExpense RecurringExpense object.
@@ -84,9 +73,7 @@ public class RecurringExpensesApi extends API {
 
     /**
      * Get the details of a recurring expense.
-     * <p>
      * Pass the recurringExpenseId to get the details of a recurring expense.
-     * <p>
      * It returns the RecurringExpense object.
      *
      * @param recurringExpenseId ID of the recurring expense.
@@ -107,11 +94,8 @@ public class RecurringExpensesApi extends API {
 
     /**
      * Update an existing recurring expense.
-     * <p>
      * Pass the RecurringExpense object to update the details of a recurring expense.
-     * <p>
      * The RecurringExpense object which contains recurringExpenseId is the mandatory parameter for which recurring expense has to be updated.
-     * <p>
      * It returns the RecurringExpense object.
      *
      * @param recurringExpense RecurringExpense object.
@@ -132,11 +116,8 @@ public class RecurringExpensesApi extends API {
 
     /**
      * Delete an existing recurring expense.
-     * <p>
      * Pass the recurringExpenseId to delete the recurring expense.
-     * <p>
      * If the recurring expense has been deleted it returns the success message.
-     * <p>
      * The success message is "The recurring expense has been deleted."
      *
      * @param recurringExpenseId ID of the recurring expense.
@@ -156,61 +137,38 @@ public class RecurringExpensesApi extends API {
 
     /**
      * List recurring expenses with pagination.
-     * <p>
      * Pass the filters to get all the recurring expenses based on the filters.
-     * <p>
      * It returns the RecurringExpenseList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
-     * <p>
      * <tr><td>recurrence_name</td><td>Search recurring expenses by recurring expense name.<br>
      * Variants: <i>recurrence_name_startswith</i> and <i>recurrence_name_contains</i></td></tr>
-     * <p>
      * <tr><td>last_created_date</td><td>Search recurring expenses by date on when last expense was generated.<br>
      * Variants: <i>last_created_date_start, last_created_date_end, last_created_date_before</i> and <i>last_created_date_after</i></td></tr>
-     * <p>
      * <tr><td>next_expense_date</td><td>Search recurring expenses by date on which next expense will be generated.<br>
      * Variants: <i>next_expense_date_start, next_expense_date_end, next_expense_date_before</i> and <i>next_expense_date_after</i></td></tr>
-     * <p>
      * <tr><td>amount</td><td>Search recurring expenses by amount.<br>
      * Variants: <i>amount_less_than, amount_less_equals, amount_greater_than</i> and <i>amount_greater_equals</i></td></tr>
-     * <p>
      * <tr><td>account_name</td><td>Search recurring expenses by expense account.<br>
      * Variants: <i>account_name_startswith</i> and <i>account_name_contains</i></td></tr>
-     * <p>
      * <tr><td>customer_name</td><td>Search recurring expenses by customer name.<br>
      * Variants: <i>customer_name_startswith</i> and <i>customer_name_contains</i></td></tr>
-     * <p>
      * <tr><td>vendor_name</td><td>Search recurring expenses by vendor name.<br>
      * Variants: <i>vendor_name_startswith</i> and <i>vendor_name_contains</i></td></tr>
-     * <p>
      * <tr><td>customer_id</td><td>Search recurring expenses by customer id.</td></tr>
-     * <p>
      * <tr><td>vendor_id</td><td>Search recurring expenses by vendor id.</td></tr>
-     * <p>
      * <tr><td>paid_through_account_id</td><td>Search expenses by paid through account id.</td></tr>
-     * <p>
      * <tr><td>description</td><td>Search recurring expenses by description.<br>
      * Variants: <i>description_startswith</i> and <i>description_contains</i></td></tr>
-     * <p>
      * <tr><td>search_text</td><td>Search recurring expenses by recurrence name or customer name.</td></tr>
-     * <p>
      * <tr><td>status</td><td>Search recurring expenses by recurring expense status.<br>
      * Allowed Values: <i>active, stopped</i> and <i>expired</i></td></tr>
-     * <p>
      * <tr><td>filter_by</td><td>Filter recurring expenses by status.<br>
      * Allowed Values: <i>RecExpenseStatus.All, RecExpenseStatus.Active, RecExpenseStatus.Stopped</i> and <i>RecExpenseStatus.Expired</i></td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort recurring expenses.<br>
      * Allowed Values: <i>recurrence_name, last_created_date, next_expense_date, account_name, paid_through_account_name, total, customer_name, vendor_name</i> and <i>created_time</i></td></tr>
-     * <p>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.
@@ -228,11 +186,8 @@ public class RecurringExpensesApi extends API {
 
     /**
      * Resume a stopped recurring expense.
-     * <p>
      * Pass the recurringExpenseId to chenge the status of a recurring expense to 'resume'.
-     * <p>
      * If the recurring expense status has been changed it returns the success message.
-     * <p>
      * The success message is "The recurring expense has been activated."
      *
      * @param recurringExpenseId ID of the recurring expense.
@@ -252,11 +207,8 @@ public class RecurringExpensesApi extends API {
 
     /**
      * Stop an active recurring expense.
-     * <p>
      * Pass the recurringExpenseId to chenge the status of a recurring expense to 'stop'.
-     * <p>
      * If the recurring expense status has been changed it returns the success message.
-     * <p>
      * The success message is "The recurring expense has been stopped."
      *
      * @param recurringExpenseId ID of the recurring expense.
@@ -276,21 +228,14 @@ public class RecurringExpensesApi extends API {
 
     /**
      * List child expenses created from recurring expense.
-     * <p>
      * Pass the recurringExpenseId and filters to get all the child expenses based on the filters.
-     * <p>
      * It returns the ExpenseList object.<br>
-     * <p>
      * The queryMap contains the possible key and value as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>sort_column</td><td>Sort child expenses created.<br>
      * Allowed Values: <i>date, account_name, vendor_name, paid_through_account_name, customer_name</i> and <i>total</i></td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param recurringExpenseId ID of the recurring expense.
@@ -311,9 +256,7 @@ public class RecurringExpensesApi extends API {
 
     /**
      * Get history and comments of a recurring expense.
-     * <p>
      * Pass the recurringExpenseId to get all the comments for the recurring expense.
-     * <p>
      * It returns the CommentList object.
      *
      * @param recurringExpenseId ID of the recurring expense.

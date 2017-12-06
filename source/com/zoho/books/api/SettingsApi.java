@@ -11,81 +11,43 @@ import java.util.HashMap;
 
 /**
  * SettingsApi is used to get and update the prefernce and create, delete the unit.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The invoice, estimate and credit note settings.<br>
- * <p>
  * The invoice, estimate and creditnote notes and terms.<br>
- * <p>
  * The list of all currencies.<br>
- * <p>
  * The details of a currency.<br>
- * <p>
  * The list of all exchange rates.<br>
- * <p>
  * The details of an exchange rate.<br>
- * <p>
  * The list of all taxes.<br>
- * <p>
  * The details of a tax.<br>
- * <p>
  * The details of a tax group.<br>
- * <p>
  * The details of an opening balance.<br>
- * <p>
  * The list of all auto reminders.<br>
- * <p>
  * The details of an auto reminder.<br>
- * <p>
  * The list of all manual reminders.<br>
- * <p>
  * The details of a manual reminder.<br><br>
- * <p>
  * It is used to create:<br><br>
- * <p>
  * The currency for transactions.<br>
- * <p>
  * The exchange for the currency.<br>
- * <p>
  * The tax associated with an item.<br>
- * <p>
  * The tax group associating multiple taxes.<br>
- * <p>
  * The opening balance.<br><br>
- * <p>
  * It is used to enable and disable auto reminders.<br><br>
- * <p>
  * It is used to update:<br><br>
- * <p>
  * The details of invoice, estimate and creditnotes settings.<br>
- * <p>
  * The details of invoice, estimates and creditnotes notes and terms.<br>
- * <p>
  * The details of a currency.<br>
- * <p>
  * The details of an exchange rate.<br>
- * <p>
  * The details of a tax.<br>
- * <p>
  * The details of a tax group.<br>
- * <p>
  * The details of an opening balance.<br>
- * <p>
  * The details of an auto reminder.<br>
- * <p>
  * The details of a manual reminder.<br><br>
- * <p>
  * It is used to delete.<br><br>
- * <p>
  * The existing currency.<br>
- * <p>
  * The existing exchange rate.<br>
- * <p>
  * The existing tax.<br>
- * <p>
  * The existing tax group.<br>
- * <p>
  * The existing opening balance.
  */
 
@@ -100,18 +62,18 @@ public class SettingsApi extends API {
      */
 
     public SettingsApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
-
     }
 
+    public SettingsApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
+    }
 
     private SettingsParser settingsParser = new SettingsParser();
 
 
     /**
      * List of preferences that are configured.
-     * <p>
      * It returns the Preference object.
      *
      * @return Returns the Preference object.
@@ -130,11 +92,8 @@ public class SettingsApi extends API {
 
     /**
      * Update the preferences that has been configured.
-     * <p>
      * Pass the preference object to update the details of a preference.
-     * <p>
      * If the preference has been updated it returns the success message.
-     * <p>
      * The success message is "Preferences have been saved."
      *
      * @param preference Preference object.
@@ -158,11 +117,8 @@ public class SettingsApi extends API {
 
     /**
      * Create a unit the can be associated to a line item.
-     * <p>
      * Pass the unit to create a new unit for the item.
-     * <p>
      * If the unit has been added it returns the success message.
-     * <p>
      * The success message is "Unit added."
      *
      * @param unit Representation for the unit. For instance kg.
@@ -190,11 +146,8 @@ public class SettingsApi extends API {
 
     /**
      * Delete a unit that has been associated to an item.
-     * <p>
      * Pass the unitId to delete the unit.
-     * <p>
      * If the unit has been deleted it returns the success message.
-     * <p>
      * The success message is "You have successfully deleted the unit."
      *
      * @param unitId ID of the unit.
@@ -219,7 +172,6 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of invoice settings.
-     * <p>
      * It returns the InvoiceSetting object.
      *
      * @return Returns the InvoiceSetting object.
@@ -237,9 +189,7 @@ public class SettingsApi extends API {
 
     /**
      * Update the settings information for invoices.
-     * <p>
      * Pass the InvoiceSetting object to update the details of a invoice settings.
-     * <p>
      * It returns the InvoiceSetting object.
      *
      * @param invoiceSetting InvoiceSetting object.
@@ -261,7 +211,6 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of invoice notes and terms.
-     * <p>
      * It returns the NotesAndTerms object.
      *
      * @return Returns NotesAndTerms object.
@@ -280,9 +229,7 @@ public class SettingsApi extends API {
 
     /**
      * Update the notes and terms for invoices.
-     * <p>
      * Pass the notes and terms to update the invoice notes and terms.
-     * <p>
      * It returns the NotesAndTerms object.
      *
      * @param notes Notes to the customer.
@@ -315,7 +262,6 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of estimate settings.
-     * <p>
      * It retruns the EstimateSetting object.
      *
      * @return Returns the EstimateSetting object.
@@ -334,9 +280,7 @@ public class SettingsApi extends API {
 
     /**
      * Update the settings that are configured for estimates.
-     * <p>
      * Pass the EstimateSetting object to update the details of an estimate setting.
-     * <p>
      * It returns the EstimateSetting object.
      *
      * @param estimateSetting EstimateSetting object.
@@ -359,7 +303,6 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of estimate notes and terms.
-     * <p>
      * It returns the estimates NotesAndTerms object.
      *
      * @return Returns the NotesAndTerms object.
@@ -378,9 +321,7 @@ public class SettingsApi extends API {
 
     /**
      * Update the details of the estimate notes and terms.
-     * <p>
      * Pass the notes and terms to update the details of estimates notes and terms.
-     * <p>
      * It returns the NotesAndTerms object.
      *
      * @param notes Notes to the customer.
@@ -414,7 +355,6 @@ public class SettingsApi extends API {
 
     /**
      * List of settings applied for creditnotes.
-     * <p>
      * It returns the CreditnoteSetting object.
      *
      * @return Returns the CreditnoteSetting object.
@@ -432,9 +372,7 @@ public class SettingsApi extends API {
 
     /**
      * Update the settings associated to creditnotes.
-     * <p>
      * Pass the CreditnoteSetting object to update the details of a credit note settings.
-     * <p>
      * It retruns the CreditnoteSetting object.
      *
      * @param creditnoteSetting CreditnoteSetting object.
@@ -456,7 +394,6 @@ public class SettingsApi extends API {
 
     /**
      * Get the contents of creditnote notes and terms.
-     * <p>
      * It returns the creditnotes NotesAndTerms object.
      *
      * @return Returns the NotesAndTerms object.
@@ -475,9 +412,7 @@ public class SettingsApi extends API {
 
     /**
      * Update the notes and terms field for creditnotes.
-     * <p>
      * Pass the notes and terms to update the creditnotes notes and terms.
-     * <p>
      * It returns the NotesAndTerms object.
      *
      * @param notes Notes to the customer.
@@ -511,21 +446,14 @@ public class SettingsApi extends API {
 
     /**
      * List of configured currencies with pagination.
-     * <p>
      * Pass the filters to get all the currencies based on the filter.
-     * <p>
      * It returns the CurrencyList object.<br>
-     * <p>
      * The queryMap contains the possible key and value as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>filter_by</td><td>Filter list of configured currencies excluding the base currency.<br>
      * Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap Filter list of configured currencies excluding the base currency.
@@ -545,9 +473,7 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of a currency.
-     * <p>
      * Pass the currencyId to get the details of a currency.
-     * <p>
      * It returns the Currency object.
      *
      * @param currencyId ID of the currency.
@@ -567,11 +493,8 @@ public class SettingsApi extends API {
 
     /**
      * Create a currency for transactions.
-     * <p>
      * Pass the Currency object to create a currency.
-     * <p>
      * The Currency object which contains currencyCode, currencySymbol, and currencyFormat are the mandatory parameters.
-     * <p>
      * It returns the Currency object.
      *
      * @param currency Currency object.
@@ -593,11 +516,8 @@ public class SettingsApi extends API {
 
     /**
      * Update the details of a currency.
-     * <p>
      * Pass the Currency object to update the details of a currency.
-     * <p>
      * The Currency object which contains currencyId is the mandatory parameter for which currency details has to be updated.
-     * <p>
      * It returns the Currency object.
      *
      * @param currency Currency object.
@@ -619,11 +539,8 @@ public class SettingsApi extends API {
 
     /**
      * Delete a currency. Currency that is associated to transactions cannot be deleted.
-     * <p>
      * Pass the currencyId to delete the currency.
-     * <p>
      * If the currency has been deleted it returns the success message.
-     * <p>
      * The success message is "The currency has been deleted."
      *
      * @param currencyId ID of the Currency.
@@ -643,22 +560,14 @@ public class SettingsApi extends API {
 
     /**
      * List of exchange rates configured for the currency.
-     * <p>
      * Pass the currencyId and filters to get all the exchange rates for the currency based on the filter.
-     * <p>
      * It returns the ExchangeRateList object. <br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>from_date</td><td>Returns the exchange rate details from the given date or from previous closest match in the absence of the exchange rate on the given date.</td></tr>
-     * <p>
      * <tr><td>is_current_date</td><td>To return the exchange rate only if available for current date.</td></tr>
-     * <p>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param currencyId ID of the Currency.
@@ -679,9 +588,7 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of an exchange rate that has been associated to the currency.
-     * <p>
      * Pass the currencyId and exchangeRateId to get the details of an exchange rate.
-     * <p>
      * It returns the ExchangeRate object.
      *
      * @param currencyId     ID of the currency.
@@ -702,11 +609,8 @@ public class SettingsApi extends API {
 
     /**
      * Create an exchange rate for the specified currency.
-     * <p>
      * Pass the currencyId and ExcahngeRate object to create an exchange rate for the currency.
-     * <p>
      * The ExchangeRate object which contains effectiveDate and rate are the mandatory parameters.
-     * <p>
      * It returns the ExchangeRate object.
      *
      * @param currencyId   ID of the exchange rate.
@@ -729,11 +633,8 @@ public class SettingsApi extends API {
 
     /**
      * Update the details of exchange rate for a currency.
-     * <p>
      * Pass the currencyId and ExcahangeRate object to update the details of an exchange rate.
-     * <p>
      * The ExchangeRate object which contains exchangeRateId is the mandatory parameter for which exchange rate details has to be updated.
-     * <p>
      * It returns the ExchangeRate object.
      *
      * @param currencyId   ID of the currency.
@@ -756,11 +657,8 @@ public class SettingsApi extends API {
 
     /**
      * Delete an exchange rate for the specified currency.
-     * <p>
      * Pass the currencyId and excahngeRateId to delete the exchange rate.
-     * <p>
      * If the exchange rate has been deleted it returns the success message.
-     * <p>
      * The success message is "Exchange rate successfully deleted."
      *
      * @param currencyId     ID of the currency.
@@ -784,7 +682,6 @@ public class SettingsApi extends API {
 
     /**
      * List of simple tax, compound tax and tax groups with pagination.
-     * <p>
      * It returns the TaxList object.
      *
      * @return Returns the TaxList object.
@@ -803,9 +700,7 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of a simple tax, compound tax or tax group.
-     * <p>
      * Pass the taxId to get the details of a tax.
-     * <p>
      * It returns the Tax object.
      *
      * @param taxId ID of the tax.
@@ -825,11 +720,8 @@ public class SettingsApi extends API {
 
     /**
      * Create a simple or compound tax that can be associated with an item.
-     * <p>
      * Pass the Tax object to create a tax.
-     * <p>
      * The Tax object which contains taxName and taxPercentage are the mandatory parameters.
-     * <p>
      * It returns the Tax object.
      *
      * @param tax Tax object.
@@ -851,11 +743,8 @@ public class SettingsApi extends API {
 
     /**
      * Update the details of a simple or compound tax.
-     * <p>
      * Pass the Tax object to update the details of a tax.
-     * <p>
      * The Tax object which contains taxId is the mandatory parameter for which tax details has to be updated.
-     * <p>
      * It returns the Tax object.
      *
      * @param tax Tax object.
@@ -877,11 +766,8 @@ public class SettingsApi extends API {
 
     /**
      * Delete a simple or compound tax.
-     * <p>
      * Pass the taxId to delete the tax.
-     * <p>
      * If the tax has been deleted it returns the success message.
-     * <p>
      * The success message is "The record has been deleted."
      *
      * @param taxId ID of the tax.
@@ -901,9 +787,7 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of a tax group with associated taxes.
-     * <p>
      * Pass the taxGroupId to get the details of a tax group.
-     * <p>
      * It returns the TaxGroup object.
      *
      * @param taxGroupId ID of the tax group.
@@ -923,9 +807,7 @@ public class SettingsApi extends API {
 
     /**
      * Create a tax group associating multiple taxes (A tax group should contain minimum of 2 taxes.Only one compund tax can be associated to a tax group along with other taxes).
-     * <p>
      * Pass the taxGroupName and taxIds to create a tax group.
-     * <p>
      * It Returns the TaxGroup object.
      *
      * @param taxGroupName Name of the tax group.
@@ -955,11 +837,8 @@ public class SettingsApi extends API {
 
     /**
      * Update the details of a tax group.
-     * <p>
      * Pass the taxGroupId, taxGroupName, and taxIds to update the details for the tax group.
-     * <p>
      * If the tax group details has been updated it returns the success message.
-     * <p>
      * The success message is "Tax Group information has been saved."
      *
      * @param taxGroupId   ID of the tax group.
@@ -990,11 +869,8 @@ public class SettingsApi extends API {
 
     /**
      * Delete a created tax group.
-     * <p>
      * Pass the taxGroupId to delete the tax group.
-     * <p>
      * If the tax group has been deleted it returns the success message.
-     * <p>
      * The success message is "The tax group has been deleted."
      *
      * @param taxGroupId ID of the tax group.
@@ -1018,7 +894,6 @@ public class SettingsApi extends API {
 
     /**
      * Get opening balance.
-     * <p>
      * It returns the OpeningBalance object.
      *
      * @return Returns the OpeningBalance object.
@@ -1037,11 +912,8 @@ public class SettingsApi extends API {
 
     /**
      * Creates opening balance with the given information.
-     * <p>
      * Pass the OpeningBalance object to create a opening balance.
-     * <p>
      * The OpeningBalance object which contains date and debitOrCredit are the mandatory parameters.
-     * <p>
      * It returns the OpeningBalance object.
      *
      * @param openingBalance OpeningBalance object.
@@ -1064,9 +936,7 @@ public class SettingsApi extends API {
 
     /**
      * Updates the existing opening balance information.
-     * <p>
      * Pass the OpeningBalance object to update the details of an opening balance.
-     * <p>
      * It returns the OpeningBalance object.
      *
      * @param openingBalance OpeningBalance object.
@@ -1088,9 +958,7 @@ public class SettingsApi extends API {
 
     /**
      * Delete the entered opening balance.
-     * <p>
      * If the opening balance has been deleted it returns the success message.
-     * <p>
      * The success message is "The entered opening balance has been deleted."
      *
      * @return Returns a String.
@@ -1113,7 +981,6 @@ public class SettingsApi extends API {
 
     /**
      * List of automated payment reminders.
-     * <p>
      * It returns the AutoReminderList object.
      *
      * @return Returns the AutoReminderList object.
@@ -1132,9 +999,7 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of an automated payment reminder.
-     * <p>
      * Pass the templateId to get the details of an auto reminder.
-     * <p>
      * It returns the AutoReminder object.
      *
      * @param templateId ID of the template.
@@ -1154,11 +1019,8 @@ public class SettingsApi extends API {
 
     /**
      * Enable an automated payment reminder.
-     * <p>
      * Pass the reminderId to enable the auto reminder.
-     * <p>
      * If the auto reminder has been enabled it returns the success message.
-     * <p>
      * The success message is "Payment reminder has been enabled."
      *
      * @param reminderId ID of the reminder.
@@ -1178,11 +1040,8 @@ public class SettingsApi extends API {
 
     /**
      * Disable an automated payment reminder.
-     * <p>
      * Pass the reminderId to disable the auto reminder.
-     * <p>
      * If the auto reminder has been disabled it returns the success message.
-     * <p>
      * The success message is "Payment reminder has been disabled."
      *
      * @param reminderId ID of the reminder.
@@ -1202,11 +1061,8 @@ public class SettingsApi extends API {
 
     /**
      * Update the details of an automated payment reminder.
-     * <p>
      * Pass the reminderId and AutoReminder object to update the details of an auto reminder.
-     * <p>
      * If the auto reminder details has been updated it returns the success message.
-     * <p>
      * The success message is "Your payment reminder preferences have been saved."
      *
      * @param reminderId   ID of the reminder.
@@ -1231,20 +1087,14 @@ public class SettingsApi extends API {
 
     /**
      * List of manual reminders.
-     * <p>
      * Pass the filters to get all the manual reminders based on the filters.
-     * <p>
      * It returns the ManualReminderList object.<br>
-     * <p>
      * The queryMap contains the possible key and value as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>type</td><td>Type to select between open or overdue reminder. <br>
      * Allowed Values: <i>overdue_reminder</i> and <i>open_reminder</i></td></tr>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap Type to select between open or overdue reminder.
@@ -1264,9 +1114,7 @@ public class SettingsApi extends API {
 
     /**
      * Get the details of a manual reminder.
-     * <p>
      * Pass the reminderId to get the details of a manual reminder.
-     * <p>
      * It returns the ManualReminder object.
      *
      * @param reminderId ID of the reminder.
@@ -1286,11 +1134,8 @@ public class SettingsApi extends API {
 
     /**
      * Update the details of a manual reminder.
-     * <p>
      * Pass the reminderId and ManualReminder object to update the details of a manual reminder.
-     * <p>
      * If the manual reminder details has been updated it returns the success message.
-     * <p>
      * The success message is "Your payment reminder preferences have been saved."
      *
      * @param reminderId     ID of the reminder.

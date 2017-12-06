@@ -12,15 +12,10 @@ import java.util.HashMap;
 
 /**
  * JournalsApi is used to create a journal.
- * <p>
  * It is used to get:<br><br>
- * <p>
  * The list of all journals.<br>
- * <p>
  * The details of a journal.<br><br>
- * <p>
  * It is used to update the details of a journal.<br>
- * <p>
  * It is used to delete the journal.
  */
 
@@ -36,9 +31,11 @@ public class JournalsApi extends API {
      */
 
     public JournalsApi(String authToken, String organizationId) {
-
         super(authToken, organizationId);
+    }
 
+    public JournalsApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
@@ -47,11 +44,8 @@ public class JournalsApi extends API {
 
     /**
      * Create a journal.
-     * <p>
      * Pass the Journal object to create a journal.
-     * <p>
      * The Journal object which contains journalDate, amount, and debitOrCredit are the mandatory parameters.
-     * <p>
      * It returns the Journal object.
      *
      * @param journal Journal object.
@@ -71,9 +65,7 @@ public class JournalsApi extends API {
 
     /**
      * Get the details of the journal.
-     * <p>
      * Pass the journalId to get the details of a jornal.
-     * <p>
      * It returns the Journal object.
      *
      * @param journalId ID of the Journal.
@@ -93,11 +85,8 @@ public class JournalsApi extends API {
 
     /**
      * Updates the journal with given information.
-     * <p>
      * Pass the Journal object to update the details of a journal.
-     * <p>
      * The Journal object which contains journalId is the mandatory parameter for which journal has to be updated.
-     * <p>
      * It returns the Journal object.
      *
      * @param journal Journal object.
@@ -119,11 +108,8 @@ public class JournalsApi extends API {
 
     /**
      * Deletes the given journal.
-     * <p>
      * Pass the journalId to delete the journal.
-     * <p>
      * If the journal has been deleted it returns the success message.
-     * <p>
      * The success message is "The selected journal entry has been deleted."
      *
      * @param journalId ID of the Journal.
@@ -143,38 +129,26 @@ public class JournalsApi extends API {
 
     /**
      * Get journal list.
-     * <p>
      * Pass the filters to get all the journals based on the filters.
-     * <p>
      * It returns the JournalList object.<br>
-     * <p>
      * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <p>
      * <table border = "1">
-     * <p>
      * <tbody>
      * <tr><td>entry_number</td><td>Search journals by journal entry number. <br>
      * Variants: <i>entry_number_startswith</i> and <i>entry_number_contains</i></td></tr>
-     * <p>
      * <tr><td>reference_number</td><td>Search journals by journal reference number. <br>
      * Variants: <i>reference_number_startswith</i> and <i>reference_number_contains</i></td></tr>
-     * <p>
      * <tr><td>date</td><td>Search journals by journal date. <br>
      * Variants: <i>date_start, date_end, date_before</i> and <i>date_after</i></td></tr>
-     * <p>
      * <tr><td>notes</td><td>Search journals by journal notes. <br>
      * Variants: <i>notes_startswith</i> and <i>notes_contains</i></td></tr>
-     * <p>
      * <tr><td>total</td><td>Search journals by journal total. <br>
      * Variants: <i>total_less_than, total_less_equals, total_greater_than</i> and <i>total_greater_equals</i></td></tr>
-     * <p>
      * <tr><td>filter_by</td><td>Filter journals by journal date. <br>
      * Allowed Values: <i>JournalDate.All, JournalDate.Today, JournalDate.ThisWeek, JournalDate.ThisMonth, JournalDate.ThisQuarter</i> and <i>JournalDate.ThisYear</i></td></tr>
-     * <p>
      * <tr><td>sort_column</td><td>Sort journal list. <br>
      * Allowed Values: <i>journal_date, entry_number, reference_number</i> and <i>total</i></td></tr>
      * </tbody>
-     * <p>
      * </table>
      *
      * @param queryMap It contains the query string parameters in the form of key-value pair.

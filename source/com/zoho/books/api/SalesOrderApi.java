@@ -13,48 +13,25 @@ import java.util.HashMap;
 
 /**
  * SalesOrderApi is used to:<br><br>
- * <p>
  * Get list of sales orders.<br>
- * <p>
  * Get the details of a sales order.<br>
- * <p>
  * Bulk export of sales orders.<br>
- * <p>
  * Bulk print of sales orders.<br>
- * <p>
  * Get list of templates.<br>
- * <p>
  * Get an attachment of the sales order.<br>
- * <p>
  * Get list of comments.<br><br>
- * <p>
- * <p>
  * Create a new sales order.<br>
- * <p>
  * Mark a sales order as open.<br>
- * <p>
  * Mark a sales order as void.<br>
- * <p>
  * Send email for the sales order.<br>
- * <p>
  * Add an attachment for the sales order.<br>
- * <p>
  * Add a comment for the sales order.<br><br>
- * <p>
- * <p>
  * Update the details of a sales order.<br>
- * <p>
  * Update the template.<br>
- * <p>
  * Update an attachment details.<br>
- * <p>
  * Update a comment.<br><br>
- * <p>
- * <p>
  * Delete an existing sales order.<br>
- * <p>
  * Delete an existing attachment.<br>
- * <p>
  * Delete an existing comment.<br><br>
  *
  * @author ramesh-2099
@@ -75,6 +52,10 @@ public class SalesOrderApi extends API {
 
     public SalesOrderApi(String authToken, String organizationId) {
         super(authToken, organizationId);
+    }
+
+    public SalesOrderApi(String authToken, String organizationId, boolean eu) {
+        super(authToken, organizationId, eu);
     }
 
 
