@@ -59,7 +59,7 @@ public class BankRulesApi extends API {
             queryMap.put("account_id", accountId);
         }
 
-        String response = ZohoHTTPClient.get(url, queryMap);
+        String response = ZohoHTTPClient.get(url, queryMap, accessToken);
 
         RuleList ruleList = bankRuleParser.getRules(response);
 
@@ -78,7 +78,7 @@ public class BankRulesApi extends API {
     public Rule get(String ruleId) throws Exception {
         String urlString = url + "/" + ruleId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Rule rule = bankRuleParser.getRule(response);
 
@@ -100,7 +100,7 @@ public class BankRulesApi extends API {
 
         requestBody.put("JSONString", rule.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return bankRuleParser.getRule(response);
     }
@@ -122,7 +122,7 @@ public class BankRulesApi extends API {
 
         requestBody.put("JSONString", rule.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return bankRuleParser.getRule(response);
     }
@@ -140,7 +140,7 @@ public class BankRulesApi extends API {
     public String delete(String ruleId) throws Exception {
         String urlString = url + "/" + ruleId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String message = bankRuleParser.getMessage(response);
 

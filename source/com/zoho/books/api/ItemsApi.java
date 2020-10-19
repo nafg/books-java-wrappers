@@ -73,7 +73,7 @@ public class ItemsApi extends API {
 
     public ItemList getItems(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         ItemList itemList = settingsParser.getItems(response);
 
@@ -93,7 +93,7 @@ public class ItemsApi extends API {
 
         String urlString = url + "/" + itemId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Item item = settingsParser.getItem(response);
 
@@ -116,7 +116,7 @@ public class ItemsApi extends API {
 
         requestBody.put("JSONString", item.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return settingsParser.getItem(response);
     }
@@ -139,7 +139,7 @@ public class ItemsApi extends API {
 
         requestBody.put("JSONString", item.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return settingsParser.getItem(response);
     }
@@ -158,7 +158,7 @@ public class ItemsApi extends API {
 
         String urlString = url + "/" + itemId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -179,7 +179,7 @@ public class ItemsApi extends API {
 
         String urlString = url + "/" + itemId + "/active"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -200,7 +200,7 @@ public class ItemsApi extends API {
 
         String urlString = url + "/" + itemId + "/inactive"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 

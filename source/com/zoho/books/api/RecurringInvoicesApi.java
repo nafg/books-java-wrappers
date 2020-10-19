@@ -64,7 +64,7 @@ public class RecurringInvoicesApi extends API {
 
         requestBody.put("JSONString", recurringInvoice.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return recurringInvoiceParser.getRecurringInvoice(response);
     }
@@ -82,7 +82,7 @@ public class RecurringInvoicesApi extends API {
 
         String urlString = url + "/" + recurringInvoiceId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         RecurringInvoice recurringInvoice = recurringInvoiceParser.getRecurringInvoice(response);
 
@@ -107,7 +107,7 @@ public class RecurringInvoicesApi extends API {
 
         requestBody.put("JSONString", recurringInvoice.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return recurringInvoiceParser.getRecurringInvoice(response);
 
@@ -127,7 +127,7 @@ public class RecurringInvoicesApi extends API {
 
         String urlString = url + "/" + recurringInvoiceId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = recurringInvoiceParser.getMessage(response);
 
@@ -175,7 +175,7 @@ public class RecurringInvoicesApi extends API {
 
     public RecurringInvoiceList getRecurringInvoices(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         RecurringInvoiceList recurringInvoiceList = recurringInvoiceParser.getRecurringInvoices(response);
 
@@ -196,7 +196,7 @@ public class RecurringInvoicesApi extends API {
 
         String urlString = url + "/" + recurringInvoiceId + "/status/stop"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = recurringInvoiceParser.getMessage(response);
 
@@ -217,7 +217,7 @@ public class RecurringInvoicesApi extends API {
 
         String urlString = url + "/" + recurringInvoiceId + "/status/resume"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = recurringInvoiceParser.getMessage(response);
 
@@ -238,7 +238,7 @@ public class RecurringInvoicesApi extends API {
     public String updateTemplate(String recurringInvoiceId, String templateId) throws Exception {
         String urlString = url + "/" + recurringInvoiceId + "/templates/" + templateId; //No I18N
 
-        String response = ZohoHTTPClient.put(urlString, getQueryMap());
+        String response = ZohoHTTPClient.put(urlString, getQueryMap(), accessToken);
 
         String success = recurringInvoiceParser.getMessage(response);
 
@@ -258,11 +258,10 @@ public class RecurringInvoicesApi extends API {
 
         String urlString = url + "/" + recurringInvoiceId + "/comments"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CommentList commentList = recurringInvoiceParser.getComments(response);
 
         return commentList;
     }
-
 }

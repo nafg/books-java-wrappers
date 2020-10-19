@@ -64,7 +64,7 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
         String urlString = url + "/accounts"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         BaseCurrencyAdjustment baseCurrencyAdjustment = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
 
@@ -94,7 +94,7 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
         requestBody.put("JSONString", baseCurrencyAdjustment.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
     }
@@ -112,7 +112,7 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
         String urlString = url + "/" + baseCurrencyAdjustmentId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         BaseCurrencyAdjustment baseCurrencyAdjustment = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
 
@@ -133,7 +133,7 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
         String urlString = url + "/" + baseCurrencyAdjustmentId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = baseCurrencyAdjustmentParser.getMessage(response);
 
@@ -160,11 +160,10 @@ public class BaseCurrencyAdjustmentsApi extends API {
 
     public BaseCurrencyAdjustmentList getBaseCurrencyAdjustments(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         BaseCurrencyAdjustmentList baseCurrencyAdjustmentList = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustments(response);
 
         return baseCurrencyAdjustmentList;
     }
-
 }

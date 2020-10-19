@@ -67,7 +67,7 @@ public class BankAccountsApi extends API {
 
     public BankAccountList getBankaccounts(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         BankAccountList bankAccountList = bankAccountParser.getBankAccounts(response);
 
@@ -89,7 +89,7 @@ public class BankAccountsApi extends API {
 
         requestBody.put("JSONString", bankAccount.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return bankAccountParser.getBankAccount(response);
 
@@ -108,7 +108,7 @@ public class BankAccountsApi extends API {
 
         String urlString = url + "/" + accountId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         BankAccount bankAccount = bankAccountParser.getBankAccount(response);
 
@@ -132,7 +132,7 @@ public class BankAccountsApi extends API {
 
         requestBody.put("JSONString", bankAccount.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return bankAccountParser.getBankAccount(response);
     }
@@ -151,7 +151,7 @@ public class BankAccountsApi extends API {
 
         String urlString = url + "/" + accountId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String message = bankAccountParser.getMessage(response);
 
@@ -172,7 +172,7 @@ public class BankAccountsApi extends API {
 
         String urlString = url + "/" + accountId + "/inactive"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String message = bankAccountParser.getMessage(response);
 
@@ -193,7 +193,7 @@ public class BankAccountsApi extends API {
 
         String urlString = url + "/" + accountId + "/active"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String message = bankAccountParser.getMessage(response);
 
@@ -213,7 +213,7 @@ public class BankAccountsApi extends API {
 
         String urlString = url + "/" + accountId + "/statement/lastimported"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Statement statement = bankAccountParser.getStatement(response);
 
@@ -235,11 +235,10 @@ public class BankAccountsApi extends API {
 
         String urlString = url + "/" + accountId + "/statement/" + statementId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String message = bankAccountParser.getMessage(response);
 
         return message;
     }
-
 }

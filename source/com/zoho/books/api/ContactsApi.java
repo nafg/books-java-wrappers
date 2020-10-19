@@ -77,7 +77,7 @@ public class ContactsApi extends API {
 
         requestBody.put("JSONString", contact.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return contactParser.getContact(response);
     }
@@ -98,7 +98,7 @@ public class ContactsApi extends API {
 
         requestBody.put("JSONString", contact.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return contactParser.getContact(response);
 
@@ -117,7 +117,7 @@ public class ContactsApi extends API {
 
         String urlString = url + "/" + contactId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Contact contact = contactParser.getContact(response);
 
@@ -142,7 +142,7 @@ public class ContactsApi extends API {
 
         requestBody.put("JSONString", contact.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return contactParser.getContact(response);
     }
@@ -161,7 +161,7 @@ public class ContactsApi extends API {
 
         String urlString = url + "/" + contactId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -201,7 +201,7 @@ public class ContactsApi extends API {
 
     public ContactList getContacts(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         ContactList contactList = contactParser.getContacts(response);
 
@@ -222,7 +222,7 @@ public class ContactsApi extends API {
 
         String urlString = url + "/" + contactId + "/active"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -243,7 +243,7 @@ public class ContactsApi extends API {
 
         String urlString = url + "/" + contactId + "/inactive"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -264,7 +264,7 @@ public class ContactsApi extends API {
 
         String urlString = url + "/" + contactId + "/paymentreminder/enable"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -285,7 +285,7 @@ public class ContactsApi extends API {
 
         String urlString = url + "/" + contactId + "/paymentreminder/disable"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -325,7 +325,7 @@ public class ContactsApi extends API {
             fileBody.put("attachments", files);
         }
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody, accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -351,7 +351,7 @@ public class ContactsApi extends API {
 
         String urlString = url + "/" + contactId + "/statements/email"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         Email email = contactParser.getEmailContent(response);
 
@@ -391,7 +391,7 @@ public class ContactsApi extends API {
             fileBody.put("attachments", files);
         }
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody, accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -411,7 +411,7 @@ public class ContactsApi extends API {
 
         String urlString = url + "/" + contactId + "/refunds"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CreditnoteRefundList creditnoteRefundList = contactParser.getRefunds(response);
 
@@ -431,7 +431,7 @@ public class ContactsApi extends API {
 
         String urlString = url + "/" + contactId + "/comments"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CommentList commentList = contactParser.getComments(response);
 
@@ -452,7 +452,7 @@ public class ContactsApi extends API {
     public String track1099(String contactId) throws Exception {
         String urlString = url + "/" + contactId + "/track1099";  //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -472,12 +472,10 @@ public class ContactsApi extends API {
     public String untrack1099(String contactId) throws Exception {
         String urlString = url + "/" + contactId + "/untrack1099"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = contactParser.getMessage(response);
 
         return success;
     }
-
 }
-

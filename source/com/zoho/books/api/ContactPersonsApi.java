@@ -59,7 +59,7 @@ public class ContactPersonsApi extends API {
 
         requestBody.put("JSONString", contactPerson.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return contactParser.getContactPerson(response);
     }
@@ -78,7 +78,7 @@ public class ContactPersonsApi extends API {
 
         String urlString = url + "/" + contactId + "/contactpersons/" + contactPersonId;  //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         ContactPerson contactPerson = contactParser.getContactPerson(response);
 
@@ -103,7 +103,7 @@ public class ContactPersonsApi extends API {
 
         requestBody.put("JSONString", contactPerson.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return contactParser.getContactPerson(response);
     }
@@ -122,7 +122,7 @@ public class ContactPersonsApi extends API {
 
         String urlString = url + "/contactpersons/" + contactPersonId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -143,7 +143,7 @@ public class ContactPersonsApi extends API {
 
         String urlString = url + "/contactpersons/" + contactPersonId + "/primary"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = contactParser.getMessage(response);
 
@@ -163,7 +163,7 @@ public class ContactPersonsApi extends API {
 
         String urlString = url + "/" + contactId + "/contactpersons"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         ContactPersonList contactPersonList = contactParser.getContactPersons(response);
 

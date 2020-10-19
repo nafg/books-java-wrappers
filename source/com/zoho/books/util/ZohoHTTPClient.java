@@ -23,29 +23,35 @@ public class ZohoHTTPClient {
     /**
      * Make a GET request and fetch the response for the given URL and a query string.
      *
-     * @param url      Service URL passed by the user.
-     * @param queryMap This queryMap contains the query string parameters in the form of key, value pair.
-     * @return Returns the JSON response String.
+	* @param url Service URL passed by the user.
+
+	* @param queryMap This queryMap contains the query string parameters in the form of key, value pair.
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
      */
 
-    public static String get(String url, HashMap<String, Object> queryMap) throws Exception {
-        URL urlCon = new URL(url + formQueryString(queryMap));
+    public static String get(String url, HashMap<String, Object> queryMap, String accessToken) throws Exception
+	{
+		URL urlCon = new URL(url+formQueryString(queryMap));
 
-        HashMap<String, Object> header = new HashMap<String, Object>();
+		HashMap<String, Object> header = new HashMap<String, Object>();
 
-        header.put("Accept", "application/json");    //No I18N
-        header.put("Content-Type", "application/x-www-form-urlencoded");    //No I18N
+		header.put("Accept", "application/json");	//No I18N
+		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
 
-        HttpsURLConnection httpGet = getConnection(urlCon, "GET", header);    //No I18N
+		HttpsURLConnection httpGet = getConnection(urlCon, "GET", header);	//No I18N
 
-        String response = getResponse(httpGet);
+  		String response = getResponse(httpGet);
 
-        return response;
-    }
+  		return response;
+	}
 
-    /**
-     * Make a GET request and fetch the file for the given URL and a query string.
-     *
+	/**
+
+	* Make a GET request and fetch the file for the given URL and a query string.
+	*
      * @param url      Service URL passed by the user.
      * @param queryMap This queryMap contains the query string parameters in the form of key, value pair.
      * @return Returns the File object.
@@ -70,28 +76,33 @@ public class ZohoHTTPClient {
     /**
      * Make a POST request and create a resource for the given URL and a request body.
      *
-     * @param url         Service URL passed by the user.
-     * @param requestBody This map contains the request body for the POST request.
-     * @return Returns the JSON response String.
+	* @param url Service URL passed by the user.
+
+	* @param requestBody This map contains the request body for the POST request.
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
      */
 
 
-    public static String post(String url, HashMap<String, Object> requestBody) throws Exception {
+    public static String post(String url, HashMap<String, Object> requestBody, String accessToken) throws Exception{
 
-        URL urlCon = new URL(url);
 
-        HashMap<String, Object> header = new HashMap<String, Object>();
+		URL urlCon = new URL(url);
 
-        header.put("Accept", "application/json");    //No I18N
-        header.put("Content-Type", "application/x-www-form-urlencoded");    //No I18N
+		HashMap<String, Object> header = new HashMap<String, Object>();
 
-        HttpsURLConnection httpPost = getConnection(urlCon, "POST", header);    //No I18N
+		header.put("Accept", "application/json");	//No I18N
+		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
 
-        StringBuffer requestParams = new StringBuffer();
+		HttpsURLConnection httpPost = getConnection(urlCon, "POST", header);	//No I18N
 
-        DataOutputStream dos = new DataOutputStream(httpPost.getOutputStream());
+		StringBuffer requestParams = new StringBuffer();
 
-        try {
+		DataOutputStream dos = new DataOutputStream(httpPost.getOutputStream());
+
+		try{
 
             if (requestBody != null) {
                 Iterator<String> keyIterator = requestBody.keySet().iterator();
@@ -124,33 +135,40 @@ public class ZohoHTTPClient {
     /**
      * Make a POST request and create a resource for the given URL and a MultiPart form data.
      *
-     * @param url         Service URL passed by the user.
-     * @param queryMap    This queryMap contains the query string parameters in the form of key, value pair.
-     * @param requestBody This requestBody contains the form data for the POST request.
-     * @param fileBody    This fileBody contains the attachment files for the POST request.
-     * @return Returns the JSON response String.
-     */
+	* @param url Service URL passed by the user.
 
-    public static String post(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody) throws Exception {
+	* @param queryMap This queryMap contains the query string parameters in the form of key, value pair.
 
-        URL urlCon = new URL(url + formQueryString(queryMap));
+	* @param requestBody This requestBody contains the form data for the POST request.
 
-        String lineEnd = "\r\n";    //No I18N
-        String twoHyphens = "--";    //No I18N
-        String boundary = String.valueOf(System.currentTimeMillis());    //No I18N
+	* @param fileBody This fileBody contains the attachment files for the POST request.
 
-        HashMap<String, Object> header = new HashMap<String, Object>();
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
+	*/
 
-        header.put("Accept", "application/json");    //No I18N
-        header.put("Content-Type", "multipart/form-data; boundary=" + boundary);    //No I18N
+    public static String post(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody, String accessToken) throws Exception{
 
-        HttpsURLConnection httpPost = getConnection(urlCon, "POST", header);    //No I18N
 
-        DataOutputStream dos = new DataOutputStream(httpPost.getOutputStream());
+		URL urlCon = new URL(url+formQueryString(queryMap));
 
-        FileInputStream fStream = null;
+  		String lineEnd = "\r\n";  	//No I18N
+		String twoHyphens = "--"; 	//No I18N
+		String boundary = String.valueOf(System.currentTimeMillis()); 	//No I18N
 
-        try {
+		HashMap<String, Object> header = new HashMap<String, Object>();
+
+		header.put("Accept", "application/json");	//No I18N
+		header.put("Content-Type", "multipart/form-data; boundary="+ boundary);	//No I18N
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
+
+		HttpsURLConnection httpPost = getConnection(urlCon, "POST", header);	//No I18N
+
+		DataOutputStream dos = new DataOutputStream(httpPost.getOutputStream());
+
+		FileInputStream fStream = null;
+
+		try{
 
             if (requestBody != null) {
                 Iterator<String> keyIterator = requestBody.keySet().iterator();
@@ -234,27 +252,32 @@ public class ZohoHTTPClient {
     /**
      * Make a PUT request and update a resource for the given URL and a request body.
      *
-     * @param url         Service URL passed by the user.
-     * @param requestBody This requestBody contains the form data for the PUT request.
-     * @return Returns the JSON response String.
+	* @param url Service URL passed by the user.
+
+	* @param requestBody This requestBody contains the form data for the PUT request.
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
      */
 
 
-    public static String put(String url, HashMap<String, Object> requestBody) throws Exception {
-        URL urlCon = new URL(url);
+    public static String put(String url, HashMap<String, Object> requestBody, String accessToken) throws Exception{
 
-        HashMap<String, Object> header = new HashMap<String, Object>();
+		URL urlCon = new URL(url);
 
-        header.put("Accept", "application/json");    //No I18N
-        header.put("Content-Type", "application/x-www-form-urlencoded");    //No I18N
+		HashMap<String, Object> header = new HashMap<String, Object>();
 
-        HttpsURLConnection httpPut = getConnection(urlCon, "PUT", header);    //No I18N
+		header.put("Accept", "application/json");	//No I18N
+		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
 
-        StringBuffer requestParams = new StringBuffer();
+		HttpsURLConnection httpPut = getConnection(urlCon, "PUT", header);	//No I18N
 
-        DataOutputStream dos = new DataOutputStream(httpPut.getOutputStream());
+		StringBuffer requestParams = new StringBuffer();
 
-        try {
+		DataOutputStream dos = new DataOutputStream(httpPut.getOutputStream());
+
+		try{
 
             if (requestBody != null) {
                 Iterator<String> keyIterator = requestBody.keySet().iterator();
@@ -288,60 +311,73 @@ public class ZohoHTTPClient {
     /**
      * Make a PUT request and update a resource for the given URL and a MultiPart form data.
      *
-     * @param url         Service URL passed by the user.
-     * @param queryMap    This queryMap contains the query string parameters in the form of key, value pair.
-     * @param requestBody This requestBody contains the form data for the PUT request.
-     * @param fileBody    This fileBody contains the attachment files for the PUT request.
-     * @return Returns the JSON response String.
-     */
+	* @param url Service URL passed by the user.
 
-    public static String put(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody) throws Exception {
+	* @param queryMap This queryMap contains the query string parameters in the form of key, value pair.
 
-        URL urlCon = new URL(url + formQueryString(queryMap));
+	* @param requestBody This requestBody contains the form data for the PUT request.
 
-        String lineEnd = "\r\n";    //No I18N
-        String twoHyphens = "--";    //No I18N
-        String boundary = String.valueOf(System.currentTimeMillis());    //No I18N
+	* @param fileBody This fileBody contains the attachment files for the PUT request.
 
-        HashMap<String, Object> header = new HashMap<String, Object>();
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
+	*/
 
-        header.put("Accept", "application/json");    //No I18N
-        header.put("Content-Type", "multipart/form-data; boundary=" + boundary);    //No I18N
+    public static String put(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody, String accessToken) throws Exception
+	{
 
-        HttpsURLConnection httpPut = getConnection(urlCon, "PUT", header);    //No I18N
+		URL urlCon = new URL(url+formQueryString(queryMap));
 
-        FileInputStream fStream = null;
+  		String lineEnd = "\r\n";	//No I18N
+		String twoHyphens = "--";	//No I18N
+		String boundary = String.valueOf(System.currentTimeMillis());	//No I18N
 
-        DataOutputStream dos = new DataOutputStream(httpPut.getOutputStream());
+		HashMap<String, Object> header = new HashMap<String, Object>();
 
-        try {
+		header.put("Accept", "application/json");	//No I18N
+		header.put("Content-Type", "multipart/form-data; boundary="+ boundary);	//No I18N
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
 
-            if (requestBody != null) {
-                Iterator<String> keyIterator = requestBody.keySet().iterator();
+		HttpsURLConnection httpPut = getConnection(urlCon, "PUT", header);	//No I18N
 
-                while (keyIterator.hasNext()) {
-                    String key = keyIterator.next();
+  		FileInputStream fStream = null;
 
-                    dos.writeBytes(twoHyphens + boundary + lineEnd);
-                    dos.writeBytes("Content-Disposition: form-data; name=\"" + key + "\"" + lineEnd + lineEnd + requestBody.get(key).toString() + lineEnd); //No I18N
-                }
+		DataOutputStream dos = new DataOutputStream(httpPut.getOutputStream());
 
-            }
-            if (fileBody != null) {
-                Iterator<String> iterator = fileBody.keySet().iterator();
+		try
+		{
 
-                while (iterator.hasNext()) {
-                    String key = iterator.next();
+			if(requestBody != null)
+			{
+				Iterator<String> keyIterator = requestBody.keySet().iterator();
 
-                    if (fileBody.get(key) instanceof File) {
+				while(keyIterator.hasNext())
+				{
+					String key = keyIterator.next();
 
-                        dos.writeBytes(twoHyphens + boundary + lineEnd);
-                        dos.writeBytes("Content-Disposition: form-data; name=\"" + key + "\";filename=\"" + (File) fileBody.get(key) + "\"" + lineEnd); //No I18N
-                        dos.writeBytes(lineEnd);
-                        fStream = new FileInputStream((File) fileBody.get(key));
-                        int bufferSize = 1024;
-                        byte[] buffer = new byte[bufferSize];
-                        int length = -1;
+					dos.writeBytes(twoHyphens + boundary + lineEnd);
+					dos.writeBytes("Content-Disposition: form-data; name=\""+key+"\""+lineEnd+lineEnd+requestBody.get(key).toString()+lineEnd); //No I18N
+				}
+
+			}
+			if(fileBody != null)
+			{
+				Iterator<String> iterator = fileBody.keySet().iterator();
+
+				while(iterator.hasNext())
+				{
+					String key = iterator.next();
+
+					if(fileBody.get(key) instanceof File)
+					{
+
+						dos.writeBytes(twoHyphens + boundary + lineEnd);
+						dos.writeBytes("Content-Disposition: form-data; name=\""+key+"\";filename=\"" + (File)fileBody.get(key) +"\"" + lineEnd); //No I18N
+						dos.writeBytes(lineEnd);
+						fStream = new FileInputStream((File)fileBody.get(key));
+						int bufferSize = 1024;
+						byte[] buffer = new byte[bufferSize];
+						int length = -1;
 
                         while ((length = fStream.read(buffer)) != -1) {
                             dos.write(buffer, 0, length);
@@ -373,26 +409,33 @@ public class ZohoHTTPClient {
     /**
      * Make a DELETE request for the given URL and a query string.
      *
-     * @param url      Service URL passed by the user.
-     * @param queryMap This queryMap contains the query string parameters in the form of key, value pair.
-     * @return Returns the JSON response String.
-     */
+	* @param url Service URL passed by the user.
+
+	* @param queryMap This queryMap contains the query string parameters in the form of key, value pair.
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
+
+	*/
 
 
-    public static String delete(String url, HashMap<String, Object> queryMap) throws Exception {
+	public static String delete(String url, HashMap<String, Object> queryMap, String accessToken) throws Exception
+	{
 
-        URL urlCon = new URL(url + formQueryString(queryMap));
+		URL urlCon = new URL(url+formQueryString(queryMap));
 
-        HashMap<String, Object> header = new HashMap<String, Object>();
+		HashMap<String, Object> header = new HashMap<String, Object>();
 
-        header.put("Accept", "application/json");    //No I18N
-        header.put("Content-Type", "application/x-www-form-urlencoded");    //No I18N
+		header.put("Accept", "application/json");	//No I18N
+		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
 
-        HttpsURLConnection httpDelete = getConnection(urlCon, "DELETE", header);    //No I18N
+		HttpsURLConnection httpDelete = getConnection(urlCon, "DELETE", header);	//No I18N
 
-        String response = getResponse(httpDelete);
+		String response = getResponse(httpDelete);
 
-        return response;
+		return response;
+
     }
 
     /**

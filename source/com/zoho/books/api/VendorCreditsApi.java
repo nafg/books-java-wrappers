@@ -69,7 +69,7 @@ public class VendorCreditsApi extends API {
 
     public VendorCreditList getVendorCredits(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         return vendorCreditsParser.getVendorCredits(response);
 
@@ -87,7 +87,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId;    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getVendorCredit(response);
     }
@@ -107,7 +107,7 @@ public class VendorCreditsApi extends API {
 
         requestBody.put("JSONString", vendorCredit.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return vendorCreditsParser.getVendorCredit(response);
 
@@ -129,7 +129,7 @@ public class VendorCreditsApi extends API {
 
         requestBody.put("JSONString", vendorCredit.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return vendorCreditsParser.getVendorCredit(response);
 
@@ -147,7 +147,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId;    //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getMessage(response);
 
@@ -165,7 +165,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId + "/status/open";    //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getMessage(response);
 
@@ -183,7 +183,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId + "/status/void";    //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getMessage(response);
 
@@ -205,7 +205,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId + "/applytobills";    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         return response;
 
@@ -242,7 +242,7 @@ public class VendorCreditsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return vendorCreditsParser.getMessage(response);
     }
@@ -260,7 +260,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId + "/bills/" + vendorCreditBillId;    //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getMessage(response);
 
@@ -282,7 +282,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/refunds";    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         return vendorCreditsParser.getVendorCreditRefunds(response);
 
@@ -300,7 +300,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId + "/refunds";    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getVendorCreditRefunds(response);
 
@@ -319,7 +319,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId + "/refunds/" + vendorCreditRefundId;    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getVendorCreditRefund(response);
 
@@ -342,7 +342,7 @@ public class VendorCreditsApi extends API {
 
         requestBody.put("JSONString", vendorCreditRefund.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return vendorCreditsParser.getVendorCreditRefund(response);
     }
@@ -364,7 +364,7 @@ public class VendorCreditsApi extends API {
 
         requestBody.put("JSONString", vendorCreditRefund.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return vendorCreditsParser.getVendorCreditRefund(response);
 
@@ -383,7 +383,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId + "/refunds/" + vendorCreditRefundId;    //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getMessage(response);
     }
@@ -404,7 +404,7 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId + "/comments";    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getComments(response);
 
@@ -429,7 +429,7 @@ public class VendorCreditsApi extends API {
         HashMap<String, Object> requestBody = getQueryMap();
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return vendorCreditsParser.getComment(response);
 
@@ -448,11 +448,10 @@ public class VendorCreditsApi extends API {
 
         String urlString = url + "/" + vendorCreditId + "/comments/" + commentId;    //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         return vendorCreditsParser.getMessage(response);
 
     }
-
 
 }

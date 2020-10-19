@@ -57,7 +57,7 @@ public class CustomerPaymentsApi extends API {
 
         requestBody.put("JSONString", customerPayment.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return customerPaymentParser.getCustomerPayment(response);
     }
@@ -75,7 +75,7 @@ public class CustomerPaymentsApi extends API {
 
         String urlString = url + "/" + paymentId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CustomerPayment customerPayment = customerPaymentParser.getCustomerPayment(response);
 
@@ -99,7 +99,7 @@ public class CustomerPaymentsApi extends API {
 
         requestBody.put("JSONString", customerPayment.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return customerPaymentParser.getCustomerPayment(response);
     }
@@ -118,7 +118,7 @@ public class CustomerPaymentsApi extends API {
 
         String urlString = url + "/" + paymentId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         JSONObject jsonObject = new JSONObject(response.trim());
 
@@ -162,7 +162,7 @@ public class CustomerPaymentsApi extends API {
 
     public CustomerPaymentList getCustomerPayments(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         CustomerPaymentList customerPaymentList = customerPaymentParser.getCustomerPayments(response);
 

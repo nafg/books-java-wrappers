@@ -130,7 +130,7 @@ public class InvoicesApi extends API {
 
     public InvoiceList getInvoices(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         InvoiceList invoiceList = invoiceParser.getInvoices(response);
 
@@ -173,7 +173,7 @@ public class InvoicesApi extends API {
 
         requestBody.put("JSONString", invoiceObj.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         Invoice invoice = invoiceParser.getInvoice(response);
 
@@ -204,7 +204,7 @@ public class InvoicesApi extends API {
 
         requestBody.put("JSONString", newInvoice.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         Invoice invoice = invoiceParser.getInvoice(response);
 
@@ -224,7 +224,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Invoice invoice = invoiceParser.getInvoice(response);
 
@@ -252,7 +252,7 @@ public class InvoicesApi extends API {
 
         requestBody.put("JSONString", newInvoice.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         Invoice invoice = invoiceParser.getInvoice(response);
 
@@ -273,7 +273,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -321,7 +321,7 @@ public class InvoicesApi extends API {
             }
         }
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody, accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -366,7 +366,7 @@ public class InvoicesApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -389,7 +389,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/email"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         Email email = invoiceParser.getEmailContent(response);
 
@@ -436,7 +436,7 @@ public class InvoicesApi extends API {
         }
 
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody, accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -459,7 +459,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/paymentreminder"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(paramMap));
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(paramMap), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -479,7 +479,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/paymentreminder"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Email email = invoiceParser.getEmailContent(response);
 
@@ -500,7 +500,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/status/sent"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -521,7 +521,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/status/draft"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -542,7 +542,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/status/void"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -602,7 +602,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/paymentreminder/enable"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -623,7 +623,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/paymentreminder/disable"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -644,7 +644,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/writeoff"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -665,7 +665,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/writeoff/cancel"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -691,7 +691,7 @@ public class InvoicesApi extends API {
 
         requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -717,7 +717,7 @@ public class InvoicesApi extends API {
 
         requestBody.put("JSONString", shippingAddress.toJSON().put("is_update_customer", shippingAddress.isUpdateCustomer()).toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -735,7 +735,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/templates"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         TemplateList templateList = invoiceParser.getTemplates(response);
 
@@ -757,7 +757,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/templates/" + templateId; //No I18N
 
-        String response = ZohoHTTPClient.put(urlString, getQueryMap());
+        String response = ZohoHTTPClient.put(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -765,8 +765,7 @@ public class InvoicesApi extends API {
 
     }
 
-
-//=============================================================================================================================================	
+//=============================================================================================================================================
 
 
     /**
@@ -782,7 +781,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/payments"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         PaymentList paymentList = invoiceParser.getPayments(response);
 
@@ -802,7 +801,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/creditsapplied"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CreditList credits = invoiceParser.getCreditsApplied(response);
 
@@ -852,7 +851,7 @@ public class InvoicesApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         Credit credit = invoiceParser.getApplyCredits(response);
 
@@ -874,7 +873,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/payments/" + invoicePaymentId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -897,7 +896,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/creditsapplied/" + creditnotesInvoiceId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -933,7 +932,7 @@ public class InvoicesApi extends API {
         fileBody.put("attachment", file);
 
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody, accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -978,7 +977,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/attachment"; //No I18N
 
-        String response = ZohoHTTPClient.put(urlString, getQueryMap(paramMap));
+        String response = ZohoHTTPClient.put(urlString, getQueryMap(paramMap), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -999,7 +998,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/attachment"; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
@@ -1020,13 +1019,12 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/expenses/" + invoiceId + "/receipt"; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
         return success;
     }
-
 
 //==============================================================================================================================================
 
@@ -1044,7 +1042,7 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/comments"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CommentList commentList = invoiceParser.getComments(response);
 
@@ -1076,7 +1074,7 @@ public class InvoicesApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         Comment comment = invoiceParser.getComment(response);
 
@@ -1107,7 +1105,7 @@ public class InvoicesApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         Comment comment = invoiceParser.getComment(response);
 
@@ -1129,12 +1127,11 @@ public class InvoicesApi extends API {
 
         String urlString = url + "/" + invoiceId + "/comments/" + commentId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = invoiceParser.getMessage(response);
 
         return success;
     }
-
 
 }

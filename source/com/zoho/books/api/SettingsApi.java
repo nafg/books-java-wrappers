@@ -83,7 +83,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/preferences"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Preference preference = settingsParser.getPreferences(response);
 
@@ -108,7 +108,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", preference.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -137,7 +137,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -158,14 +158,13 @@ public class SettingsApi extends API {
 
         String urlString = url + "/units/" + unitId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
         return success;
 
     }
-
 
 //=========================================================================================================================================
 
@@ -180,7 +179,7 @@ public class SettingsApi extends API {
     public InvoiceSetting getInvoiceSettings() throws Exception {
         String urlString = url + "/invoices"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         InvoiceSetting invoiceSetting = settingsParser.getInvoiceSettings(response);
 
@@ -204,7 +203,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", invoiceSetting.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return settingsParser.getInvoiceSettings(response);
     }
@@ -220,7 +219,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/invoices/notesandterms"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         NotesAndTerms notesAndTerms = settingsParser.getNotesAndTerms(response);
 
@@ -250,13 +249,12 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         NotesAndTerms notesAndTerms = settingsParser.getNotesAndTerms(response);
 
         return notesAndTerms;
     }
-
 //=========================================================================================================================================
 
 
@@ -271,7 +269,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/estimates";  //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         EstimateSetting estimateSetting = settingsParser.getEstimateSettings(response);
 
@@ -295,7 +293,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", estimateSetting.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return settingsParser.getEstimateSettings(response);
     }
@@ -312,7 +310,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/estimates/notesandterms";  //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         NotesAndTerms notesAndTerms = settingsParser.getNotesAndTerms(response);
 
@@ -342,13 +340,12 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         NotesAndTerms notesAndTerms = settingsParser.getNotesAndTerms(response);
 
         return notesAndTerms;
     }
-
 
 //=========================================================================================================================================
 
@@ -363,7 +360,7 @@ public class SettingsApi extends API {
     public CreditnoteSetting getCreditnoteSettings() throws Exception {
         String urlString = url + "/creditnotes";  //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CreditnoteSetting creditnoteSetting = settingsParser.getCreditnoteSettings(response);
 
@@ -387,7 +384,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", creditnoteSetting.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return settingsParser.getCreditnoteSettings(response);
     }
@@ -403,7 +400,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/creditnotes/notesandterms";  //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         NotesAndTerms notesAndTerms = settingsParser.getNotesAndTerms(response);
 
@@ -433,13 +430,12 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         NotesAndTerms notesAndTerms = settingsParser.getNotesAndTerms(response);
 
         return notesAndTerms;
     }
-
 
 //=========================================================================================================================================
 
@@ -464,7 +460,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/currencies"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         CurrencyList currencyList = settingsParser.getCurrencies(response);
 
@@ -484,7 +480,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/currencies/" + currencyId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Currency currency = settingsParser.getCurrency(response);
 
@@ -509,7 +505,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", currency.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return settingsParser.getCurrency(response);
     }
@@ -532,7 +528,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", currency.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return settingsParser.getCurrency(response);
     }
@@ -551,7 +547,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/currencies/" + currencyId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -579,7 +575,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/currencies/" + currencyId + "/exchangerates"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         ExchangeRateList exchangeRateList = settingsParser.getExchangeRates(response);
 
@@ -600,7 +596,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/currencies/" + currencyId + "/exchangerates/" + exchangeRateId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         ExchangeRate exchangeRate = settingsParser.getExchangeRate(response);
 
@@ -626,7 +622,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", exchangeRate.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return settingsParser.getExchangeRate(response);
     }
@@ -650,7 +646,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", exchangeRate.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return settingsParser.getExchangeRate(response);
     }
@@ -670,13 +666,12 @@ public class SettingsApi extends API {
 
         String urlString = url + "/currencies/" + currencyId + "/exchangerates/" + exchangeRateId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
         return success;
     }
-
 //=========================================================================================================================================
 
 
@@ -691,7 +686,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/taxes"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         TaxList taxList = settingsParser.getTaxes(response);
 
@@ -711,7 +706,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/taxes/" + taxId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Tax tax = settingsParser.getTax(response);
 
@@ -736,7 +731,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", tax.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return settingsParser.getTax(response);
     }
@@ -759,7 +754,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", tax.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return settingsParser.getTax(response);
     }
@@ -778,7 +773,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/taxes/" + taxId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -798,7 +793,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/taxgroups/" + taxGroupId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         TaxGroup taxGroup = settingsParser.getTaxGroup(response);
 
@@ -828,7 +823,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         TaxGroup taxGroup = settingsParser.getTaxGroup(response);
 
@@ -860,7 +855,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -881,13 +876,12 @@ public class SettingsApi extends API {
 
         String urlString = url + "/taxgroups/" + taxGroupId;  //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
         return success;
     }
-
 
 //=========================================================================================================================================
 
@@ -903,7 +897,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/openingbalances"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         OpeningBalance openingBalance = settingsParser.getOpeningBalance(response);
 
@@ -928,7 +922,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", openingBalance.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return settingsParser.getOpeningBalance(response);
 
@@ -951,7 +945,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", openingBalance.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return settingsParser.getOpeningBalance(response);
     }
@@ -968,13 +962,12 @@ public class SettingsApi extends API {
 
         String urlString = url + "/openingbalances";  //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
         return success;
     }
-
 
 //=========================================================================================================================================
 
@@ -990,7 +983,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/autoreminders"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         AutoReminderList autoReminderList = settingsParser.getAutoReminders(response);
 
@@ -1010,7 +1003,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/autoreminders/" + templateId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         AutoReminder autoReminder = settingsParser.getAutoReminder(response);
 
@@ -1031,7 +1024,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/autoreminders/" + reminderId + "/enable"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -1052,7 +1045,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/autoreminders/" + reminderId + "/disable";  //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -1078,7 +1071,7 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", autoReminder.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -1105,7 +1098,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/manualreminders"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         ManualReminderList manualReminderList = settingsParser.getManualReminders(response);
 
@@ -1125,7 +1118,7 @@ public class SettingsApi extends API {
 
         String urlString = url + "/manualreminders/" + reminderId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         ManualReminder manualReminder = settingsParser.getManualReminder(response);
 
@@ -1151,13 +1144,11 @@ public class SettingsApi extends API {
 
         requestBody.put("JSONString", manualReminder.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = settingsParser.getMessage(response);
 
         return success;
 
     }
-
 }
-

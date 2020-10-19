@@ -105,7 +105,7 @@ public class CreditNotesApi extends API {
 
         requestBody.put("JSONString", creditNote.toJSON().toString());
 
-        String resp = ZohoHTTPClient.post(url, requestBody);
+        String resp = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return creditNoteParser.getCreditNote(resp);
     }
@@ -130,7 +130,7 @@ public class CreditNotesApi extends API {
 
         requestBody.put("JSONString", creditNote.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return creditNoteParser.getCreditNote(response);
     }
@@ -150,7 +150,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CreditNote creditNote = creditNoteParser.getCreditNote(response);
 
@@ -178,7 +178,7 @@ public class CreditNotesApi extends API {
 
         requestBody.put("JSONString", creditNote.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return creditNoteParser.getCreditNote(response);
 
@@ -198,7 +198,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
@@ -246,7 +246,7 @@ public class CreditNotesApi extends API {
 
     public CreditNoteList getCreditNotes(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         CreditNoteList creditNoteList = creditNoteParser.getCreditNotes(response);
 
@@ -290,7 +290,7 @@ public class CreditNotesApi extends API {
         }
 
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody, accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
@@ -310,7 +310,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/emailhistory"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         EmailHistoryList emailHistory = creditNoteParser.getEmailHistory(response);
 
@@ -333,7 +333,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/email"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         Email email = creditNoteParser.getEmailContent(response);
 
@@ -354,7 +354,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/status/open"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
@@ -375,7 +375,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/status/void"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
@@ -401,7 +401,7 @@ public class CreditNotesApi extends API {
 
         requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
@@ -427,7 +427,7 @@ public class CreditNotesApi extends API {
 
         requestBody.put("JSONString", shippingAddress.toJSON().put("is_update_customer", shippingAddress.isUpdateCustomer()).toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
@@ -445,7 +445,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/templates"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         TemplateList templateList = creditNoteParser.getTemplates(response);
 
@@ -467,14 +467,13 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/templates/" + templateId; //No I18N
 
-        String response = ZohoHTTPClient.put(urlString, getQueryMap());
+        String response = ZohoHTTPClient.put(urlString, getQueryMap(), accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
         return success;
 
     }
-
 
 //===========================================================================================================================================
 
@@ -512,7 +511,7 @@ public class CreditNotesApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return creditNoteParser.getCreditToInvoice(response);
 
@@ -531,7 +530,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/invoices"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         InvoicesCreditedList invoicesCredited = creditNoteParser.getInvoicesCredited(response);
 
@@ -554,13 +553,12 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/invoices/" + creditnoteInvoiceId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
         return success;
     }
-
 
 //=========================================================================================================================================
 
@@ -584,7 +582,7 @@ public class CreditNotesApi extends API {
 
         requestBody.put("JSONString", creditnoteRefund.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return creditNoteParser.getCreditnoteRefund(response);
     }
@@ -603,7 +601,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/refunds/" + creditnoteRefundId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CreditnoteRefund creditnoteRefund = creditNoteParser.getCreditnoteRefund(response);
 
@@ -630,7 +628,7 @@ public class CreditNotesApi extends API {
 
         requestBody.put("JSONString", creditnoteRefund.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return creditNoteParser.getCreditnoteRefund(response);
     }
@@ -650,7 +648,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/refunds/" + creditnoteRefundId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
@@ -670,7 +668,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/refunds"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CreditnoteRefundList creditnoteRefundList = creditNoteParser.getRefunds(response);
 
@@ -698,13 +696,12 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/refunds"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         CreditnoteRefundList creditnoteRefundList = creditNoteParser.getRefunds(response);
 
         return creditnoteRefundList;
     }
-
 
 //======================================================================================================================================
 
@@ -730,7 +727,7 @@ public class CreditNotesApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         Comment comment = creditNoteParser.getComment(response);
 
@@ -750,7 +747,7 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/comments"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CommentList commentList = creditNoteParser.getComments(response);
 
@@ -773,12 +770,11 @@ public class CreditNotesApi extends API {
 
         String urlString = url + "/" + creditNoteId + "/comments/" + commentId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = creditNoteParser.getMessage(response);
 
         return success;
     }
-
 
 }

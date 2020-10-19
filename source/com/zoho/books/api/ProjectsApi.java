@@ -92,7 +92,7 @@ public class ProjectsApi extends API {
 
     public ProjectList getProjects(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         ProjectList projectList = projectParser.getProjects(response);
 
@@ -112,7 +112,7 @@ public class ProjectsApi extends API {
     public Project get(String projectId) throws Exception {
         String urlString = url + "/" + projectId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Project projects = projectParser.getProject(response);
 
@@ -135,7 +135,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", project.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return projectParser.getProject(response);
 
@@ -160,7 +160,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", project.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return projectParser.getProject(response);
     }
@@ -180,7 +180,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = projectParser.getMessage(response);
 
@@ -202,7 +202,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/active"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = projectParser.getMessage(response);
 
@@ -224,7 +224,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/inactive"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = projectParser.getMessage(response);
 
@@ -256,13 +256,12 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         Project projects = projectParser.getProject(response);
 
         return projects;
     }
-
 
 //=========================================================================================================================================
 
@@ -288,7 +287,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/tasks"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         TaskList taskList = projectParser.getTasks(response);
 
@@ -315,7 +314,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", task.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return projectParser.getTask(response);
     }
@@ -335,7 +334,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/tasks/" + taskId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Task task = projectParser.getTask(response);
 
@@ -362,7 +361,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", task.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return projectParser.getTask(response);
     }
@@ -383,13 +382,12 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/tasks/" + taskId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = projectParser.getMessage(response);
 
         return success;
     }
-
 
 //======================================================================================================================================
 
@@ -407,7 +405,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/users"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         UserList userList = projectParser.getUsers(response);
 
@@ -429,7 +427,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/users/" + userId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         User user = projectParser.getUser(response);
 
@@ -471,7 +469,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return projectParser.getUsers(response);
 
@@ -496,7 +494,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", user.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return projectParser.getUser(response);
     }
@@ -521,7 +519,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", user.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return projectParser.getUser(response);
     }
@@ -542,13 +540,12 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/users/" + userId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = projectParser.getMessage(response);
 
         return success;
     }
-
 
 //=========================================================================================================================================
 
@@ -579,7 +576,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/timeentries"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         TimeEntryList timeEntryList = projectParser.getTimeEntries(response);
 
@@ -605,7 +602,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", timeEntry.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return projectParser.getTimeEntry(response);
 
@@ -625,7 +622,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/timeentries/" + timeEntryId; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         TimeEntry timeEntry = projectParser.getTimeEntry(response);
 
@@ -651,7 +648,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", timeEntry.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return projectParser.getTimeEntry(response);
 
@@ -672,7 +669,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/timeentries/" + timeEntryId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = projectParser.getMessage(response);
 
@@ -696,7 +693,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/timeentries"; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(queryMap), accessToken);
 
         String success = projectParser.getMessage(response);
 
@@ -717,7 +714,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/timeentries/" + timeEntryId + "/timer/start"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         TimeEntry timeEntry = projectParser.getTimeEntry(response);
 
@@ -737,13 +734,12 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/timeentries/timer/stop"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         TimeEntry timeEntry = projectParser.getTimeEntry(response);
 
         return timeEntry;
     }
-
 
 //=========================================================================================================================================
 
@@ -761,7 +757,7 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/comments"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CommentList commentList = projectParser.getComments(response);
 
@@ -791,7 +787,7 @@ public class ProjectsApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         Comment comment = projectParser.getComment(response);
 
@@ -813,13 +809,12 @@ public class ProjectsApi extends API {
     public String deleteComment(String projectId, String commentId) throws Exception {
         String urlString = url + "/" + projectId + "/comments/" + commentId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = projectParser.getMessage(response);
 
         return success;
     }
-
 
 //=========================================================================================================================================
 
@@ -846,11 +841,10 @@ public class ProjectsApi extends API {
 
         String urlString = url + "/" + projectId + "/invoices"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         InvoiceList invoiceList = projectParser.getInvoices(response);
 
         return invoiceList;
     }
-
 }
