@@ -33,7 +33,7 @@ public class API {
         this(accessToken, organizationId, false);
     }
 
-    public API(String authToken, String organizationId, boolean eu) {
+    public API(String accessToken, String organizationId, boolean eu) {
       this.accessToken = accessToken;
       this.organizationId = organizationId;
       if(eu) {

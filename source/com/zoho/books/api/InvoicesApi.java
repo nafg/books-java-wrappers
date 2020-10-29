@@ -77,8 +77,8 @@ public class InvoicesApi extends API {
         super(accessToken, organizationId);
     }
 
-    public InvoicesApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public InvoicesApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
