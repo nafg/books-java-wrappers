@@ -27,18 +27,20 @@ public class UsersApi extends API {
 
 
     /**
-     * Construct a new UsersApi using user's authtoken and organizationid.
+     * Construct a new UsersApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public UsersApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public UsersApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public UsersApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public UsersApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 

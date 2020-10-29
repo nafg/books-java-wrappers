@@ -39,18 +39,18 @@ public class BankTransactionsApi extends API {
     private String url = baseURL + "/banktransactions"; //No I18N
 
     /**
-     * Construct a new BankTransactionsApi using user's authtoken and organization id.
+     * Construct a new BankTransactionsApi using user's accessToken and organization id.
      *
-     * @param authToken      user's authtoken.
+     * @param accessToken      user's accessToken.
      * @param organizationId user's organization id.
      */
 
-    public BankTransactionsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+    public BankTransactionsApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public BankTransactionsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public BankTransactionsApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
     private BankTransactionParser bankTransactionParser = new BankTransactionParser();

@@ -27,183 +27,250 @@ public class ItemsApi extends API {
 
 
     /**
-     * Construct a new ItemsApi using user's authtoken and organizationid.
+     * Construct a new ItemsApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public ItemsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
-    }
+	* @param organizationId user's organization id.
 
-    public ItemsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
-    }
+	*/
 
+	public ItemsApi(String accessToken, String organizationId)
+	{
 
-    private SettingsParser settingsParser = new SettingsParser();
+		super(accessToken, organizationId);
+
+	}
 
 
-    /**
-     * Get the list of all active items with pagination.
-     * Pass the filters in the form of key-value pair to get all the items from an organization based on the filter.
-     * It returns the ItemList object.<br>
-     * The queryMap contains the possible keys and values as mentioned below:<br><br>
-     * <table border = "1">
-     * <tbody>
-     * <tr><td>name</td><td>Search items by name.<br>
-     * Variants: <i>name_startswith</i> and <i>name_contains</i></td></tr>
-     * <tr><td>description</td><td>Search items by description.<br>
-     * Variants: <i>description_startswith</i> and <i>description_contains</i></td></tr>
-     * <tr><td>rate</td><td>Search items by rate.<br>
-     * Variants: <i>rate_less_than, rate_less_equals, rate_greater_than</i> and <i>rate_greater_equals</i></td></tr>
-     * <tr><td>tax_id</td><td>Search items by tax id.</td></tr>
-     * <tr><td>search_text</td><td>Search items by name or description.</td></tr>
-     * <tr><td>filter_by</td><td>Filter items by status.<br>
-     * Allowed Values: <i>Status.All, Status.Active</i> and <i>Status.Inactive</i></td></tr>
-     * <tr><td>sort_column</td><td>Sort items.<br>
-     * Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
-     * </tbody>
-     * </table>
-     *
-     * @param queryMap It contains the query string parameters in the form of key-value pair.
-     * @return Returns the ItemList object.
-     */
+	private SettingsParser settingsParser = new SettingsParser();
 
-    public ItemList getItems(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
-        ItemList itemList = settingsParser.getItems(response);
+	/**
 
-        return itemList;
-    }
+	* Get the list of all active items with pagination.
 
-    /**
-     * Get the details of an item.
-     * Pass the itemId to get the details of a particular item.
-     * It returns the Item object.
-     *
-     * @param itemId ID of an item.
-     * @return Returns an Item object.
-     */
+	* Pass the filters in the form of key-value pair to get all the items from an organization based on the filter.
 
-    public Item get(String itemId) throws Exception {
+	* It returns the ItemList object.<br>
 
-        String urlString = url + "/" + itemId;
+	* The queryMap contains the possible keys and values as mentioned below:<br><br>
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
+		<table border = "1">
 
-        Item item = settingsParser.getItem(response);
+			<tbody>
+				<tr><td>name</td><td>Search items by name.<br>
+Variants: <i>name_startswith</i> and <i>name_contains</i></td></tr>
 
-        return item;
-    }
+				<tr><td>description</td><td>Search items by description.<br>
+Variants: <i>description_startswith</i> and <i>description_contains</i></td></tr>
 
-    /**
-     * Create a new item.
-     * Pass the Item object to create a new item for the organization.
-     * The Item object which contains name and rate are mandatory parameters.
-     * It returns the Item object.
-     *
-     * @param item Item object.
-     * @return Returns the Item object.
-     */
+				<tr><td>rate</td><td>Search items by rate.<br>
+Variants: <i>rate_less_than, rate_less_equals, rate_greater_than</i> and <i>rate_greater_equals</i></td></tr>
 
-    public Item create(Item item) throws Exception {
+				<tr><td>tax_id</td><td>Search items by tax id.</td></tr>
 
-        HashMap<String, Object> requestBody = getQueryMap();
+				<tr><td>search_text</td><td>Search items by name or description.</td></tr>
 
-        requestBody.put("JSONString", item.toJSON().toString());
+				<tr><td>filter_by</td><td>Filter items by status.<br>
+Allowed Values: <i>Status.All, Status.Active</i> and <i>Status.Inactive</i></td></tr>
 
-        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
-        return settingsParser.getItem(response);
-    }
+				<tr><td>sort_column</td><td>Sort items.<br>
+Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
+			</tbody>
 
-    /**
-     * Update the details of an item.
-     * Pass the Item object to update the details of a particular item.
-     * The Item object must contain the itemId for which item has to be updated.
-     * It returns the Item object.
-     *
-     * @param item Item object.
-     * @return Returns the Item object.
-     */
+		</table>
 
-    public Item update(Item item) throws Exception {
 
-        String urlString = url + "/" + item.getItemId();
+	* @param queryMap It contains the query string parameters in the form of key-value pair.
 
-        HashMap<String, Object> requestBody = getQueryMap();
+	* @return Returns the ItemList object.
 
-        requestBody.put("JSONString", item.toJSON().toString());
+	*/
 
-        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
+	public ItemList getItems(HashMap<String, Object> queryMap)throws Exception
+	{
 
-        return settingsParser.getItem(response);
-    }
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
-    /**
-     * Delete the item created. Items that are part of transaction cannot be deleted.
-     * Pass the itemId to delete the particular item from the organization.
-     * If the item has been deleted it returns the success message.
-     * The success message is "The item has been deleted."
-     *
-     * @param itemId ID of an item.
-     * @return Returns a String.
-     */
+		ItemList itemList = settingsParser.getItems(response);
 
-    public String delete(String itemId) throws Exception {
+		return itemList;
+	}
 
-        String urlString = url + "/" + itemId;
+	/**
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
+	* Get the details of an item.
 
-        String success = settingsParser.getMessage(response);
+	* Pass the itemId to get the details of a particular item.
 
-        return success;
-    }
+	* It returns the Item object.
 
-    /**
-     * Mark an inactive item as active.
-     * Pass the itemId to change the status of an item to 'active'.
-     * If the item status has been changed it returns the success message.
-     * The successs message is "The item has been marked as active."
-     *
-     * @param itemId ID of an item.
-     * @return Returns a String.
-     */
 
-    public String markItemAsActive(String itemId) throws Exception {
+	* @param itemId ID of an item.
 
-        String urlString = url + "/" + itemId + "/active"; //No I18N
+	* @return Returns an Item object.
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
+	*/
 
-        String success = settingsParser.getMessage(response);
+	public Item get(String itemId)throws Exception
+	{
 
-        return success;
-    }
+		String urlString = url+"/"+itemId;
 
-    /**
-     * Mark an active item as inactive.
-     * Pass the itemId to change the status of an item to 'inactive'.
-     * If the item status has been changed it returns the success message.
-     * The success message is "The item has been marked as inactive."
-     *
-     * @param itemId ID of an item.
-     * @return Returns a String.
-     */
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
-    public String markItemAsInactive(String itemId) throws Exception {
+		Item item = settingsParser.getItem(response);
 
-        String urlString = url + "/" + itemId + "/inactive"; //No I18N
+		return item;
+	}
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
+	/**
 
-        String success = settingsParser.getMessage(response);
+	* Create a new item.
 
-        return success;
-    }
+	* Pass the Item object to create a new item for the organization.
+
+	* The Item object which contains name and rate are mandatory parameters.
+
+	* It returns the Item object.
+
+
+	* @param item Item object.
+
+	* @return Returns the Item object.
+
+	*/
+
+	public Item create(Item item)throws Exception
+	{
+
+		HashMap<String, Object>	requestBody = getQueryMap();
+
+		requestBody.put("JSONString", item.toJSON().toString());
+
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
+
+		return settingsParser.getItem(response);
+	}
+
+	/**
+
+	* Update the details of an item.
+
+	* Pass the Item object to update the details of a particular item.
+
+	* The Item object must contain the itemId for which item has to be updated.
+
+	* It returns the Item object.
+
+
+	* @param item Item object.
+
+	* @return Returns the Item object.
+
+	*/
+
+	public Item update(Item item)throws Exception
+	{
+
+		String urlString = url+"/"+item.getItemId();
+
+		HashMap<String, Object>	requestBody = getQueryMap();
+
+		requestBody.put("JSONString", item.toJSON().toString());
+
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
+
+		return settingsParser.getItem(response);
+	}
+
+	/**
+
+	* Delete the item created. Items that are part of transaction cannot be deleted.
+
+	* Pass the itemId to delete the particular item from the organization.
+
+	* If the item has been deleted it returns the success message.
+
+	* The success message is "The item has been deleted."
+
+
+	* @param itemId ID of an item.
+
+	* @return Returns a String.
+
+	*/
+
+	public String delete(String itemId)throws Exception
+	{
+
+		String urlString = url+"/"+itemId;
+
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
+
+		String success = settingsParser.getMessage(response);
+
+		return success;
+	}
+
+	/**
+
+	* Mark an inactive item as active.
+
+	* Pass the itemId to change the status of an item to 'active'.
+
+	* If the item status has been changed it returns the success message.
+
+	* The successs message is "The item has been marked as active."
+
+
+	* @param itemId ID of an item.
+
+	* @return Returns a String.
+
+	*/
+
+	public String markItemAsActive(String itemId)throws Exception
+	{
+
+		String urlString = url+"/"+itemId+"/active"; //No I18N
+
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
+
+		String success = settingsParser.getMessage(response);
+
+		return success;
+	}
+
+	/**
+
+	* Mark an active item as inactive.
+
+	* Pass the itemId to change the status of an item to 'inactive'.
+
+	* If the item status has been changed it returns the success message.
+
+	* The success message is "The item has been marked as inactive."
+
+
+	* @param itemId ID of an item.
+
+	* @return Returns a String.
+
+	*/
+
+	public String markItemAsInactive(String itemId)throws Exception
+	{
+
+		String urlString = url+"/"+itemId+"/inactive"; //No I18N
+
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
+
+		String success = settingsParser.getMessage(response);
+
+		return success;
+	}
 }

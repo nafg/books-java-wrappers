@@ -53,22 +53,23 @@ public class ProjectsApi extends API {
 
 
     /**
-     * Construct a new ProjectsApi using user's authtoken and organizationid.
+     * Construct a new ProjectsApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public ProjectsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
-    }
+	* @param organizationId user's organization id.
 
-    public ProjectsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
-    }
+	*/
+
+	public ProjectsApi(String accessToken, String organizationId)
+	{
+
+		super(accessToken, organizationId);
+
+	}
 
 
-    private ProjectParser projectParser = new ProjectParser();
+	private ProjectParser projectParser = new ProjectParser();
 
 
     /**

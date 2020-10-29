@@ -23,7 +23,7 @@ public class API {
     protected String organizationId;
 
     /**
-     * Construct a new API using user's authToken and organizationId.
+     * Construct a new API using access token and organization ID.
      *
      * @param accessToken OAuth access token.
      * @param organizationId User's organizationId.
@@ -43,7 +43,7 @@ public class API {
 
 
 		/**
-		 * Construct a queryMap using user's authToken and organizationId.
+		 * Construct a queryMap containing organization_id.
 		 *
 		 * @return Returns a HashMap.
 		 */
@@ -61,7 +61,7 @@ public class API {
 
 
     /**
-     * Construct a queryMap using user's authToken, organizationId and query string parameters.
+     * Construct a queryMap with the provided query string parameters, and add organization_id.
      *
      * @param queryMap This queryMap contains the query string parameters.
 		 * @return Returns a HashMap.

@@ -23,18 +23,20 @@ public class CustomerPaymentsApi extends API {
     private String url = baseURL + "/customerpayments"; //No I18N
 
     /**
-     * Construct a new CustomerPaymentsApi using user's authtoken and organizationid.
+     * Construct a new CustomerPaymentsApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public CustomerPaymentsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public CustomerPaymentsApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public CustomerPaymentsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public CustomerPaymentsApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 

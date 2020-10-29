@@ -40,18 +40,18 @@ public class VendorCreditsApi extends API {
     private String url = baseURL + "/vendorcredits";    //No I18N
 
     /**
-     * Construct a new VendorCreditsApi using user's authToken and organizationId.
+     * Construct a new VendorCreditsApi using user's accessToken and organizationId.
      *
-     * @param authToken      User's authToken.
+     * @param accessToken      User's accessToken.
      * @param organizationId User's organizationId.
      */
 
-    public VendorCreditsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+    public VendorCreditsApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public VendorCreditsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public VendorCreditsApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
     //VendorCreditsParser is used to parse the JSON response into respective objects.
@@ -453,5 +453,4 @@ public class VendorCreditsApi extends API {
         return vendorCreditsParser.getMessage(response);
 
     }
-
 }

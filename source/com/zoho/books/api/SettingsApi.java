@@ -55,18 +55,20 @@ public class SettingsApi extends API {
     private String url = baseURL + "/settings"; //No I18N
 
     /**
-     * Construct a new SettingsApi using user's authtoken and organizationid.
+     * Construct a new SettingsApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public SettingsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public SettingsApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public SettingsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public SettingsApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
     private SettingsParser settingsParser = new SettingsParser();

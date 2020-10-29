@@ -32,18 +32,20 @@ public class ExpensesApi extends API {
 
 
     /**
-     * Construct a new ExpensesApi using user's authtoken and organizationid.
+     * Construct a new ExpensesApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public ExpensesApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public ExpensesApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public ExpensesApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public ExpensesApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
@@ -286,7 +288,6 @@ public class ExpensesApi extends API {
 
         return commentList;
     }
-
 //=========================================================================================================================================
 
 

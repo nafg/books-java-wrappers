@@ -23,18 +23,20 @@ public class ContactPersonsApi extends API {
 
 
     /**
-     * Construct a new ContactPersonsApi using user's authtoken and organizationid.
+     * Construct a new ContactPersonsApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public ContactPersonsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public ContactPersonsApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public ContactPersonsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public ContactPersonsApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 

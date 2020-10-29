@@ -42,18 +42,20 @@ public class EstimatesApi extends API {
     private String url = baseURL + "/estimates"; //No I18N
 
     /**
-     * Construct a new EstimatesApi using user's authtoken and organizationid.
+     * Construct a new EstimatesApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public EstimatesApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public EstimatesApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public EstimatesApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public EstimatesApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
@@ -73,7 +75,6 @@ public class EstimatesApi extends API {
     public Estimate create(String customerId, String itemName) throws Exception {
 
         HashMap<String, Object> requestBody = getQueryMap();
-
 
         Estimate estimateObj = new Estimate();
 

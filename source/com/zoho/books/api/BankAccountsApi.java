@@ -29,18 +29,18 @@ public class BankAccountsApi extends API {
 
 
     /**
-     * Construct a new BankAccountsApi using user's authtoken and organizationid.
+     * Construct a new BankAccountsApi using access token and organizationid.
      *
-     * @param authToken      user's authToken.
+     * @param accessToken      user's access token.
      * @param organizationId user's organization id.
      */
 
-    public BankAccountsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+    public BankAccountsApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public BankAccountsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public BankAccountsApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
