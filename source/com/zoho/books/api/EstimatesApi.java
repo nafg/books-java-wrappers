@@ -42,18 +42,20 @@ public class EstimatesApi extends API {
     private String url = baseURL + "/estimates"; //No I18N
 
     /**
-     * Construct a new EstimatesApi using user's authtoken and organizationid.
+     * Construct a new EstimatesApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public EstimatesApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public EstimatesApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public EstimatesApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public EstimatesApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
@@ -74,7 +76,6 @@ public class EstimatesApi extends API {
 
         HashMap<String, Object> requestBody = getQueryMap();
 
-
         Estimate estimateObj = new Estimate();
 
         estimateObj.setCustomerId(customerId);
@@ -92,7 +93,7 @@ public class EstimatesApi extends API {
 
         requestBody.put("JSONString", estimateObj.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         Estimate estimate = estimateParser.getEstimate(response);
 
@@ -120,7 +121,7 @@ public class EstimatesApi extends API {
 
         requestBody.put("JSONString", estimate.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return estimateParser.getEstimate(response);
     }
@@ -138,7 +139,7 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/" + estimateId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Estimate estimate = estimateParser.getEstimate(response);
 
@@ -167,7 +168,7 @@ public class EstimatesApi extends API {
 
         requestBody.put("JSONString", estimate.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return estimateParser.getEstimate(response);
     }
@@ -186,7 +187,7 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/" + estimateId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = estimateParser.getMessage(response);
 
@@ -237,7 +238,7 @@ public class EstimatesApi extends API {
     public EstimateList getEstimates(HashMap<String, Object> queryMap) throws Exception {
 
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         EstimateList estimateList = estimateParser.getEstimates(response);
 
@@ -275,7 +276,7 @@ public class EstimatesApi extends API {
         }
 
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), requestBody, fileBody);
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), requestBody, fileBody, accessToken);
 
         String success = estimateParser.getMessage(response);
 
@@ -296,7 +297,7 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/email"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(paramMap));
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(paramMap), accessToken);
 
         String success = estimateParser.getMessage(response);
 
@@ -319,7 +320,7 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/" + estimateId + "/email"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         Email email = estimateParser.getEmailContent(response);
 
@@ -340,7 +341,7 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/" + estimateId + "/status/sent"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = estimateParser.getMessage(response);
 
@@ -361,7 +362,7 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/" + estimateId + "/status/accepted"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = estimateParser.getMessage(response);
 
@@ -382,7 +383,7 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/" + estimateId + "/status/declined"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = estimateParser.getMessage(response);
 
@@ -444,7 +445,7 @@ public class EstimatesApi extends API {
 
         requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = estimateParser.getMessage(response);
 
@@ -470,7 +471,7 @@ public class EstimatesApi extends API {
 
         requestBody.put("JSONString", shippingAddress.toJSON().put("is_update_customer", shippingAddress.isUpdateCustomer()).toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         String success = estimateParser.getMessage(response);
 
@@ -488,7 +489,7 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/templates"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         TemplateList templateList = estimateParser.getTemplates(response);
 
@@ -510,14 +511,13 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/" + estimateId + "/templates/" + templateId; //No I18N
 
-        String response = ZohoHTTPClient.put(urlString, getQueryMap());
+        String response = ZohoHTTPClient.put(urlString, getQueryMap(), accessToken);
 
         String success = estimateParser.getMessage(response);
 
         return success;
 
     }
-
 
 //=======================================================================================================================================
 
@@ -535,7 +535,7 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/" + estimateId + "/comments"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CommentList commentList = estimateParser.getComments(response);
 
@@ -565,7 +565,7 @@ public class EstimatesApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         Comment comment = estimateParser.getComment(response);
 
@@ -596,7 +596,7 @@ public class EstimatesApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         Comment comment = estimateParser.getComment(response);
 
@@ -618,12 +618,11 @@ public class EstimatesApi extends API {
 
         String urlString = url + "/" + estimateId + "/comments/" + commentId; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = estimateParser.getMessage(response);
 
         return success;
     }
-
 
 }

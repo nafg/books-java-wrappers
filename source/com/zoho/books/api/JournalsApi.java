@@ -24,18 +24,20 @@ public class JournalsApi extends API {
 
 
     /**
-     * Construct a new JournalsApi using user's authtoken and organizationid.
+     * Construct a new JournalsApi using user's accessToken and organizationid.
      *
-     * @param authToken      User's authToken.
-     * @param organizationId User's organization id.
-     */
+     * @param accessToken user's accessToken.
 
-    public JournalsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId User's organization id.
+
+	*/
+
+    public JournalsApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public JournalsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public JournalsApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
@@ -58,7 +60,7 @@ public class JournalsApi extends API {
 
         requestBody.put("JSONString", journal.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return journalParser.getJournal(response);
     }
@@ -76,7 +78,7 @@ public class JournalsApi extends API {
 
         String urlString = url + "/" + journalId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Journal journal = journalParser.getJournal(response);
 
@@ -101,7 +103,7 @@ public class JournalsApi extends API {
 
         requestBody.put("JSONString", journal.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return journalParser.getJournal(response);
     }
@@ -120,7 +122,7 @@ public class JournalsApi extends API {
 
         String urlString = url + "/" + journalId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = journalParser.getMessage(response);
 
@@ -157,7 +159,7 @@ public class JournalsApi extends API {
 
     public JournalList getJournals(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         JournalList journalList = journalParser.getJournals(response);
 

@@ -23,18 +23,20 @@ public class CustomerPaymentsApi extends API {
     private String url = baseURL + "/customerpayments"; //No I18N
 
     /**
-     * Construct a new CustomerPaymentsApi using user's authtoken and organizationid.
+     * Construct a new CustomerPaymentsApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public CustomerPaymentsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public CustomerPaymentsApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public CustomerPaymentsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public CustomerPaymentsApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
@@ -57,7 +59,7 @@ public class CustomerPaymentsApi extends API {
 
         requestBody.put("JSONString", customerPayment.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return customerPaymentParser.getCustomerPayment(response);
     }
@@ -75,7 +77,7 @@ public class CustomerPaymentsApi extends API {
 
         String urlString = url + "/" + paymentId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CustomerPayment customerPayment = customerPaymentParser.getCustomerPayment(response);
 
@@ -99,7 +101,7 @@ public class CustomerPaymentsApi extends API {
 
         requestBody.put("JSONString", customerPayment.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return customerPaymentParser.getCustomerPayment(response);
     }
@@ -118,7 +120,7 @@ public class CustomerPaymentsApi extends API {
 
         String urlString = url + "/" + paymentId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         JSONObject jsonObject = new JSONObject(response.trim());
 
@@ -162,7 +164,7 @@ public class CustomerPaymentsApi extends API {
 
     public CustomerPaymentList getCustomerPayments(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         CustomerPaymentList customerPaymentList = customerPaymentParser.getCustomerPayments(response);
 

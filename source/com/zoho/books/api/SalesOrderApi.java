@@ -44,18 +44,18 @@ public class SalesOrderApi extends API {
 
 
     /**
-     * Construct a new SalesOrderApi using user's authToken and organizationId.
+     * Construct a new SalesOrderApi using user's accessToken and organizationId.
      *
-     * @param authToken      User's authToken.
+     * @param accessToken      User's accessToken.
      * @param organizationId User's organizationId.
      */
 
-    public SalesOrderApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+    public SalesOrderApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public SalesOrderApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public SalesOrderApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
@@ -74,7 +74,7 @@ public class SalesOrderApi extends API {
 
     public SalesOrderList getSalesOrders(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         return salesOrderParser.getSalesOrders(response);
 
@@ -93,7 +93,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId;    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         return salesOrderParser.getSalesOrder(response);
 
@@ -114,7 +114,7 @@ public class SalesOrderApi extends API {
 
         requestBody.put("JSONString", salesOrder.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return salesOrderParser.getSalesOrder(response);
 
@@ -137,7 +137,7 @@ public class SalesOrderApi extends API {
 
         requestBody.put("JSONString", salesOrder.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return salesOrderParser.getSalesOrder(response);
 
@@ -155,7 +155,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId;    //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         return salesOrderParser.getMessage(response);
 
@@ -173,7 +173,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId + "/status/open";    //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         return salesOrderParser.getMessage(response);
 
@@ -191,7 +191,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId + "/status/void";    //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         return salesOrderParser.getMessage(response);
 
@@ -231,7 +231,7 @@ public class SalesOrderApi extends API {
             }
         }
 
-        response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
+        response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody, accessToken);
 
         return salesOrderParser.getMessage(response);
     }
@@ -249,7 +249,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId + "/email";    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 
         return salesOrderParser.getEmailContent(response);
     }
@@ -307,7 +307,7 @@ public class SalesOrderApi extends API {
 
         requestBody.put("JSONString", address.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return salesOrderParser.getMessage(response);
 
@@ -331,7 +331,7 @@ public class SalesOrderApi extends API {
 
         requestBody.put("JSONString", address.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return salesOrderParser.getMessage(response);
 
@@ -348,7 +348,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/templates";    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         return salesOrderParser.getTemplates(response);
 
@@ -367,7 +367,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId + "/templates/" + templateId;    //No I18N
 
-        String response = ZohoHTTPClient.put(urlString, getQueryMap());
+        String response = ZohoHTTPClient.put(urlString, getQueryMap(), accessToken);
 
         return salesOrderParser.getMessage(response);
 
@@ -413,7 +413,7 @@ public class SalesOrderApi extends API {
         HashMap<String, Object> fileBody = new HashMap<String, Object>();
         fileBody.put("attachment", file);
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(queryMap), null, fileBody);
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(queryMap), null, fileBody, accessToken);
 
         return salesOrderParser.getMessage(response);
 
@@ -432,7 +432,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId + "/attachment";    //No I18N
 
-        String response = ZohoHTTPClient.put(urlString, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.put(urlString, getQueryMap(queryMap), accessToken);
 
         return salesOrderParser.getMessage(response);
     }
@@ -449,7 +449,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId + "/attachment";    //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         return salesOrderParser.getMessage(response);
 
@@ -471,7 +471,7 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId + "/comments";    //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         return salesOrderParser.getComments(response);
 
@@ -497,7 +497,7 @@ public class SalesOrderApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.post(urlString, requestBody);
+        String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 
         return salesOrderParser.getComment(response);
 
@@ -524,7 +524,7 @@ public class SalesOrderApi extends API {
 
         requestBody.put("JSONString", jsonObject.toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return salesOrderParser.getComment(response);
 
@@ -543,11 +543,10 @@ public class SalesOrderApi extends API {
 
         String urlString = url + "/" + salesorderId + "/comments/" + commentId;    //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         return salesOrderParser.getMessage(response);
 
     }
-
 
 }

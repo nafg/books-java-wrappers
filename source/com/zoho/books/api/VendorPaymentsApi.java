@@ -25,18 +25,20 @@ public class VendorPaymentsApi extends API {
 
 
     /**
-     * Construct a new VendorPaymentsApi using user's authtoken and organizationid.
+     * Construct a new VendorPaymentsApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public VendorPaymentsApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public VendorPaymentsApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public VendorPaymentsApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public VendorPaymentsApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
@@ -59,7 +61,7 @@ public class VendorPaymentsApi extends API {
 
         requestBody.put("JSONString", vendorPayment.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return vendorPaymentParser.getVendorPayment(response);
     }
@@ -77,7 +79,7 @@ public class VendorPaymentsApi extends API {
 
         String urlString = url + "/" + paymentId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         VendorPayment vendorPayment = vendorPaymentParser.getVendorPayment(response);
 
@@ -102,7 +104,7 @@ public class VendorPaymentsApi extends API {
 
         requestBody.put("JSONString", vendorPayment.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return vendorPaymentParser.getVendorPayment(response);
     }
@@ -121,7 +123,7 @@ public class VendorPaymentsApi extends API {
 
         String urlString = url + "/" + paymentId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = vendorPaymentParser.getMessage(response);
 
@@ -163,11 +165,10 @@ public class VendorPaymentsApi extends API {
 
     public VendorPaymentList getVendorPayments(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         VendorPaymentList vendorPaymentList = vendorPaymentParser.getVendorPayments(response);
 
         return vendorPaymentList;
     }
-
 }

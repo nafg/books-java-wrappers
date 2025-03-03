@@ -27,18 +27,20 @@ public class UsersApi extends API {
 
 
     /**
-     * Construct a new UsersApi using user's authtoken and organizationid.
+     * Construct a new UsersApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public UsersApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public UsersApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public UsersApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public UsersApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
@@ -65,7 +67,7 @@ public class UsersApi extends API {
 
     public UserList getUsers(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         UserList userList = settingsParser.getUsers(response);
 
@@ -85,7 +87,7 @@ public class UsersApi extends API {
 
         String urlString = url + "/" + userId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         User user = settingsParser.getUser(response);
 
@@ -104,7 +106,7 @@ public class UsersApi extends API {
 
         String urlString = url + "/me"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         User user = settingsParser.getUser(response);
 
@@ -127,7 +129,7 @@ public class UsersApi extends API {
 
         requestBody.put("JSONString", user.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return settingsParser.getUser(response);
     }
@@ -150,7 +152,7 @@ public class UsersApi extends API {
 
         requestBody.put("JSONString", user.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return settingsParser.getUser(response);
     }
@@ -169,7 +171,7 @@ public class UsersApi extends API {
 
         String urlString = url + "/" + userId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -190,7 +192,7 @@ public class UsersApi extends API {
 
         String urlString = url + "/" + userId + "/invite"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -211,7 +213,7 @@ public class UsersApi extends API {
 
         String urlString = url + "/" + userId + "/active"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 
@@ -232,7 +234,7 @@ public class UsersApi extends API {
 
         String urlString = url + "/" + userId + "/inactive"; //No I18N
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap());
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 
         String success = settingsParser.getMessage(response);
 

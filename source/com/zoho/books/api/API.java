@@ -18,41 +18,41 @@ public class API {
 
     protected String baseURL = "https://books.zoho.com/api/v3";    //No I18N
     private String basURLEu = "https://books.zoho.eu/api/v3";
-    protected String authToken;
+    protected String accessToken;
 
     protected String organizationId;
 
     /**
-     * Construct a new API using user's authToken and organizationId.
+     * Construct a new API using access token and organization ID.
      *
-     * @param authToken      User's authToken.
+     * @param accessToken OAuth access token.
      * @param organizationId User's organizationId.
      */
 
-    public API(String authToken, String organizationId) {
-        this(authToken, organizationId, false);
+    public API(String accessToken, String organizationId) {
+        this(accessToken, organizationId, false);
     }
 
-    public API(String authToken, String organizationId, boolean eu) {
-      this.authToken = authToken;
+    public API(String accessToken, String organizationId, boolean eu) {
+      this.accessToken = accessToken;
       this.organizationId = organizationId;
       if(eu) {
         this.baseURL = basURLEu;
       }
-    }
+		}
 
 
-    /**
-     * Construct a queryMap using user's authToken and organizationId.
-     *
-     * @return Returns a HashMap.
-     */
+		/**
+		 * Construct a queryMap containing organization_id.
+		 *
+		 * @return Returns a HashMap.
+		 */
 
-    public HashMap<String, Object> getQueryMap() {
+		public HashMap<String, Object> getQueryMap()
+		{
 
-        HashMap<String, Object> queryMap = new HashMap<String, Object>();
+				HashMap<String, Object> queryMap = new HashMap<String, Object>();
 
-        queryMap.put("authtoken", authToken);
         queryMap.put("organization_id", organizationId);
 
         return queryMap;
@@ -61,23 +61,23 @@ public class API {
 
 
     /**
-     * Construct a queryMap using user's authToken, organizationId and query string parameters.
+     * Construct a queryMap with the provided query string parameters, and add organization_id.
      *
      * @param queryMap This queryMap contains the query string parameters.
-     * @return Returns a HashMap.
-     */
+		 * @return Returns a HashMap.
+		 */
 
-    public HashMap<String, Object> getQueryMap(HashMap<String, Object> queryMap) {
+		public HashMap<String, Object> getQueryMap(HashMap<String, Object> queryMap)
+		{
 
-        if (queryMap == null || queryMap.isEmpty()) {
-            queryMap = new HashMap<String, Object>();
-        }
+				if(queryMap == null || queryMap.isEmpty())
+				{
+						queryMap = new HashMap<String, Object>();
+				}
 
-        queryMap.put("authtoken", authToken);
         queryMap.put("organization_id", organizationId);
 
         return queryMap;
 
     }
-
 }

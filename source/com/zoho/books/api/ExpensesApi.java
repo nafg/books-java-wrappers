@@ -32,18 +32,20 @@ public class ExpensesApi extends API {
 
 
     /**
-     * Construct a new ExpensesApi using user's authtoken and organizationid.
+     * Construct a new ExpensesApi using user's accessToken and organizationid.
      *
-     * @param authToken      user's authToken.
-     * @param organizationId user's organization id.
-     */
+     * @param accessToken      user's accessToken.
 
-    public ExpensesApi(String authToken, String organizationId) {
-        super(authToken, organizationId);
+	* @param organizationId user's organization id.
+
+	*/
+
+    public ExpensesApi(String accessToken, String organizationId) {
+        super(accessToken, organizationId);
     }
 
-    public ExpensesApi(String authToken, String organizationId, boolean eu) {
-        super(authToken, organizationId, eu);
+    public ExpensesApi(String accessToken, String organizationId, boolean eu) {
+        super(accessToken, organizationId, eu);
     }
 
 
@@ -73,7 +75,7 @@ public class ExpensesApi extends API {
 
         requestBody.put("JSONString", expense.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return expenseParser.getExpense(response);
     }
@@ -94,7 +96,7 @@ public class ExpensesApi extends API {
 
         requestBody.put("JSONString", expense.toJSON().toString());
 
-        String response = ZohoHTTPClient.post(url, requestBody);
+        String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 
         return expenseParser.getExpense(response);
     }
@@ -121,7 +123,7 @@ public class ExpensesApi extends API {
         fileBody.put("receipt", file);
 
 
-        String response = ZohoHTTPClient.post(url, getQueryMap(), requestBody, fileBody);
+        String response = ZohoHTTPClient.post(url, getQueryMap(), requestBody, fileBody, accessToken);
 
         return expenseParser.getExpense(response);
     }
@@ -139,7 +141,7 @@ public class ExpensesApi extends API {
 
         String urlString = url + "/" + expenseId;
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         Expense expense = expenseParser.getExpense(response);
 
@@ -164,7 +166,7 @@ public class ExpensesApi extends API {
 
         requestBody.put("JSONString", expense.toJSON().toString());
 
-        String response = ZohoHTTPClient.put(urlString, requestBody);
+        String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 
         return expenseParser.getExpense(response);
     }
@@ -193,7 +195,7 @@ public class ExpensesApi extends API {
         fileBody.put("receipt", file);
 
 
-        String response = ZohoHTTPClient.put(urlString, getQueryMap(), requestBody, fileBody);
+        String response = ZohoHTTPClient.put(urlString, getQueryMap(), requestBody, fileBody, accessToken);
 
         return expenseParser.getExpense(response);
     }
@@ -212,7 +214,7 @@ public class ExpensesApi extends API {
 
         String urlString = url + "/" + expenseId;
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = expenseParser.getMessage(response);
 
@@ -260,7 +262,7 @@ public class ExpensesApi extends API {
 
     public ExpenseList getExpesnses(HashMap<String, Object> queryMap) throws Exception {
 
-        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+        String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 
         ExpenseList expenseList = expenseParser.getExpenses(response);
 
@@ -280,14 +282,12 @@ public class ExpensesApi extends API {
 
         String urlString = url + "/" + expenseId + "/comments"; //No I18N
 
-        String response = ZohoHTTPClient.get(urlString, getQueryMap());
+        String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 
         CommentList commentList = expenseParser.getComments(response);
 
         return commentList;
     }
-
-
 //=========================================================================================================================================
 
 
@@ -310,7 +310,7 @@ public class ExpensesApi extends API {
 
         fileBody.put("receipt", file);
 
-        String response = ZohoHTTPClient.post(urlString, getQueryMap(), null, fileBody);
+        String response = ZohoHTTPClient.post(urlString, getQueryMap(), null, fileBody, accessToken);
 
         String success = expenseParser.getMessage(response);
 
@@ -350,7 +350,7 @@ public class ExpensesApi extends API {
 
         String urlString = url + "/" + expenseId + "/receipt"; //No I18N
 
-        String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+        String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 
         String success = expenseParser.getMessage(response);
 
