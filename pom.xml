@@ -2,9 +2,9 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  	
+
   	<modelVersion>4.0.0</modelVersion>
-  
+
 	<groupId>com.zoho.books</groupId>
 	<artifactId>books-java</artifactId>
 	<packaging>jar</packaging>
@@ -12,14 +12,14 @@
 
 	<name>books-java-wrappers</name>
 	<description>Java client library for Zoho Books API</description>
-	
+
 	<url>https://github.com/zoho/books-java-wrappers.git</url>
 
 	<organization>
 		<name>Zoho</name>
-		<url>http://www.zoho.com</url>
+		<url>https://www.zoho.com</url>
 	</organization>
-	
+
 	<scm>
 		<connection>scm:git@github.com:zoho/books-java-wrappers.git</connection>
 		<developerConnection>scm:git@github.com:zoho/books-java-wrappers.git</developerConnection>
@@ -90,5 +90,5 @@
 
 		</plugins>
 	</build>
-  
+
 </project>
