@@ -16,8 +16,8 @@ public class API {
      * This is the API base URL for Zoho Books service.
      */
 
-    protected String baseURL = "https://books.zoho.com/api/v3";    //No I18N
-    private String basURLEu = "https://books.zoho.eu/api/v3";
+    protected String baseURL = "https://www.zohoapis.com/books/v3";    //No I18N
+    private String basURLEu = "https://www.zohoapis.eu/books/v3";
     protected String accessToken;
 
     protected String organizationId;
